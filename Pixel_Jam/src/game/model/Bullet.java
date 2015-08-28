@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Bullet {
 
-	private final int RADIUS = 5;
+	public final int RADIUS = 5;
 
 	private int x;
 	private int y;
