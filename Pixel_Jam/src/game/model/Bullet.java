@@ -1,5 +1,6 @@
 package game.model;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Bullet {
@@ -14,7 +15,10 @@ public class Bullet {
 
 	public Bullet(int xi, int yi, double direction, double speed) {
 
+		x = xi;
+		y = yi;
 
+		setSpeed(direction, speed);
 	}
 
 	public void moveFrame() {
@@ -38,11 +42,15 @@ public class Bullet {
 
 	public void setSpeed(double direction, double speed) {
 
-
+		vx = speed * Math.cos(direction);
+		vy = speed * Math.sin(direction);
 	}
 
 	public void draw(Graphics g) {
 
+		Color firstColor = g.getColor();
+		g.setColor(Color.BLACK);
 		g.fillOval(x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
+		g.setColor(firstColor);
 	}
 }
