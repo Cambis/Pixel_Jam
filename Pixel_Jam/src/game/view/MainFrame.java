@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,7 +19,11 @@ public class MainFrame extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu menu;
 
+	// Displays the board
 	private BoardPanel board;
+
+	// Displays the current rule
+	private JLabel rule;
 
 	public MainFrame() {
 
@@ -26,8 +31,13 @@ public class MainFrame extends JFrame {
 		setSize(600, 600);
 		setJMenuBar(createMenu());
 
+		board = new BoardPanel();
+		add(board, BorderLayout.CENTER);
+
 		// Make sure we can sees it!
 		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		repaint();
 	}
 
