@@ -53,6 +53,12 @@ public class Board {
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
+				//Updates x and y
+				xPos++;
+				if(xPos>=xSize){
+					xPos=0;
+					yPos++;
+				}
 			}
 		} catch (IOException e) {
 		}
