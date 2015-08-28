@@ -1,6 +1,5 @@
 package game.model;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,66 +15,75 @@ public class Board {
 	private int ySize;
 	public static final int tileSize = 128;
 
-	public Board(String filename){
+	public Board(String filename) {
 
-		try{
-				Scanner s = new Scanner(new File(filename));
-				xSize=s.nextInt();
-				ySize=s.nextInt();
-				tiles = new Tile[xSize][ySize];
-				int xPos = 0;
-				int yPos = 0;
-				while(s.hasNext()){
-					if(s.hasNextInt()){
-						int i = s.nextInt();
-						if(i==0){
-							tiles[xPos][yPos] = new BlankTile();
-						}else if(i==1){
-							tiles[xPos][yPos] = new Wall();
-						}else{
-							System.out.println("Error loading file (invalid int - " + i + ", xPos = " + xPos + ", yPox = " + yPos + ")");
-						}
-						//Else square is a player or target
-					}else{
-						String tok = s.next();
-						//Checks string was 1 char
-						if(tok.length()!=1){
-							s.close();
-							throw new IOException("Invalid string");
-						}
-						//gets char
-						char c = tok.charAt(0);
-						if(c == 'T'){
-							tiles[xPos][yPos] = new Target();
-						}else if(c == 'P'){
-							//Create player at this point
-							tiles[xPos][yPos] = new BlankTile();
-						}
+		try {
+			Scanner s = new Scanner(new File(filename));
+			xSize = s.nextInt();
+			ySize = s.nextInt();
+			tiles = new Tile[xSize][ySize];
+			int xPos = 0;
+			int yPos = 0;
+			while (s.hasNext()) {
+				if (s.hasNextInt()) {
+					int i = s.nextInt();
+					if (i == 0) {
+						tiles[xPos][yPos] = new BlankTile();
+					} else if (i == 1) {
+						tiles[xPos][yPos] = new Wall();
+					} else {
+						System.out.println("Error loading file (invalid int - "
+								+ i + ", xPos = " + xPos + ", yPox = " + yPos
+								+ ")");
 					}
+					// Else square is a player or target
+				} else {
+					String tok = s.next();
+					// Checks string was 1 char
+					if (tok.length() != 1) {
+						s.close();
+						throw new IOException("Invalid string");
+					}
+					// gets char
+					char c = tok.charAt(0);
+					if (c == 'T') {
+						tiles[xPos][yPos] = new Target();
+					} else if (c == 'P') {
+						// Create player at this point
+						tiles[xPos][yPos] = new BlankTile();
+					}
+				}
+				//Updates x and y
+				xPos++;
+				if(xPos>=xSize){
+					xPos=0;
+					yPos++;
+				}
 			}
-		}catch(IOException e){
+		} catch (IOException e) {
 		}
 	}
 
-	public HitDirection checkCollisions(Bullet b){
-		int xTile = b.getX()/tileSize;
-		int yTile = b.getY()/tileSize;
-		if(tiles[xTile][yTile] instanceof Wall){
-			int xPos = b.getX()-xTile;
-			int yPos = b.getY()-yTile;
+	public HitDirection checkCollisions(Bullet b) {
+		int xTile = b.getX() / tileSize;
+		int yTile = b.getY() / tileSize;
+		if (tiles[xTile][yTile] instanceof Wall) {
+			int xPos = b.getX() - xTile;
+			int yPos = b.getY() - yTile;
 
 		}
 		return null;
 	}
 
-	public BufferedImage draw(){
-		BufferedImage boardReturn = new BufferedImage(128*xSize, 128*ySize, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = (Graphics2D)boardReturn.getGraphics();
-		for(int x=0; x<xSize; x++){
-			for(int y=0; y<ySize; y++){
-				if(tiles[x][y] instanceof Wall){
-					g.setColor(Color.black);
-					g.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
+	public BufferedImage draw() {
+		BufferedImage boardReturn = new BufferedImage(128 * xSize, 128 * ySize,
+				BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = (Graphics2D) boardReturn.getGraphics();
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				if (tiles[x][y] instanceof Wall) {
+					g.setColor(Color.white);
+					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
 			}
 		}
