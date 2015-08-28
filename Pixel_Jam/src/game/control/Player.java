@@ -57,11 +57,12 @@ public class Player {
 
 	public void fire(int speed) {
 
+		speed = (speed < MAX_BULLET_HOLD_TIME) ? speed : MAX_BULLET_HOLD_TIME;
+
 		// Create new bullet
 		bullet = new Bullet(position.x, position.y, rotation,
-				bulletHoldTime);
+				speed);
 
-		bulletHoldTime = 0;
 	}
 
 	public final double getLookAngle() {
