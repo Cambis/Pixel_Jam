@@ -1,5 +1,9 @@
 package game.control;
 
+import game.model.Board;
+
+import java.util.Set;
+
 /**
  * Main game logic class
  *
@@ -8,6 +12,9 @@ package game.control;
  */
 public class Game {
 
+	private Set<Player> players;
+	private Board board;
+	
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
