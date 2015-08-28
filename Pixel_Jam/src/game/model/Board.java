@@ -77,13 +77,16 @@ public class Board {
 		}
 	}
 
-	public HitDirection checkCollisions(Bullet b) {
+	public HitDetection checkCollisions(Bullet b) {
 		int xTile = b.getX() / tileSize;
 		int yTile = b.getY() / tileSize;
 		if (tiles[xTile][yTile] instanceof Wall) {
 			int xPos = b.getX() - xTile;
 			int yPos = b.getY() - yTile;
+			return ((Wall)tiles[xTile][yTile]).hitSegment(xPos, yPos);
 
+		}else if(tiles[xTile][yTile] instanceof Target){
+			return HitDetection.TARGET;
 		}
 		return null;
 	}

@@ -43,18 +43,18 @@ public class Bullet {
 
 		System.out.println("pos:[" + x + "," + y + "]");
 
-		HitDirection hitDirection = board.checkCollisions(this);
+		HitDetection hitDirection = board.checkCollisions(this);
 
 		if (hitDirection != null) { //if bullet made a collision
 
 			numHits++;
 
 			// if bullet hit top or bottom
-			if (hitDirection == HitDirection.NORTH || hitDirection == HitDirection.SOUTH) {
+			if (hitDirection == HitDetection.NORTH || hitDirection == HitDetection.SOUTH) {
 
 				bounceVertical(); //flip vertical speed
 			}
-			else if (hitDirection == HitDirection.EAST || hitDirection == HitDirection.WEST) {
+			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
 
 				bounceHorizontal(); //flip horizontal speed
 			}

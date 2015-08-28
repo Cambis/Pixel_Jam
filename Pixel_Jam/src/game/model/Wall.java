@@ -2,34 +2,24 @@ package game.model;
 
 public class Wall implements Tile {
 
-	public HitDirection hitSegment(int x, int y){
+	public HitDetection hitSegment(int x, int y){
 		if(x>=y){
 			if(y>=Board.tileSize-x){
 				//East
-				return HitDirection.EAST;
+				return HitDetection.EAST;
 			}else{
 				//North
-				return HitDirection.NORTH;
+				return HitDetection.NORTH;
 			}
 		}else{
 			if(y>=Board.tileSize-x){
 				//South
-				return HitDirection.SOUTH;
+				return HitDetection.SOUTH;
 			}else{
 				//West
-				return HitDirection.WEST;
+				return HitDetection.WEST;
 			}
 		}
-	}
-
-	//private HitDirection hitDirection;
-	public enum HitDirection {
-
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST
-
 	}
 }
 
