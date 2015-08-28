@@ -24,6 +24,8 @@ public class Player implements KeyListener {
 
 	private long start, end;
 
+	private static final boolean DEBUG = true;
+
 	public Player(Point startPos, char left, char right) {
 		position = startPos;
 		this.left = left;
@@ -42,6 +44,8 @@ public class Player implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
+		if (DEBUG) System.out.println(e.getKeyChar());
+
 		if (e.getKeyChar() == left || e.getKeyChar() == right) {
 			start = System.currentTimeMillis();
 		}
@@ -50,6 +54,8 @@ public class Player implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+
+		if (DEBUG) System.out.println(e.getKeyChar());
 
 		// Left key press
 		if (e.getKeyChar() == left) {
@@ -76,4 +82,7 @@ public class Player implements KeyListener {
 		}
 	}
 
+	public static void main (String args[]) {
+		new Player(new Point(0, 0), 'A', 'D');
+	}
 }
