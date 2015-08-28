@@ -58,7 +58,7 @@ public class Board {
 	}
 
 	public HitDirection checkCollisions(Bullet b){
-
+		if(b.)
 		return null;
 	}
 

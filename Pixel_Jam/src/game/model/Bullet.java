@@ -21,6 +21,14 @@ public class Bullet {
 		setSpeed(direction, speed);
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	public void moveFrame(Board board) {
 
 		x += vx;
