@@ -1,5 +1,6 @@
 package game.control;
 
+import game.model.Board;
 import game.model.Bullet;
 
 import java.awt.Point;
@@ -137,5 +138,10 @@ public class Player implements KeyListener {
 	public static void main(String args[]) {
 		Player player = new Player(new Point(0, 0), 'a', 'd', 'w');
 		System.out.println(player.getLookAngle());
+	}
+
+	public void moveBullet(Board board) {
+
+		bullet.moveFrame(board);
 	}
 }
