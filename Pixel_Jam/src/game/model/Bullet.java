@@ -86,6 +86,11 @@ public class Bullet {
 		vy = speed * Math.sin(direction / 180 * Math.PI);
 	}
 
+	public void setSpeed(double speed) {
+
+		setSpeed(getDirection(), speed);
+	}
+
 	public double getDirection() {
 
 		return Math.atan2(vy, vx) / Math.PI * 180;
