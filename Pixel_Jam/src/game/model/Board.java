@@ -14,7 +14,7 @@ public class Board {
 	private Tile tiles[][];
 	private int xSize;
 	private int ySize;
-	private int tileSize = 128;
+	public static final int tileSize = 128;
 
 	public Board(String filename){
 
@@ -58,7 +58,13 @@ public class Board {
 	}
 
 	public HitDirection checkCollisions(Bullet b){
-		if(b.)
+		int xTile = b.getX()/tileSize;
+		int yTile = b.getY()/tileSize;
+		if(tiles[xTile][yTile] instanceof Wall){
+			int xPos = b.getX()-xTile;
+			int yPos = b.getY()-yTile;
+
+		}
 		return null;
 	}
 
