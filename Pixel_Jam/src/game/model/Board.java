@@ -110,6 +110,8 @@ public class Board {
 					if(p.getX()==x && p.getY()==y){
 						g.drawImage(p.getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
 					}
+
+					p.drawBullet(g);
 				}
 			}
 		}

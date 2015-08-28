@@ -41,6 +41,8 @@ public class Bullet {
 		x += vx;
 		y += vy;
 
+		System.out.println("pos:[" + x + "," + y + "]");
+
 		HitDirection hitDirection = board.checkCollisions(this);
 
 		if (hitDirection != null) { //if bullet made a collision
@@ -99,7 +101,7 @@ public class Bullet {
 	public void draw(Graphics g) {
 
 		Color firstColor = g.getColor();
-		g.setColor(Color.BLACK);
+		g.setColor(Color.ORANGE);
 		g.fillOval(x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
 		g.setColor(firstColor);
 	}

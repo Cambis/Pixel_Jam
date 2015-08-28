@@ -3,6 +3,7 @@ package game.control;
 import game.model.Board;
 import game.model.Bullet;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -85,7 +86,7 @@ public class Player {
 		}
 
 
-		double rotationRequired = Math.toRadians (rotation);
+		double rotationRequired = Math.toRadians (rotation + 90);
 		double locationX = image.getWidth() / 2;
 		double locationY = image.getHeight() / 2;
 		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
@@ -126,5 +127,14 @@ public class Player {
 
 		if (bullet != null)
 			bullet.moveFrame(board);
+	}
+
+	public void drawBullet(Graphics g) {
+
+		if (bullet != null) {
+
+//			System.out.println("Drawing Bullet");
+			bullet.draw(g);
+		}
 	}
 }
