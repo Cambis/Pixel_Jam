@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 
@@ -50,7 +51,7 @@ public class Player implements KeyListener {
 
 	public BufferedImage getImage() {
 		java.net.URL imageURL = getClass().getResource(
-				"/assets/images/Playerv3.png");
+				"/game/assets/Playerv3.png");
 
 		BufferedImage image = null;
 
@@ -61,7 +62,8 @@ public class Player implements KeyListener {
 			e.printStackTrace();
 		}
 
-		return image;
+
+		 return image;
 	}
 
 	public final int getX() {
@@ -137,7 +139,7 @@ public class Player implements KeyListener {
 
 	public static void main(String args[]) {
 		Player player = new Player(new Point(0, 0), 'a', 'd', 'w');
-		System.out.println(player.getLookAngle());
+		System.out.println(player.getImage().toString());
 	}
 
 	public void moveBullet(Board board) {
