@@ -22,10 +22,10 @@ import javax.swing.Timer;
  * @author bryerscame
  *
  */
-public class BoardPanel extends JPanel implements ActionListener, KeyListener {
+public class BoardPanel extends JPanel implements ActionListener {
 
 	private Board board;
-	private int fireSpeed = 0;
+
 	private Timer timer;
 
 	public BoardPanel(Board board) {
@@ -61,37 +61,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 		this.repaint();
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		char key = e.getKeyChar();
-
-		for (Player p : board.getPlayers()) {
-			if (key == p.getLeft())
-				p.turnLeft();
-			else if (key == p.getRight())
-				p.turnRight();
-			else if (key == p.getFire()) {
-				fireSpeed++;
-			}
-
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		char key = e.getKeyChar();
-
-		for (Player p : board.getPlayers())
-			if (key == p.getFire()) {
-				p.fire(fireSpeed);
-				fireSpeed = 0;
-			}
-	}
+	
 
 
 }

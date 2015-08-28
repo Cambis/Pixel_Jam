@@ -1,5 +1,6 @@
 package game.view;
 
+import game.control.Player;
 import game.model.Board;
 
 import java.awt.BorderLayout;
@@ -20,7 +21,7 @@ import javax.swing.JMenuItem;
  * @author bryerscame
  *
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements KeyListener{
 
 	public static int BOARD_HEIGHT, BOARD_WIDTH;
 
@@ -28,10 +29,13 @@ public class MainFrame extends JFrame {
 	private JMenu menu;
 
 	// Displays the board
-	private BoardPanel board;
+	private BoardPanel boardPanel;
+	private Board board;
 
 	// Displays the current rule
 	private JLabel rule;
+
+	private int fireSpeed = 0;
 
 	public MainFrame() {
 
@@ -39,8 +43,9 @@ public class MainFrame extends JFrame {
 		setSize(600, 600);
 		setJMenuBar(createMenu());
 
-		board = new BoardPanel(new Board("res/test1.txt"));
-		add(board, BorderLayout.CENTER);
+		board = new Board("res/test1.txt");
+		boardPanel = new BoardPanel(board);
+		add(boardPanel, BorderLayout.CENTER);
 
 		// Make sure we can sees it!
 		setVisible(true);
@@ -48,6 +53,7 @@ public class MainFrame extends JFrame {
 		// Probably will change this
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addKeyListener(this);
 		repaint();
 	}
 
@@ -88,7 +94,41 @@ public class MainFrame extends JFrame {
 		return menuBar;
 	}
 
+
 	public static void main(String args[]) {
 		new MainFrame();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		char key = e.getKeyChar();
+		System.out.println("In here");
+
+		for (Player p : board.getPlayers()) {
+			if (key == p.getLeft())
+				p.turnLeft();
+			else if (key == p.getRight())
+				p.turnRight();
+			else if (key == p.getFire()) {
+				fireSpeed++;
+			}
+
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		char key = e.getKeyChar();
+
+		for (Player p : board.getPlayers())
+			if (key == p.getFire()) {
+				p.fire(fireSpeed);
+				fireSpeed = 0;
+			}
 	}
 }
