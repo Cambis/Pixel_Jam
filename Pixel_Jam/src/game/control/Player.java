@@ -6,6 +6,8 @@ import game.model.Bullet;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -82,6 +84,16 @@ public class Player {
 			e.printStackTrace();
 		}
 
+
+		double rotationRequired = Math.toRadians (rotation);
+		double locationX = image.getWidth() / 2;
+		double locationY = image.getHeight() / 2;
+		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
+		image = op.filter(image, null);
+
+
 		return image;
 	}
 
@@ -112,6 +124,7 @@ public class Player {
 
 	public void moveBullet(Board board) {
 
-		bullet.moveFrame(board);
+		if (bullet != null)
+			bullet.moveFrame(board);
 	}
 }

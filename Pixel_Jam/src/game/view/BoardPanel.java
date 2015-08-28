@@ -30,6 +30,8 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 	public BoardPanel(Board board) {
 		this.board = board;
+
+		setUpTimer();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -51,6 +53,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 	private void setUpTimer() {
 
 		timer = new Timer(20, this); //tick every 20 milliseconds
+		timer.start();
 	}
 
 	//on timer tick
@@ -61,7 +64,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-	
+
 
 
 }
