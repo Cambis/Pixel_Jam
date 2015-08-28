@@ -66,11 +66,11 @@ public class Player implements KeyListener {
 		 return image;
 	}
 
-	public final int getX() {
+	public int getX() {
 		return position.x;
 	}
 
-	public final int getY() {
+	public int getY() {
 		return position.y;
 	}
 

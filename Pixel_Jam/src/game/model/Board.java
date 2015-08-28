@@ -87,22 +87,23 @@ public class Board {
 	}
 
 	public BufferedImage draw() {
-		BufferedImage boardReturn = new BufferedImage(128 * xSize, 128 * ySize,
+		BufferedImage boardReturn = new BufferedImage(tileSize * (xSize*2), tileSize * ySize,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) boardReturn.getGraphics();
+		g.fillRect(0,0,tileSize * (xSize*2), tileSize * ySize);
 		for (int x = 0; x < xSize*2; x++) {
 			for (int y = 0; y < ySize; y++) {
 				if (tiles[x][y] instanceof Wall) {
-					g.setColor(Color.white);
+					g.setColor(Color.black);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}else if (tiles[x][y] instanceof Target) {
 					g.setColor(Color.red);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
 				if(players[0].getX()==x && players[0].getY()==y){
-					g.drawImage(players[0].getImage(), x, y, null);
-				}else{
-
+					g.drawImage(players[0].getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
+				}else if(players[1].getX()==x && players[1].getY()==y){
+					g.drawImage(players[1].getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
 				}
 			}
 		}
