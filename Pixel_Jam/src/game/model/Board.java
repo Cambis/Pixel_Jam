@@ -57,8 +57,8 @@ public class Board {
 						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
 					} else if (c == 'P') {
 						// Create player at this point
-						players[0] = new Player(new Point(xPos, yPos), 'a', 'd');
-						players[1] = new Player(new Point(xSize+(xSize-xPos)-1, yPos), 'j', 'l');
+						players[0] = new Player(new Point(xPos, yPos), 'a', 'd', 'w');
+						players[1] = new Player(new Point(xSize+(xSize-xPos)-1, yPos), 'j', 'l', 'i');
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
@@ -93,10 +93,11 @@ public class Board {
 				if (tiles[x][y] instanceof Wall) {
 					g.setColor(Color.white);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-				}if (tiles[x][y] instanceof Target) {
+				}else if (tiles[x][y] instanceof Target) {
 					g.setColor(Color.red);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
+
 			}
 		}
 		return boardReturn;
