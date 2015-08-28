@@ -11,12 +11,14 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Board {
 
 	private Tile tiles[][];
-	private Player players[] = new Player[2];
+	private List<Player> players = new ArrayList<Player>();
 	private int xSize;
 	private int ySize;
 	public static final int tileSize = 16;
@@ -59,8 +61,8 @@ public class Board {
 						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
 					} else if (c == 'P') {
 						// Create player at this point
-						players[0] = new Player(new Point(xPos, yPos), 'a', 'd', 'w');
-						players[1] = new Player(new Point(xSize+(xSize-xPos)-1, yPos), 'j', 'l', 'i');
+						players.add(new Player(new Point(xPos, yPos), 'a', 'd', 'w'));
+						players.add(new Player(new Point(xSize+(xSize-xPos)-1, yPos), 'j', 'l', 'i'));
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
@@ -86,23 +88,28 @@ public class Board {
 		return null;
 	}
 
+	public List<Player> getPlayers(){
+		return players;
+	}
+
 	public BufferedImage draw() {
-		BufferedImage boardReturn = new BufferedImage(128 * xSize, 128 * ySize,
+		BufferedImage boardReturn = new BufferedImage(tileSize * (xSize*2), tileSize * ySize,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) boardReturn.getGraphics();
+		g.fillRect(0,0,tileSize * (xSize*2), tileSize * ySize);
 		for (int x = 0; x < xSize*2; x++) {
 			for (int y = 0; y < ySize; y++) {
 				if (tiles[x][y] instanceof Wall) {
-					g.setColor(Color.white);
+					g.setColor(Color.black);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}else if (tiles[x][y] instanceof Target) {
 					g.setColor(Color.red);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
-				if(players[0].getX()==x && players[0].getY()==y){
-					g.drawImage(players[0].getImage(), x, y, null);
-				}else{
-
+				for(Player p: players){
+					if(p.getX()==x && p.getY()==y){
+						g.drawImage(p.getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
+					}
 				}
 			}
 		}
