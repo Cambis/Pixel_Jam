@@ -1,5 +1,7 @@
 package game.control;
 
+import game.model.Bullet;
+
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,18 +24,23 @@ public class Player implements KeyListener {
 
 	// Current angle the player is facing
 	private double rotation;
+	private static final double ROTATION_MIN = 0;
+	private static final double ROTATION_MAX = 180;
 
 	// Keys used to control player movement
-	private char left, right;
+	private final char left, right, fire;
 
 	private long start, end;
 
+	private Bullet bullet;
+
 	private static final boolean DEBUG = true;
 
-	public Player(Point startPos, char left, char right) {
+	public Player(Point startPos, char left, char right, char fire) {
 		position = startPos;
 		this.left = left;
 		this.right = right;
+		this.fire = fire;
 	}
 
 	public final double getLookAngle() {
@@ -41,7 +48,8 @@ public class Player implements KeyListener {
 	}
 
 	public BufferedImage getImage() {
-		java.net.URL imageURL = getClass().getResource("/game/assets/images/Playerv3.png");
+		java.net.URL imageURL = getClass().getResource(
+				"/game/assets/images/Playerv3.png");
 
 		BufferedImage image = null;
 
@@ -86,8 +94,8 @@ public class Player implements KeyListener {
 			// Calculate difference
 			double difference = end - start;
 
-			// Change the rotation, must be < 360
-			rotation = (rotation < 360) ? rotation + difference : 360;
+			// Change the rotation, must be < MAX
+			rotation = (rotation < ROTATION_MAX) ? rotation + difference : ROTATION_MAX;
 		}
 
 		// Right key press
@@ -98,12 +106,13 @@ public class Player implements KeyListener {
 			// Calculate difference
 			double difference = end - start;
 
-			// Change the rotation, must be > 0
-			rotation = (rotation > 0) ? rotation - difference : 0;
+			// Change the rotation, must be > MIN
+			rotation = (rotation > ROTATION_MIN) ? rotation - difference : ROTATION_MIN;
 		}
 	}
 
 	public static void main(String args[]) {
-		new Player(new Point(0, 0), 'A', 'D');
+		Player player = new Player(new Point(0, 0), 'a', 'd', 's');
+		System.out.println(player.getLookAngle());
 	}
 }
