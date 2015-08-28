@@ -31,6 +31,11 @@ public class Bullet {
 		return y;
 	}
 
+	public int GetNumHits() {
+
+		return numHits;
+	}
+
 	public void moveFrame(Board board) {
 
 		x += vx;
