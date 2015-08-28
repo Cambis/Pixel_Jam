@@ -61,8 +61,8 @@ public class Board {
 						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
 					} else if (c == 'P') {
 						// Create player at this point
-						players.add(new Player(new Point(xPos, yPos), 'a', 'd', 'w'));
-						players.add(new Player(new Point(xSize+(xSize-xPos)-1, yPos), 'j', 'l', 'i'));
+						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'a', 'd', 'w'));
+						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'j', 'l', 'i'));
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
@@ -78,19 +78,23 @@ public class Board {
 	}
 
 	public HitDetection checkCollisions(Bullet b) {
-		if(b.getX()<0 || b.getY()<0 || b.getX()>xSize*2 || b.getY()>ySize){
+		if(b.getX()<0 || b.getY()<0 || b.getX()>xSize*2*tileSize || b.getY()>ySize*tileSize){
+			System.out.println("Out of screen");
 			return null;
 		}
 		int xTile = b.getX() / tileSize;
 		int yTile = b.getY() / tileSize;
 		if (tiles[xTile][yTile] instanceof Wall) {
-			int xPos = b.getX() - xTile;
-			int yPos = b.getY() - yTile;
+			int xPos = b.getX() - (xTile*tileSize);
+			int yPos = b.getY() - (yTile*tileSize);
+			System.out.println("Hit wall");
 			return ((Wall)tiles[xTile][yTile]).hitSegment(xPos, yPos);
 
 		}else if(tiles[xTile][yTile] instanceof Target){
+			System.out.println("BINGO");
 			return HitDetection.TARGET;
 		}
+		System.out.println("No collision");
 		return null;
 	}
 
@@ -113,7 +117,7 @@ public class Board {
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
 				for(Player p: players){
-					if(p.getX()==x && p.getY()==y){
+					if(p.getX()/tileSize==x && p.getY()/tileSize==y){
 						g.drawImage(p.getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
 					}
 
