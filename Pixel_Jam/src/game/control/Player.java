@@ -63,6 +63,14 @@ public class Player implements KeyListener {
 		return image;
 	}
 
+	public final int getX() {
+		return position.x;
+	}
+
+	public final int getY() {
+		return position.y;
+	}
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 
@@ -74,7 +82,8 @@ public class Player implements KeyListener {
 		if (DEBUG)
 			System.out.println(e.getKeyChar());
 
-		if (e.getKeyChar() == left || e.getKeyChar() == right) {
+		if (e.getKeyChar() == left || e.getKeyChar() == right
+				|| e.getKeyChar() == fire) {
 			start = System.currentTimeMillis();
 		}
 
@@ -95,7 +104,8 @@ public class Player implements KeyListener {
 			double difference = end - start;
 
 			// Change the rotation, must be < MAX
-			rotation = (rotation < ROTATION_MAX) ? rotation + difference : ROTATION_MAX;
+			rotation = (rotation < ROTATION_MAX) ? rotation + difference
+					: ROTATION_MAX;
 		}
 
 		// Right key press
@@ -107,12 +117,25 @@ public class Player implements KeyListener {
 			double difference = end - start;
 
 			// Change the rotation, must be > MIN
-			rotation = (rotation > ROTATION_MIN) ? rotation - difference : ROTATION_MIN;
+			rotation = (rotation > ROTATION_MIN) ? rotation - difference
+					: ROTATION_MIN;
+		}
+
+		// Fire the bullet!
+		else if (e.getKeyChar() == fire) {
+
+			end = System.currentTimeMillis();
+
+			// Calculate difference
+			double difference = end - start;
+
+			// Create new bullet
+			bullet = new Bullet(position.x, position.y, rotation, difference);
 		}
 	}
 
 	public static void main(String args[]) {
-		Player player = new Player(new Point(0, 0), 'a', 'd', 's');
+		Player player = new Player(new Point(0, 0), 'a', 'd', 'w');
 		System.out.println(player.getLookAngle());
 	}
 }

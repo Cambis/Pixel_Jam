@@ -5,10 +5,13 @@ import game.model.Board;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  * Draws the board itself
@@ -16,9 +19,11 @@ import javax.swing.JPanel;
  * @author bryerscame
  *
  */
-public class BoardPanel extends JPanel {
+public class BoardPanel extends JPanel implements ActionListener {
 
 	private Board board;
+
+	private Timer timer;
 
 	public BoardPanel(Board board) {
 		this.board = board;
@@ -36,4 +41,21 @@ public class BoardPanel extends JPanel {
 		frame.add(board);
 		frame.setVisible(true);
 	}
+
+
+
+
+	private void setUpTimer() {
+
+		timer = new Timer(20, this); //tick every 20 milliseconds
+	}
+
+	//on timer tick
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		board.gameTick();
+		this.repaint();
+	}
+
 }
