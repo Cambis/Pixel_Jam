@@ -36,7 +36,14 @@ public class Bullet {
 
 		HitDirection hitDirection = board.checkCollisions(this);
 
+		if (hitDirection == HitDirection.NORTH || hitDirection == HitDirection.SOUTH) {
 
+			bounceVertical();
+		}
+		else if (hitDirection == HitDirection.EAST || hitDirection == HitDirection.WEST) {
+
+			bounceHorizontal();
+		}
 	}
 
 	public double getSpeed() {
