@@ -1,8 +1,11 @@
 package game.model;
 
+import game.control.Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,9 +14,10 @@ import java.util.Scanner;
 public class Board {
 
 	private Tile tiles[][];
+	private Player players[] = new Player[2];
 	private int xSize;
 	private int ySize;
-	public static final int tileSize = 128;
+	public static final int tileSize = 16;
 
 	public Board(String filename) {
 
@@ -21,7 +25,7 @@ public class Board {
 			Scanner s = new Scanner(new File(filename));
 			xSize = s.nextInt();
 			ySize = s.nextInt();
-			tiles = new Tile[xSize][ySize];
+			tiles = new Tile[xSize*2][ySize];
 			int xPos = 0;
 			int yPos = 0;
 			while (s.hasNext()) {
@@ -29,8 +33,10 @@ public class Board {
 					int i = s.nextInt();
 					if (i == 0) {
 						tiles[xPos][yPos] = new BlankTile();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new BlankTile();
 					} else if (i == 1) {
 						tiles[xPos][yPos] = new Wall();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new Wall();
 					} else {
 						System.out.println("Error loading file (invalid int - "
 								+ i + ", xPos = " + xPos + ", yPox = " + yPos
@@ -48,8 +54,11 @@ public class Board {
 					char c = tok.charAt(0);
 					if (c == 'T') {
 						tiles[xPos][yPos] = new Target();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
 					} else if (c == 'P') {
 						// Create player at this point
+						players[0] = new Player(new Point(xPos, yPos), 'a', 'd');
+						players[1] = new Player(new Point(xSize+(xSize-xPos)-1, yPos), 'j', 'l');
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
@@ -79,10 +88,13 @@ public class Board {
 		BufferedImage boardReturn = new BufferedImage(128 * xSize, 128 * ySize,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) boardReturn.getGraphics();
-		for (int x = 0; x < xSize; x++) {
+		for (int x = 0; x < xSize*2; x++) {
 			for (int y = 0; y < ySize; y++) {
 				if (tiles[x][y] instanceof Wall) {
 					g.setColor(Color.white);
+					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+				}if (tiles[x][y] instanceof Target) {
+					g.setColor(Color.red);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
 			}

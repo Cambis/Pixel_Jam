@@ -6,6 +6,8 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.Timer;
 
+import javax.imageio.ImageIO;
+
 /**
  * Represents a player on screen.
  *
@@ -38,6 +40,7 @@ public class Player implements KeyListener {
 	}
 
 	public BufferedImage getImage() {
+		// BufferedImage = ImageIO.read(input)
 		return null;
 	}
 
@@ -49,7 +52,8 @@ public class Player implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		if (DEBUG) System.out.println(e.getKeyChar());
+		if (DEBUG)
+			System.out.println(e.getKeyChar());
 
 		if (e.getKeyChar() == left || e.getKeyChar() == right) {
 			start = System.currentTimeMillis();
@@ -60,7 +64,8 @@ public class Player implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		if (DEBUG) System.out.println(e.getKeyChar());
+		if (DEBUG)
+			System.out.println(e.getKeyChar());
 
 		// Left key press
 		if (e.getKeyChar() == left) {
@@ -87,7 +92,7 @@ public class Player implements KeyListener {
 		}
 	}
 
-	public static void main (String args[]) {
+	public static void main(String args[]) {
 		new Player(new Point(0, 0), 'A', 'D');
 	}
 }
