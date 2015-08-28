@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Timer;
 
 import javax.imageio.ImageIO;
@@ -40,8 +41,18 @@ public class Player implements KeyListener {
 	}
 
 	public BufferedImage getImage() {
-		// BufferedImage = ImageIO.read(input)
-		return null;
+		java.net.URL imageURL = getClass().getResource("/game/assets/images/Playerv3.png");
+
+		BufferedImage image = null;
+
+		try {
+			image = ImageIO.read(imageURL);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return image;
 	}
 
 	@Override

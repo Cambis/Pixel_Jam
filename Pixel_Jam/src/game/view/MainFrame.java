@@ -1,5 +1,7 @@
 package game.view;
 
+import game.model.Board;
+
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 
@@ -31,7 +33,7 @@ public class MainFrame extends JFrame {
 		setSize(600, 600);
 		setJMenuBar(createMenu());
 
-		board = new BoardPanel();
+		board = new BoardPanel(new Board("res/test1.txt"));
 		add(board, BorderLayout.CENTER);
 
 		// Make sure we can sees it!
