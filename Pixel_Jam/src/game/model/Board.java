@@ -78,6 +78,9 @@ public class Board {
 	}
 
 	public HitDetection checkCollisions(Bullet b) {
+		if(b.getX()<0 || b.getY()<0 || b.getX()>xSize*2 || b.getY()>ySize){
+			return null;
+		}
 		int xTile = b.getX() / tileSize;
 		int yTile = b.getY() / tileSize;
 		if (tiles[xTile][yTile] instanceof Wall) {
