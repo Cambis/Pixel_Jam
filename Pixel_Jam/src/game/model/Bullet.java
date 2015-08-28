@@ -13,6 +13,8 @@ public class Bullet {
 	private double vx;
 	private double vy;
 
+	int numHits;
+
 	public Bullet(int xi, int yi, double direction, double speed) {
 
 		x = xi;
@@ -36,19 +38,25 @@ public class Bullet {
 
 		HitDirection hitDirection = board.checkCollisions(this);
 
-		if (hitDirection == HitDirection.NORTH || hitDirection == HitDirection.SOUTH) {
+		if (hitDirection != null) { //if bullet made a collision
 
-			bounceVertical();
-		}
-		else if (hitDirection == HitDirection.EAST || hitDirection == HitDirection.WEST) {
+			numHits++;
 
-			bounceHorizontal();
+			// if bullet hit top or bottom
+			if (hitDirection == HitDirection.NORTH || hitDirection == HitDirection.SOUTH) {
+
+				bounceVertical(); //flip vertical speed
+			}
+			else if (hitDirection == HitDirection.EAST || hitDirection == HitDirection.WEST) {
+
+				bounceHorizontal(); //flip horizontal speed
+			}
 		}
 	}
 
 	public double getSpeed() {
 
-		return Math.sqrt(vx*vx + vy*vy);
+		return Math.sqrt(vx*vx + vy*vy); //magnitude of velocity vector
 	}
 
 	public void setVelocity(double vx, double vy) {
@@ -69,8 +77,13 @@ public class Bullet {
 
 	public void setSpeed(double direction, double speed) {
 
-		vx = speed * Math.cos(direction);
-		vy = speed * Math.sin(direction);
+		vx = speed * Math.cos(direction / 180 * Math.PI);
+		vy = speed * Math.sin(direction / 180 * Math.PI);
+	}
+
+	public double getDirection() {
+
+		return Math.atan2(vy, vx) / Math.PI * 180;
 	}
 
 	public void draw(Graphics g) {
