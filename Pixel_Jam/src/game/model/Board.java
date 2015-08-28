@@ -111,6 +111,9 @@ public class Board {
 
 	public void gameTick() {
 
+		for (Player player : players) {
 
+			player.moveBullet(this);
+		}
 	}
 }
