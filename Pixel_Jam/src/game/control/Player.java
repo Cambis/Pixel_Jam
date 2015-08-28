@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  * @author bryerscame
  *
  */
-public class Player implements KeyListener {
+public class Player {
 
 	// Player's position
 	private Point position;
@@ -45,6 +45,23 @@ public class Player implements KeyListener {
 		this.left = left;
 		this.right = right;
 		this.fire = fire;
+	}
+
+	public void turnLeft() {
+		rotation = (rotation > ROTATION_MIN) ? rotation - 1 : ROTATION_MIN;
+	}
+
+	public void turnRight() {
+		rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
+	}
+
+	public void fire(int speed) {
+
+		// Create new bullet
+		bullet = new Bullet(position.x, position.y, rotation,
+				bulletHoldTime);
+
+		bulletHoldTime = 0;
 	}
 
 	public final double getLookAngle() {
@@ -75,45 +92,16 @@ public class Player implements KeyListener {
 		return position.y;
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-
+	public final char getLeft() {
+		return left;
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-
-		if (DEBUG)
-			System.out.println(e.getKeyChar());
-
-		char key = e.getKeyChar();
-
-		/**
-		 * ROTATION_MIN < rotation < ROTATION_MAX
-		 */
-
-		if (key == left) {
-			rotation = (rotation > ROTATION_MIN) ? rotation - 1 : ROTATION_MIN;
-		} else if (key == right) {
-			rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
-		} else if (key == fire) {
-			bulletHoldTime = (bulletHoldTime < MAX_BULLET_HOLD_TIME) ? bulletHoldTime + 1
-					: MAX_BULLET_HOLD_TIME;
-		}
+	public final char getRight() {
+		return right;
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-
-		// Fire the bullet!
-		if (e.getKeyChar() == fire) {
-
-			// Create new bullet
-			bullet = new Bullet(position.x, position.y, rotation,
-					bulletHoldTime);
-
-			bulletHoldTime = 0;
-		}
+	public final char getFire() {
+		return fire;
 	}
 
 	public static void main(String args[]) {

@@ -2,11 +2,14 @@ package game.view;
 
 import game.control.Player;
 import game.model.Board;
+import game.model.Bullet;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Set;
 
 import javax.swing.JFrame;
@@ -19,7 +22,7 @@ import javax.swing.Timer;
  * @author bryerscame
  *
  */
-public class BoardPanel extends JPanel implements ActionListener {
+public class BoardPanel extends JPanel implements ActionListener, KeyListener {
 
 	private Board board;
 
@@ -57,5 +60,21 @@ public class BoardPanel extends JPanel implements ActionListener {
 		board.gameTick();
 		this.repaint();
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+
+	}
+
 
 }
