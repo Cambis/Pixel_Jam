@@ -1,6 +1,7 @@
 package game.model;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -10,9 +11,10 @@ import java.util.Scanner;
 
 public class Board {
 
-	Tile tiles[][];
-	int xSize;
-	int ySize;
+	private Tile tiles[][];
+	private int xSize;
+	private int ySize;
+	private int tileSize = 128;
 
 	public Board(String filename){
 
@@ -43,7 +45,6 @@ public class Board {
 						}
 						//gets char
 						char c = tok.charAt(0);
-						//if c is a-z
 						if(c == 'T'){
 							tiles[xPos][yPos] = new Target();
 						}else if(c == 'P'){
@@ -56,9 +57,22 @@ public class Board {
 		}
 	}
 
+	public HitDirection checkCollisions(Bullet b){
+
+		return null;
+	}
+
 	public BufferedImage draw(){
 		BufferedImage boardReturn = new BufferedImage(128*xSize, 128*ySize, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D)boardReturn.getGraphics();
+		for(int x=0; x<xSize; x++){
+			for(int y=0; y<ySize; y++){
+				if(tiles[x][y] instanceof Wall){
+					g.setColor(Color.black);
+					g.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
+				}
+			}
+		}
 		return boardReturn;
 	}
 
