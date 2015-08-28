@@ -35,6 +35,8 @@ public class Player implements KeyListener {
 	private long start, end;
 
 	private Bullet bullet;
+	private double bulletHoldTime = 0;
+	private static final int MAX_BULLET_HOLD_TIME = 5;
 
 	private static final boolean DEBUG = true;
 
@@ -62,8 +64,7 @@ public class Player implements KeyListener {
 			e.printStackTrace();
 		}
 
-
-		 return image;
+		return image;
 	}
 
 	public int getX() {
@@ -85,55 +86,33 @@ public class Player implements KeyListener {
 		if (DEBUG)
 			System.out.println(e.getKeyChar());
 
-		if (e.getKeyChar() == left || e.getKeyChar() == right
-				|| e.getKeyChar() == fire) {
-			start = System.currentTimeMillis();
-		}
+		char key = e.getKeyChar();
 
+		/**
+		 * ROTATION_MIN < rotation < ROTATION_MAX
+		 */
+
+		if (key == left) {
+			rotation = (rotation > ROTATION_MIN) ? rotation - 1 : ROTATION_MIN;
+		} else if (key == right) {
+			rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
+		} else if (key == fire) {
+			bulletHoldTime = (bulletHoldTime < MAX_BULLET_HOLD_TIME) ? bulletHoldTime + 1
+					: MAX_BULLET_HOLD_TIME;
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		if (DEBUG)
-			System.out.println(e.getKeyChar());
-
-		// Left key press
-		if (e.getKeyChar() == left) {
-
-			end = System.currentTimeMillis();
-
-			// Calculate difference
-			double difference = end - start;
-
-			// Change the rotation, must be < MAX
-			rotation = (rotation < ROTATION_MAX) ? rotation + difference
-					: ROTATION_MAX;
-		}
-
-		// Right key press
-		else if (e.getKeyChar() == right) {
-
-			end = System.currentTimeMillis();
-
-			// Calculate difference
-			double difference = end - start;
-
-			// Change the rotation, must be > MIN
-			rotation = (rotation > ROTATION_MIN) ? rotation - difference
-					: ROTATION_MIN;
-		}
-
 		// Fire the bullet!
-		else if (e.getKeyChar() == fire) {
-
-			end = System.currentTimeMillis();
-
-			// Calculate difference
-			double difference = end - start;
+		if (e.getKeyChar() == fire) {
 
 			// Create new bullet
-			bullet = new Bullet(position.x, position.y, rotation, difference);
+			bullet = new Bullet(position.x, position.y, rotation,
+					bulletHoldTime);
+
+			bulletHoldTime = 0;
 		}
 	}
 
