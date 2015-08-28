@@ -7,11 +7,12 @@ package game.model;
  * @author petikalohi
  *
  */
-public enum HitDirection {
+public enum HitDetection {
 
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	TARGET
 
 }
