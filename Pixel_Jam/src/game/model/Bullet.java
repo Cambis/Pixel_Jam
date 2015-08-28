@@ -21,12 +21,12 @@ public class Bullet {
 		setSpeed(direction, speed);
 	}
 
-	public void moveFrame() {
+	public void moveFrame(Board board) {
 
 		x += vx;
 		y += vy;
 
-		// check for collisions
+		//board.checkCollisions(this);
 	}
 
 	public double getSpeed() {
@@ -38,6 +38,16 @@ public class Bullet {
 
 		this.vx = vx;
 		this.vy = vy;
+	}
+
+	public void bounceVertical() {
+
+		vx = -vx;
+	}
+
+	public void bounceHorizontal() {
+
+		vy = -vy;
 	}
 
 	public void setSpeed(double direction, double speed) {
