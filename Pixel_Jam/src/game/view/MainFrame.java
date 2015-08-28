@@ -3,8 +3,11 @@ package game.view;
 import game.model.Board;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -38,6 +41,8 @@ public class MainFrame extends JFrame {
 
 		// Make sure we can sees it!
 		setVisible(true);
+
+		// Probably will change this
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		repaint();
@@ -53,8 +58,29 @@ public class MainFrame extends JFrame {
 
 		menuBar.add(menu); // adds to menu bar
 
-		JMenuItem menuItem = new JMenuItem("New Game");
-		menu.add(menuItem);
+		JMenuItem newGame = new JMenuItem("New Game");
+		newGame.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new MainFrame();
+			}
+
+		});
+
+		JMenuItem quit = new JMenuItem("Quit");
+		quit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+
+		});
+
+		menu.add(newGame);
+		menu.add(quit);
 
 		return menuBar;
 	}
