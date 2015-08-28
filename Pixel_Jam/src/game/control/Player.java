@@ -49,7 +49,7 @@ public class Player implements KeyListener {
 
 	public BufferedImage getImage() {
 		java.net.URL imageURL = getClass().getResource(
-				"/game/assets/images/Playerv3.png");
+				"/assets/images/Playerv3.png");
 
 		BufferedImage image = null;
 

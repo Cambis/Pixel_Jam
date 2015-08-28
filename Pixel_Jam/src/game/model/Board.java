@@ -99,7 +99,11 @@ public class Board {
 					g.setColor(Color.red);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
+				if(players[0].getX()==x && players[0].getY()==y){
+					g.drawImage(players[0].getImage(), x, y, null);
+				}else{
 
+				}
 			}
 		}
 		return boardReturn;
