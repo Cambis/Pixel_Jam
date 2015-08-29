@@ -2,6 +2,7 @@ package game.view;
 
 import game.control.Player;
 import game.model.Board;
+import game.model.RuleType;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,6 +36,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static final int TARGET_SCORE = 100;
 	public static final int TROPHY_SCORE = 20;
 
+	// Top menu bar
 	private JMenuBar menuBar;
 	private JMenu menu;
 
@@ -42,37 +44,55 @@ public class MainFrame extends JFrame implements KeyListener {
 	private BoardPanel boardPanel;
 	private Board board;
 
+	// This pops up after a game is won
 	private EndGameBox endGame;
 
+	// Current rule
+	private RuleType rule;
+
 	// Displays the current rule
-	private JLabel rule;
+	private JLabel ruleLabel;
+
+	// Displays player scores
 	private JLabel player1Score, player2Score;
 
+	// Used to check for game over and update player scores
 	private Timer timer;
 
 	public MainFrame() {
+		init();
+	}
+
+	private void init() {
 
 		setLayout(new BorderLayout());
 		setJMenuBar(createMenu());
 
+		// Add board
 		board = new Board("res/CallumLvl.txt");
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
-
-
 		board.setParentPanel(boardPanel);
+		setSize(new Dimension(board.getXSize(), board.getYSize() + 100));
 
-		setSize(new Dimension(board.getXSize(), board.getYSize() + 50));
+		// Add rule label
+		JPanel rulePanel = new JPanel();
+		ruleLabel = new JLabel("DICKS", JLabel.CENTER);
+		rulePanel.add(ruleLabel);
+		add(rulePanel, BorderLayout.NORTH);
 
-		player1Score = new JLabel(String.valueOf(board.getPlayers().get(0).getScore()));
+		// Set up player scores
+		player1Score = new JLabel(String.valueOf(board.getPlayers().get(0)
+				.getScore()));
 		player1Score.setHorizontalAlignment(JLabel.CENTER);
-		player2Score = new JLabel(String.valueOf(board.getPlayers().get(1).getScore()));
+		player2Score = new JLabel(String.valueOf(board.getPlayers().get(1)
+				.getScore()));
 		player2Score.setHorizontalAlignment(JLabel.CENTER);
 		JPanel playerPanel = new JPanel(new GridLayout());
+
 		playerPanel.setSize(board.getXSize(), 50);
 		playerPanel.add(player1Score);
 		playerPanel.add(player2Score);
-
 		add(playerPanel, BorderLayout.SOUTH);
 
 		// Set up the timer (updates score and checks for game over).
@@ -88,6 +108,16 @@ public class MainFrame extends JFrame implements KeyListener {
 		addKeyListener(board.getPlayers().get(0));
 		addKeyListener(board.getPlayers().get(1));
 		repaint();
+	}
+
+	/**
+	 * Change board and rule, called when user presses next
+	 *
+	 * @param board
+	 * @param rule
+	 */
+	public void changeBoard(Board board, RuleType rule) {
+
 	}
 
 	private JMenuBar createMenu() {
@@ -129,6 +159,9 @@ public class MainFrame extends JFrame implements KeyListener {
 		return menuBar;
 	}
 
+	/**
+	 * Updates player score
+	 */
 	private void updateScore() {
 		Player player1 = board.getPlayers().get(0);
 		Player player2 = board.getPlayers().get(1);
@@ -146,7 +179,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		timer = new Timer(1, new ActionListener() {
 
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -162,6 +194,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		timer.start();
 	}
+
 	public static void main(String args[]) {
 		new MainFrame();
 	}
