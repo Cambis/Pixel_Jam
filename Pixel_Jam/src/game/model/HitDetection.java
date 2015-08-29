@@ -17,6 +17,9 @@ public enum HitDetection {
 	SOUTH_EAST,
 	NORTH_WEST,
 	SOUTH_WEST,
-	TARGET
+	TARGET,
+	BLACKHOLE,
+	BOOSTPAD,
+	SLOWPAD
 
 }

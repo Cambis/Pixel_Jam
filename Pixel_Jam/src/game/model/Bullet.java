@@ -47,6 +47,21 @@ public class Bullet {
 
 			numHits++;
 
+			if (hitDirection == HitDetection.BLACKHOLE) {
+
+				this.setSpeed(0);
+			}
+
+			else if (hitDirection == HitDetection.BOOSTPAD) {
+
+				this.setSpeed(getSpeed() * 2);
+			}
+
+			else if (hitDirection == HitDetection.SLOWPAD) {
+
+				this.setSpeed(getSpeed() / 2);
+			}
+
 			// if bullet hit top or bottom
 			switch(hitDirection){
 			case NORTH: case SOUTH:
