@@ -94,7 +94,7 @@ public class Board {
 			if(left<(xTile)*tileSize
 					&& (tiles[xTile-1][yTile-1] instanceof Wall)){
 				if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
-					System.out.println("NW");
+					//System.out.println("NW");
 					return HitDetection.NORTH_WEST;
 				}
 			}
@@ -102,12 +102,12 @@ public class Board {
 					&& (tiles[xTile+1][yTile-1] instanceof Wall)){
 				//Colliding with tile right
 				if(dist(right, top, (xTile+1)*tileSize, yTile*tileSize)<=b.RADIUS){
-					System.out.println("NE");
+					//System.out.println("NE");
 					return HitDetection.NORTH_EAST;
 				}
 			}
 			if(tiles[xTile][yTile-1] instanceof Wall){
-				System.out.println("N");
+				//System.out.println("N");
 				return HitDetection.NORTH;
 			}
 		}
@@ -116,7 +116,7 @@ public class Board {
 			if(left<(xTile)*tileSize
 					&& (tiles[xTile-1][yTile+1] instanceof Wall)){
 				if(dist(left, bot, xTile*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
-					System.out.println("SW");
+					//System.out.println("Sw");
 					return HitDetection.SOUTH_WEST;
 				}
 			}
@@ -124,12 +124,12 @@ public class Board {
 					&& (tiles[xTile+1][yTile+1] instanceof Wall)){
 				//Colliding with tile right
 				if(dist(right, bot, (xTile+1)*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
-					System.out.println("SE");
+					//System.out.println("SE");
 					return HitDetection.SOUTH_EAST;
 				}
 			}
 			if(tiles[xTile][yTile+1] instanceof Wall){
-				System.out.println("S");
+				//System.out.println("S");
 				return HitDetection.SOUTH;
 			}
 		}
@@ -163,7 +163,24 @@ public class Board {
 		return Math.sqrt(distX*distX+distY*distY);
 	}
 
+	public int getTileEdge(double x, double y, HitDetection dir){
+		int xTile = (int)x / tileSize;
+		int yTile = (int)y / tileSize;
+		if(dir==HitDetection.NORTH){
+			return yTile*tileSize;
+		}
+		if(dir==HitDetection.SOUTH){
+			return (yTile+1)*tileSize;
+		}
+		if(dir==HitDetection.WEST){
+			return xTile*tileSize;
+		}
+		if(dir==HitDetection.EAST){
+			return (xTile+1)*tileSize;
+		}
+		return -1;
 
+	}
 
 	public List<Player> getPlayers(){
 		return players;
@@ -211,5 +228,9 @@ public class Board {
 
 	public final int getYSize() {
 		return tileSize * ySize;
+	}
+
+	public enum Direction{
+		NORTH,SOUTH,EAST,WEST;
 	}
 }
