@@ -131,10 +131,12 @@ public class Board {
 
 		if(tiles[xTile][yTile] instanceof Target) {
 
-			for (Player player : getPlayers()) {
-				if (player.getBullet() != null && player.getBullet().equals(b))
-					player.updateScore(1);
-			}
+//			for (Player player : getPlayers()) {
+//				if (player.getBullet() != null && player.getBullet().equals(b))
+//					player.hitTarget();
+//			}
+
+			b.getPlayer().hitTarget();
 			parentPanel.endGame();
 			return HitDetection.TARGET;
 		}

@@ -3,6 +3,7 @@ package game.control;
 import game.model.Board;
 import game.model.Bullet;
 import game.model.GameColors;
+import game.view.MainFrame;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -22,7 +23,7 @@ import javax.imageio.ImageIO;
  * @author bryerscame
  *
  */
-public class Player implements KeyListener{
+public class Player implements KeyListener {
 
 	// Player's position
 	private Point position;
@@ -45,8 +46,11 @@ public class Player implements KeyListener{
 
 	private boolean turnLeft, turnRight, firing, fired;
 
-	private int score;
-	private int trophies=0;
+	// Points for hitting the target
+	private int hitTarget = 0;
+
+	// Points for hitting the trophies
+	private int trophies = 0;
 
 	private double updateRate = 0.1;
 
@@ -78,23 +82,23 @@ public class Player implements KeyListener{
 		speed = 0;
 	}
 
-	public void addTrophy(){
+	public void addTrophy() {
 		trophies++;
 	}
 
 	public void updateFireSpeed() {
-		if((speed+updateRate>=MAX_BULLET_HOLD_TIME)||(speed+updateRate<=0)){
-			updateRate*=-1;
+		if ((speed + updateRate >= MAX_BULLET_HOLD_TIME)
+				|| (speed + updateRate <= 0)) {
+			updateRate *= -1;
 		}
 		speed += updateRate;
 
-
-		int c = (int)(255*speed/MAX_BULLET_HOLD_TIME);
+		int c = (int) (255 * speed / MAX_BULLET_HOLD_TIME);
 		currentColor = new Color(c, c, 0);
 
-		//speed = (speed < 0) ? 0 : speed;
+		// speed = (speed < 0) ? 0 : speed;
 
-//		System.out.println(speed);
+		// System.out.println(speed);
 	}
 
 	public final double getLookAngle() {
@@ -147,14 +151,20 @@ public class Player implements KeyListener{
 		return fire;
 	}
 
+	/**
+	 * Return the score of the player
+	 * @return
+	 */
 	public final int getScore() {
-		return score;
+		return (hitTarget * MainFrame.TARGET_SCORE) + (trophies * MainFrame.TROPHY_SCORE);
 	}
 
-	public void updateScore(int score) {
-		this.score += score;
+	/**
+	 * Increment the number of times the player has hit the target
+	 */
+	public void hitTarget() {
+		hitTarget++;
 	}
-
 
 	public void moveBullet(Board board) {
 
@@ -187,8 +197,8 @@ public class Player implements KeyListener{
 
 		g.fillOval(x, y, w, h);
 
-		int x2 = (int)(w/2 * Math.cos(rotation / 180 * Math.PI));
-		int y2 = (int)(h/2 * Math.sin(rotation / 180 * Math.PI));
+		int x2 = (int) (w / 2 * Math.cos(rotation / 180 * Math.PI));
+		int y2 = (int) (h / 2 * Math.sin(rotation / 180 * Math.PI));
 
 		g.setColor(GameColors.PLAYERFACE);
 		g.drawLine(x + w / 2, y + h / 2, x + w / 2 + x2, y + h / 2 + y2);
@@ -203,8 +213,7 @@ public class Player implements KeyListener{
 		else if (firing) {
 			updateFireSpeed();
 			firing = false;
-		}
-		else if (fired) {
+		} else if (fired) {
 			fire();
 			fired = false;
 		}

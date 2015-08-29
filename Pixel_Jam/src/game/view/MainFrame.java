@@ -32,6 +32,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	public static int BOARD_HEIGHT, BOARD_WIDTH;
 
+	public static final int TARGET_SCORE = 100;
+	public static final int TROPHY_SCORE = 20;
+
 	private JMenuBar menuBar;
 	private JMenu menu;
 
@@ -61,8 +64,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		setSize(new Dimension(board.getXSize(), board.getYSize() + 50));
 
-		setUpTimer();
-
 		player1Score = new JLabel(String.valueOf(board.getPlayers().get(0).getScore()));
 		player1Score.setHorizontalAlignment(JLabel.CENTER);
 		player2Score = new JLabel(String.valueOf(board.getPlayers().get(1).getScore()));
@@ -73,6 +74,9 @@ public class MainFrame extends JFrame implements KeyListener {
 		playerPanel.add(player2Score);
 
 		add(playerPanel, BorderLayout.SOUTH);
+
+		// Set up the timer (updates score and checks for game over).
+		setUpTimer();
 
 		// Make sure we can sees it!
 		setVisible(true);
@@ -123,6 +127,14 @@ public class MainFrame extends JFrame implements KeyListener {
 		return menuBar;
 	}
 
+	private void updateScore() {
+		Player player1 = board.getPlayers().get(0);
+		Player player2 = board.getPlayers().get(1);
+
+		player1Score.setText(String.valueOf(player1.getScore()));
+		player2Score.setText(String.valueOf(player2.getScore()));
+	}
+
 	private void setUpTimer() {
 
 		endGame = new EndGameBox();
@@ -132,8 +144,12 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		timer = new Timer(1, new ActionListener() {
 
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				updateScore();
+
 				if (boardPanel.gameOver()) {
 					endGame.setVisible(true);
 					timer.stop();
