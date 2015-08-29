@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements KeyListener{
 		setLayout(new GridLayout(1, 1));
 		setJMenuBar(createMenu());
 
-		board = new Board("res/test3.txt");
+		board = new Board("res/test3.txt", boardPanel);
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 
