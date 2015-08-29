@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		// Add rule label
 		JPanel rulePanel = new JPanel();
-		ruleLabel = new JLabel("DICKS", JLabel.CENTER);
+		ruleLabel = new JLabel("NO RULE", JLabel.CENTER);
 		rulePanel.add(ruleLabel);
 		add(rulePanel, BorderLayout.NORTH);
 
@@ -127,7 +127,8 @@ public class MainFrame extends JFrame implements KeyListener {
 //		boardPanel.setBoard(board);
 //		this.rule = rule;
 
-		this.board = new Board("res/" + level, rule);
+		if (boardPanel != null) remove(boardPanel);
+		board = new Board("res/" + level, rule);
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 		board.setParentPanel(boardPanel);
@@ -266,8 +267,8 @@ public class MainFrame extends JFrame implements KeyListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
-			int levelNumber = randomNumber(0, levels.length);
-			int ruleNumber = randomNumber(0, RuleType.values().length);
+			int levelNumber = randomNumber(0, levels.length - 1);
+			int ruleNumber = randomNumber(1, RuleType.values().length - 1);
 
 			changeBoard(levels[levelNumber], RuleType.values()[ruleNumber]);
 		}
