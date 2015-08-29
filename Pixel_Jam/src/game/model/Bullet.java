@@ -48,21 +48,26 @@ public class Bullet {
 			numHits++;
 
 			// if bullet hit top or bottom
-			if (hitDirection == HitDetection.NORTH || hitDirection == HitDetection.SOUTH) {
+			switch(hitDirection){
+			case NORTH: case SOUTH:
 				bounceVertical(); //flip vertical speed
 				if(hitDirection==HitDetection.NORTH)
 					y = board.getTileEdge(x, y, hitDirection)+RADIUS;
 				else
 					y = board.getTileEdge(x, y, hitDirection)-RADIUS;
-
-			}
-			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
-
+				break;
+			case WEST: case EAST:
 				bounceHorizontal(); //flip horizontal speed
 				if(hitDirection==HitDetection.EAST)
 					x = board.getTileEdge(x, y, hitDirection)-RADIUS;
 				else
 					x = board.getTileEdge(x, y, hitDirection)+RADIUS;
+				break;
+//			case NORTH_WEST: case NORTH_EAST: case SOUTH_EAST: case SOUTH_WEST:
+//				bounceHorizontal();
+//				bounceVertical();
+//
+//				break;
 			}
 //			if (hitDirection == HitDetection.NORTH) {
 //

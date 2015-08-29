@@ -84,6 +84,16 @@ public class Board {
 		}
 		int xTile = b.getX() / tileSize;
 		int yTile = b.getY() / tileSize;
+		if(tiles[xTile][yTile] instanceof Wall){
+			int xPos = b.getX() - xTile;
+			int yPos = b.getY() - yTile;
+			System.out.println("IN WALL!!!");
+			return ((Wall)tiles[xTile][yTile]).hitSegment(xPos, yPos);
+		}
+		if(tiles[xTile][yTile] instanceof Target){
+			return HitDetection.TARGET;
+		}
+
 		int right = b.getX()+b.RADIUS;
 		int left = b.getX()-b.RADIUS;
 		int bot = b.getY()+b.RADIUS;
@@ -91,45 +101,45 @@ public class Board {
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left
-			if(left<(xTile)*tileSize
-					&& (tiles[xTile-1][yTile-1] instanceof Wall)){
-				if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
-					//System.out.println("NW");
-					return HitDetection.NORTH_WEST;
-				}
-			}
-			else if(right>(xTile+1)*tileSize
-					&& (tiles[xTile+1][yTile-1] instanceof Wall)){
-				//Colliding with tile right
-				if(dist(right, top, (xTile+1)*tileSize, yTile*tileSize)<=b.RADIUS){
-					//System.out.println("NE");
-					return HitDetection.NORTH_EAST;
-				}
-			}
+//			if(left<(xTile)*tileSize
+//					&& (tiles[xTile-1][yTile-1] instanceof Wall)){
+//				if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
+//					System.out.println("NW");
+//					return HitDetection.NORTH_WEST;
+//				}
+//			}
+//			else if(right>(xTile+1)*tileSize
+//					&& (tiles[xTile+1][yTile-1] instanceof Wall)){
+//				//Colliding with tile right
+//				if(dist(right, top, (xTile+1)*tileSize, yTile*tileSize)<=b.RADIUS){
+//					System.out.println("NE");
+//					return HitDetection.NORTH_EAST;
+//				}
+//			}
 			if(tiles[xTile][yTile-1] instanceof Wall){
-				//System.out.println("N");
+				System.out.println("N");
 				return HitDetection.NORTH;
 			}
 		}
 		else if(bot>(yTile+1)*tileSize){
 			//Colliding with tile below
-			if(left<(xTile)*tileSize
-					&& (tiles[xTile-1][yTile+1] instanceof Wall)){
-				if(dist(left, bot, xTile*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
-					//System.out.println("Sw");
-					return HitDetection.SOUTH_WEST;
-				}
-			}
-			else if(right>(xTile+1)*tileSize
-					&& (tiles[xTile+1][yTile+1] instanceof Wall)){
-				//Colliding with tile right
-				if(dist(right, bot, (xTile+1)*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
-					//System.out.println("SE");
-					return HitDetection.SOUTH_EAST;
-				}
-			}
+//			if(left<(xTile)*tileSize
+//					&& (tiles[xTile-1][yTile+1] instanceof Wall)){
+//				if(dist(left, bot, xTile*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
+//					System.out.println("Sw");
+//					return HitDetection.SOUTH_WEST;
+//				}
+//			}
+//			else if(right>(xTile+1)*tileSize
+//					&& (tiles[xTile+1][yTile+1] instanceof Wall)){
+//				//Colliding with tile right
+//				if(dist(right, bot, (xTile+1)*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
+//					System.out.println("SE");
+//					return HitDetection.SOUTH_EAST;
+//				}
+//			}
 			if(tiles[xTile][yTile+1] instanceof Wall){
-				//System.out.println("S");
+				System.out.println("S");
 				return HitDetection.SOUTH;
 			}
 		}
@@ -166,16 +176,26 @@ public class Board {
 	public int getTileEdge(double x, double y, HitDetection dir){
 		int xTile = (int)x / tileSize;
 		int yTile = (int)y / tileSize;
-		if(dir==HitDetection.NORTH){
+		if(tiles[xTile][yTile] instanceof Wall){
+			switch(dir){
+			case NORTH:
+				yTile++;
+			case SOUTH:
+				yTile--;
+			case WEST:
+				xTile++;
+			case EAST:
+				xTile--;
+			}
+		}
+		switch(dir){
+		case NORTH:
 			return yTile*tileSize;
-		}
-		if(dir==HitDetection.SOUTH){
+		case SOUTH:
 			return (yTile+1)*tileSize;
-		}
-		if(dir==HitDetection.WEST){
+		case WEST:
 			return xTile*tileSize;
-		}
-		if(dir==HitDetection.EAST){
+		case EAST:
 			return (xTile+1)*tileSize;
 		}
 		return -1;
@@ -196,9 +216,13 @@ public class Board {
 				if (tiles[x][y] instanceof Wall) {
 					g.setColor(Color.black);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+					g.setColor(Color.WHITE);
+					g.drawRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}else if (tiles[x][y] instanceof Target) {
 					g.setColor(Color.red);
 					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+					g.setColor(Color.WHITE);
+					g.drawRect(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
 				for(Player p: players){
 					if(p.getX()/tileSize==x && p.getY()/tileSize==y){
