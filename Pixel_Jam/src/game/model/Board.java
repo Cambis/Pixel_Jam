@@ -61,8 +61,8 @@ public class Board {
 						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
 					} else if (c == 'P') {
 						// Create player at this point
-						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'a', 'd', 'w'));
-						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'j', 'l', 'i'));
+						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'd', 'a', 'w'));
+						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'l', 'j', 'i'));
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
@@ -84,18 +84,83 @@ public class Board {
 		}
 		int xTile = b.getX() / tileSize;
 		int yTile = b.getY() / tileSize;
-		if (tiles[xTile][yTile] instanceof Wall) {
-			int xPos = b.getX() - (xTile*tileSize);
-			int yPos = b.getY() - (yTile*tileSize);
-			System.out.println("Hit wall");
-			return ((Wall)tiles[xTile][yTile]).hitSegment(xPos, yPos);
-
-		}else if(tiles[xTile][yTile] instanceof Target){
-			System.out.println("BINGO");
-			return HitDetection.TARGET;
+		int right = b.getX()+b.RADIUS;
+		int left = b.getX()-b.RADIUS;
+		int bot = b.getY()+b.RADIUS;
+		int top = b.getY()-b.RADIUS;
+		if(top<(yTile)*tileSize){
+			//Colliding with tile above
+			//Check Top-Left
+			if(left<(xTile)*tileSize
+					&& (tiles[xTile-1][yTile-1] instanceof Wall)){
+				if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
+					System.out.println("NW");
+					return HitDetection.NORTH_WEST;
+				}
+			}
+			else if(right>(xTile+1)*tileSize
+					&& (tiles[xTile+1][yTile-1] instanceof Wall)){
+				//Colliding with tile right
+				if(dist(right, top, (xTile+1)*tileSize, yTile*tileSize)<=b.RADIUS){
+					System.out.println("NE");
+					return HitDetection.NORTH_EAST;
+				}
+			}
+			if(tiles[xTile][yTile-1] instanceof Wall){
+				System.out.println("N");
+				return HitDetection.NORTH;
+			}
 		}
-		System.out.println("No collision");
+		else if(bot>(yTile+1)*tileSize){
+			//Colliding with tile below
+			if(left<(xTile)*tileSize
+					&& (tiles[xTile-1][yTile+1] instanceof Wall)){
+				if(dist(left, bot, xTile*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
+					System.out.println("SW");
+					return HitDetection.SOUTH_WEST;
+				}
+			}
+			else if(right>(xTile+1)*tileSize
+					&& (tiles[xTile+1][yTile+1] instanceof Wall)){
+				//Colliding with tile right
+				if(dist(right, bot, (xTile+1)*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
+					System.out.println("SE");
+					return HitDetection.SOUTH_EAST;
+				}
+			}
+			if(tiles[xTile][yTile+1] instanceof Wall){
+				System.out.println("S");
+				return HitDetection.SOUTH;
+			}
+		}
+		if(left<(xTile)*tileSize
+				&& (tiles[xTile-1][yTile] instanceof Wall)){
+			//Colliding with tile left
+			System.out.println("W");
+			return HitDetection.WEST;
+		}
+		else if(right>(xTile+1)*tileSize
+				&& (tiles[xTile+1][yTile] instanceof Wall)){
+			//Colliding with tile right
+			System.out.println("E");
+			return HitDetection.EAST;
+		}
 		return null;
+	}
+
+	/**
+	 * Helper method:
+	 * returns distance between two points
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
+	private double dist(int x1, int y1, int x2, int y2){
+		int distX = Math.abs(x1-x2);
+		int distY = Math.abs(y1-y2);
+		return Math.sqrt(distX*distX+distY*distY);
 	}
 
 
@@ -138,5 +203,13 @@ public class Board {
 
 			player.moveBullet(this);
 		}
+	}
+
+	public final int getXSize() {
+		return tileSize * (xSize * 2);
+	}
+
+	public final int getYSize() {
+		return tileSize * ySize;
 	}
 }

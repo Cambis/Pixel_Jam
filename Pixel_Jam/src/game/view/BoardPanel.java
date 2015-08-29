@@ -41,7 +41,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 	public static void main(String args[]) {
 
-		BoardPanel board = new BoardPanel(new Board("res/test1.txt"));
+		BoardPanel board = new BoardPanel(new Board("res/test3.txt"));
 		JFrame frame = new JFrame();
 		frame.add(board);
 		frame.setVisible(true);

@@ -40,7 +40,7 @@ public class Player {
 
 	private Bullet bullet;
 	private double speed = 0;
-	private static final int MAX_BULLET_HOLD_TIME = 5;
+	private static final int MAX_BULLET_HOLD_TIME = 2;
 
 	private static final boolean DEBUG = true;
 
