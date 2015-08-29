@@ -8,7 +8,7 @@ public class Wall implements Tile {
 
 	@Override
 	public Graphics2D draw(int x, int y, int size, Graphics2D g) {
-		g.setColor(Color.black);
+		g.setColor(GameColors.WALL);
 		g.fillRect(x * size, y * size, size, size);
 		g.setColor(Color.white);
 		g.drawRect(x * size, y * size, size, size);

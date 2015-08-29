@@ -130,7 +130,7 @@ public class Bullet {
 	public void draw(Graphics g) {
 
 		Color firstColor = g.getColor();
-		g.setColor(Color.ORANGE);
+		g.setColor(GameColors.BULLET);
 		g.fillOval(getX() - RADIUS, getY() - RADIUS, RADIUS * 2, RADIUS * 2);
 		g.setColor(firstColor);
 	}

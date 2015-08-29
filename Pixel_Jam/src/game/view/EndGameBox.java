@@ -13,6 +13,8 @@ public class EndGameBox extends JDialog {
 
 	public EndGameBox() {
 
+		setTitle("Game Over");
+
 		setLayout(new FlowLayout());
 
 		next = new JButton("Next");
@@ -32,7 +34,7 @@ public class EndGameBox extends JDialog {
 		next.addActionListener(a);
 	}
 
-	public void addQuitListener(ActionListener q) {
+	public void addTryAgainListener(ActionListener q) {
 		tryAgain.addActionListener(q);
 	}
 

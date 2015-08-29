@@ -254,7 +254,10 @@ public class Board {
 		BufferedImage boardReturn = new BufferedImage(tileSize * (xSize*2), tileSize * ySize,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) boardReturn.getGraphics();
-		g.fillRect(0,0,tileSize * (xSize*2), tileSize * ySize);
+
+		g.setColor(GameColors.BACKGROUND);
+		g.fillRect(0, 0, tileSize * (xSize*2), tileSize * ySize);
+
 		for (int x = 0; x < xSize*2; x++) {
 			for (int y = 0; y < ySize; y++) {
 				if(tiles[x][y]!=null){

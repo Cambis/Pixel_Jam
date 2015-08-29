@@ -4,6 +4,7 @@ import game.control.Player;
 import game.model.Board;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -51,6 +52,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		board = new Board("res/test3.txt");
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
+
 
 		board.setParentPanel(boardPanel);
 
@@ -112,7 +114,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		endGame = new EndGameBox();
 		endGame.setLocationRelativeTo(boardPanel);
 		endGame.setVisible(false);
-		endGame.addNextListener(tryAgainListener);
+		endGame.addTryAgainListener(tryAgainListener);
 
 		timer = new Timer(1, new ActionListener() {
 

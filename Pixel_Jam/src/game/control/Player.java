@@ -2,6 +2,7 @@ package game.control;
 
 import game.model.Board;
 import game.model.Bullet;
+import game.model.GameColors;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -154,13 +155,13 @@ public class Player implements KeyListener{
 		int w = Board.tileSize;
 		int h = Board.tileSize;
 
-		g.setColor(Color.GRAY);
+		g.setColor(GameColors.PLAYER);
 		g.fillOval(x, y, w, h);
 
 		int x2 = (int)(w/2 * Math.cos(rotation / 180 * Math.PI));
 		int y2 = (int)(h/2 * Math.sin(rotation / 180 * Math.PI));
 
-		g.setColor(Color.RED);
+		g.setColor(GameColors.PLAYERFACE);
 		g.drawLine(x + w / 2, y + h / 2, x + w / 2 + x2, y + h / 2 + y2);
 
 	}
