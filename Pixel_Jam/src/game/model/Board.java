@@ -1,6 +1,7 @@
 package game.model;
 
 import game.control.Player;
+import game.view.BoardPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -22,6 +23,8 @@ public class Board {
 	private int xSize;
 	private int ySize;
 	public static final int tileSize = 16;
+
+	private BoardPanel parentPanel;
 
 	public Board(String filename) {
 
@@ -77,6 +80,11 @@ public class Board {
 		}
 	}
 
+	public void setParentPanel(BoardPanel panel) {
+
+		parentPanel = panel;
+	}
+
 	public HitDetection checkCollisions(Bullet b) {
 		if(b.getX()<0 || b.getY()<0 || b.getX()>xSize*2*tileSize || b.getY()>ySize*tileSize){
 			System.out.println("Out of screen");
@@ -98,6 +106,13 @@ public class Board {
 		int left = b.getX()-b.RADIUS;
 		int bot = b.getY()+b.RADIUS;
 		int top = b.getY()-b.RADIUS;
+
+		if(tiles[xTile][yTile] instanceof Target) {
+
+			parentPanel.endGame();
+			return HitDetection.TARGET;
+		}
+
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left

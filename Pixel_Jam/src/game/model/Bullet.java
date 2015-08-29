@@ -69,28 +69,8 @@ public class Bullet {
 //
 //				break;
 			}
-//			if (hitDirection == HitDetection.NORTH) {
-//
-//				bounceVertical();
-//				y = Math.floor(y/Board.tileSize)*board.tileSize-5;
-//			}
-//			else if (hitDirection == HitDetection.SOUTH) {
-//
-//				bounceVertical();
-//				y = Math.ceil(y/Board.tileSize)*board.tileSize;
-//			}
-//			else if (hitDirection == HitDetection.WEST) {
-//
-//				bounceHorizontal();
-//				x = Math.floor(x/Board.tileSize)*board.tileSize-5;
-//			}
-//			else if (hitDirection == HitDetection.EAST) {
-//
-//				bounceHorizontal();
-//				x = Math.ceil(x/Board.tileSize)*board.tileSize;
-//			}
 
-			//System.out.println(hitDirection);
+
 		}
 	}
 
