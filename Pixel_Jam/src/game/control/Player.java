@@ -30,8 +30,8 @@ public class Player implements KeyListener {
 
 	// Current angle the player is facing
 	private double rotation;
-	private static final double ROTATION_MIN = 0;
-	private static final double ROTATION_MAX = 180;
+	private static final double ROTATION_MIN = Double.NEGATIVE_INFINITY;
+	private static final double ROTATION_MAX = Double.POSITIVE_INFINITY;
 
 	// Keys used to control player movement
 	private final char left, right, fire;
@@ -88,6 +88,13 @@ public class Player implements KeyListener {
 
 	public final int getNumTrophies() {
 		return trophies;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [position=" + position + ", rotation=" + rotation
+				+ ", left=" + left + ", right=" + right + ", getScore()="
+				+ getScore() + "]";
 	}
 
 	public void updateFireSpeed() {
