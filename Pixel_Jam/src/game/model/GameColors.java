@@ -10,7 +10,7 @@ public class GameColors {
 
 	static public final Color PLAYERFACE = new Color(0,93,45);
 
-	static public final Color BULLET = new Color(255,255,0);
+	static public final Color BULLET = new Color(0,255,255);
 
 	static public final Color WALL = new Color(255,0,132);
 
