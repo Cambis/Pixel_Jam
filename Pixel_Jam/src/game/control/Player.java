@@ -46,6 +46,7 @@ public class Player implements KeyListener{
 	private boolean turnLeft, turnRight, firing, fired;
 
 	private int score;
+	private int trophies=0;
 
 	private double updateRate = 0.1;
 
@@ -72,9 +73,13 @@ public class Player implements KeyListener{
 
 		// Create new bullet
 		bullet = new Bullet(position.x + Board.tileSize / 2, position.y
-				+ Board.tileSize / 2, rotation, speed);
+				+ Board.tileSize / 2, rotation, speed, this);
 
 		speed = 0;
+	}
+
+	public void addTrophy(){
+		trophies++;
 	}
 
 	public void updateFireSpeed() {
@@ -150,10 +155,6 @@ public class Player implements KeyListener{
 		this.score += score;
 	}
 
-	public static void main(String args[]) {
-		Player player = new Player(new Point(0, 0), 'a', 'd', 'w');
-		System.out.println(player.getImage().toString());
-	}
 
 	public void moveBullet(Board board) {
 

@@ -36,6 +36,7 @@ public class Bullet {
 		return player;
 	}
 
+
 	public int getX() {
 		return (int)x;
 	}
