@@ -46,6 +46,7 @@ public class Player implements KeyListener{
 	private boolean turnLeft, turnRight, firing, fired;
 
 	private int score;
+	private int trophies=0;
 
 	private double updateRate = 0.1;
 
@@ -75,6 +76,10 @@ public class Player implements KeyListener{
 				+ Board.tileSize / 2, rotation, speed, this);
 
 		speed = 0;
+	}
+
+	public void addTrophy(){
+		trophies++;
 	}
 
 	public void updateFireSpeed() {

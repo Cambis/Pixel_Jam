@@ -6,5 +6,6 @@ T - Target
 P - Player
 S - Slow Pad
 B - Boost Pad
-A - Teleporter Sender (not done)
-B - Teleporter Receiver (not done)
+I - Teleporter Sender (not done)
+O - Teleporter Receiver (not done)
+$ - Trophy

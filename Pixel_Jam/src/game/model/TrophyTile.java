@@ -14,7 +14,7 @@ public class TrophyTile implements Tile {
 
 	@Override
 	public void effect(Bullet b) {
-		// TODO Auto-generated method stub
+		b.getPlayer().addTrophy();
 		enabled = false;
 	}
 
