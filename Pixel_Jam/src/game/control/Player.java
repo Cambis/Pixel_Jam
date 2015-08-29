@@ -153,10 +153,10 @@ public class Player {
 		int h = Board.tileSize;
 
 		g.setColor(Color.GRAY);
-		g.fillRect(x, y, w, h);
+		g.fillOval(x, y, w, h);
 
-		int x2 = (int)(w * Math.cos(rotation / 180 * Math.PI));
-		int y2 = (int)(h * Math.sin(rotation / 180 * Math.PI));
+		int x2 = (int)(w/2 * Math.cos(rotation / 180 * Math.PI));
+		int y2 = (int)(h/2 * Math.sin(rotation / 180 * Math.PI));
 
 		g.setColor(Color.RED);
 		g.drawLine(x + w/2, y + h/2, x + w/2 + x2, y + h/2 + y2);
