@@ -6,6 +6,7 @@ import game.model.Board;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
@@ -41,12 +43,13 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	// Displays the current rule
 	private JLabel rule;
+	private JLabel player1Score, player2Score;
 
 	private Timer timer;
 
 	public MainFrame() {
 
-		setLayout(new GridLayout(1, 1));
+		setLayout(new BorderLayout());
 		setJMenuBar(createMenu());
 
 		board = new Board("res/test3.txt");
@@ -59,6 +62,17 @@ public class MainFrame extends JFrame implements KeyListener {
 		setSize(new Dimension(board.getXSize(), board.getYSize() + 50));
 
 		setUpTimer();
+
+		player1Score = new JLabel(String.valueOf(board.getPlayers().get(0).getScore()));
+		player1Score.setHorizontalAlignment(JLabel.CENTER);
+		player2Score = new JLabel(String.valueOf(board.getPlayers().get(1).getScore()));
+		player2Score.setHorizontalAlignment(JLabel.CENTER);
+		JPanel playerPanel = new JPanel(new GridLayout());
+		playerPanel.setSize(board.getXSize(), 50);
+		playerPanel.add(player1Score);
+		playerPanel.add(player2Score);
+
+		add(playerPanel, BorderLayout.SOUTH);
 
 		// Make sure we can sees it!
 		setVisible(true);
@@ -170,7 +184,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			dispose();
 			endGame.dispose();
 			new MainFrame();
 		}
