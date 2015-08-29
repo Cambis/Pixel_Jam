@@ -89,7 +89,7 @@ public class Board {
 					case '$':
 						//Create hole
 						tiles[xPos][yPos] = new TrophyTile();
-						tiles[xSize+(xSize-xPos)-1][yPos] = new BlackHole();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new TrophyTile();
 						break;
 					}
 				}
