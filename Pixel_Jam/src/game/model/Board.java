@@ -86,6 +86,11 @@ public class Board {
 						tiles[xPos][yPos] = new BlackHole();
 						tiles[xSize+(xSize-xPos)-1][yPos] = new BlackHole();
 						break;
+					case '$':
+						//Create hole
+						tiles[xPos][yPos] = new TrophyTile();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new BlackHole();
+						break;
 					}
 				}
 				//Updates x and y

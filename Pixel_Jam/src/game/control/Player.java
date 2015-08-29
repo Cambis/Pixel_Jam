@@ -72,7 +72,7 @@ public class Player implements KeyListener{
 
 		// Create new bullet
 		bullet = new Bullet(position.x + Board.tileSize / 2, position.y
-				+ Board.tileSize / 2, rotation, speed);
+				+ Board.tileSize / 2, rotation, speed, this);
 
 		speed = 0;
 	}

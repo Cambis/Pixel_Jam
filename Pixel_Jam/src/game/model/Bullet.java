@@ -1,5 +1,7 @@
 package game.model;
 
+import game.control.Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -13,14 +15,20 @@ public class Bullet {
 	private double vx;
 	private double vy;
 
+	private Player player;
+
 	int numHits;
 
-	public Bullet(int xi, int yi, double direction, double speed) {
+	public Bullet(int xi, int yi, double direction, double speed, Player player) {
 
 		x = xi;
 		y = yi;
 
 		setSpeed(direction, speed);
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 	public int getX() {
