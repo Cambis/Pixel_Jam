@@ -317,8 +317,10 @@ public class Board {
 	 * @return
 	 */
 	public void checkGameOver(Bullet b) {
-		if (b.checkValidWin(rule))
+		if (b.checkValidWin(rule)) {
+			System.out.println("Win Win");
 			parentPanel.endGame();
+	}
 	}
 
 	public RuleType getRule() {

@@ -38,7 +38,8 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static final int TROPHY_SCORE = 20;
 
 	// Levels
-	private final String[] levels = new String[] { "CallumLvl.txt", "camerons_level.txt", "Lohit.txt" };
+	private final String[] levels = new String[] { "CallumLvl.txt",
+			"camerons_level.txt", "Lohit_test.txt" };
 
 	// Top menu bar
 	private JMenuBar menuBar;
@@ -72,19 +73,19 @@ public class MainFrame extends JFrame implements KeyListener {
 		setLayout(new BorderLayout());
 		setJMenuBar(createMenu());
 
-		// Add board
-		changeBoard("CallumLvl.txt", RuleType.NO_RULE);
-//		board = new Board("res/CallumLvl.txt");
-//		boardPanel = new BoardPanel(board);
-//		add(boardPanel, BorderLayout.CENTER);
-//		board.setParentPanel(boardPanel);
-//		setSize(new Dimension(board.getXSize(), board.getYSize() + 100));
-
 		// Add rule label
 		JPanel rulePanel = new JPanel();
 		ruleLabel = new JLabel("NO RULE", JLabel.CENTER);
 		rulePanel.add(ruleLabel);
 		add(rulePanel, BorderLayout.NORTH);
+
+		// Add board
+		changeBoard("CallumLvl.txt", RuleType.NO_RULE);
+		// board = new Board("res/CallumLvl.txt");
+		// boardPanel = new BoardPanel(board);
+		// add(boardPanel, BorderLayout.CENTER);
+		// board.setParentPanel(boardPanel);
+		// setSize(new Dimension(board.getXSize(), board.getYSize() + 100));
 
 		// Set up player scores
 		player1Score = new JLabel(String.valueOf(board.getPlayers().get(0)
@@ -100,18 +101,15 @@ public class MainFrame extends JFrame implements KeyListener {
 		playerPanel.add(player2Score);
 		add(playerPanel, BorderLayout.SOUTH);
 
-		// Set up the timer (updates score and checks for game over).
-		setUpTimer();
-
 		// Make sure we can sees it!
 		setVisible(true);
+
+		setUpTimer();
 
 		this.setLocationRelativeTo(null);
 
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addKeyListener(board.getPlayers().get(0));
-		addKeyListener(board.getPlayers().get(1));
 		repaint();
 	}
 
@@ -123,12 +121,20 @@ public class MainFrame extends JFrame implements KeyListener {
 	 */
 	private void changeBoard(String level, RuleType rule) {
 
-//		this.board = new Board("res/" + level);
-//		boardPanel.setBoard(board);
-//		this.rule = rule;
+		// this.board = new Board("res/" + level);
+		// boardPanel.setBoard(board);
+		// this.rule = rule;
 
-		if (boardPanel != null) remove(boardPanel);
-		board = new Board("res/" + level, rule);
+		if (boardPanel != null) {
+			remove(boardPanel);
+			removeKeyListener(board.getPlayers().get(0));
+			removeKeyListener(board.getPlayers().get(1));
+		}
+
+		// Change rule label
+		ruleLabel.setText(rule.toString() + " " + rule.getValue());
+
+		this.board = new Board("res/" + level, rule);
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 		board.setParentPanel(boardPanel);
@@ -136,7 +142,18 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		this.rule = rule;
 
+		addKeyListener(board.getPlayers().get(0));
+		addKeyListener(board.getPlayers().get(1));
 		repaint();
+
+		// Set up the timer (updates score and checks for game over).
+		// setUpTimer();
+		endGame = new EndGameBox();
+		endGame.setLocationRelativeTo(boardPanel);
+		endGame.setVisible(false);
+
+		if (timer != null)
+			timer.start();
 	}
 
 	private JMenuBar createMenu() {
@@ -191,9 +208,6 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private void setUpTimer() {
 
-		endGame = new EndGameBox();
-		endGame.setLocationRelativeTo(boardPanel);
-		endGame.setVisible(false);
 		endGame.addTryAgainListener(tryAgainListener);
 		endGame.addNextListener(nextListener);
 
@@ -270,13 +284,20 @@ public class MainFrame extends JFrame implements KeyListener {
 			int levelNumber = randomNumber(0, levels.length - 1);
 			int ruleNumber = randomNumber(1, RuleType.values().length - 1);
 
-			changeBoard(levels[levelNumber], RuleType.values()[ruleNumber]);
+			// System.out.println("level: " + levels[levelNumber] + "rule: "
+			// + RuleType.values()[ruleNumber]);
+
+			RuleType newRule = RuleType.values()[ruleNumber];
+			int value = randomNumber(1, 10);
+			newRule.setValue(value);
+			changeBoard(levels[levelNumber], newRule);
 		}
 
 	};
 
 	/**
 	 * Gets a random number between a max and a min
+	 *
 	 * @param min
 	 * @param max
 	 * @return
