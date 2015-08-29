@@ -86,6 +86,10 @@ public class Player implements KeyListener {
 		trophies++;
 	}
 
+	public final int getNumTrophies() {
+		return trophies;
+	}
+
 	public void updateFireSpeed() {
 		if ((speed + updateRate >= MAX_BULLET_HOLD_TIME)
 				|| (speed + updateRate <= 0)) {
