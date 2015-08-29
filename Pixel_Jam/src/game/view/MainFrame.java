@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
@@ -35,6 +36,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	public static final int TARGET_SCORE = 100;
 	public static final int TROPHY_SCORE = 20;
+
+	// Levels
+	private final String[] levels = new String[] { "CallumLvl.txt", "camerons_level.txt", "Lohit.txt" };
 
 	// Top menu bar
 	private JMenuBar menuBar;
@@ -69,11 +73,12 @@ public class MainFrame extends JFrame implements KeyListener {
 		setJMenuBar(createMenu());
 
 		// Add board
-		board = new Board("res/CallumLvl.txt");
-		boardPanel = new BoardPanel(board);
-		add(boardPanel, BorderLayout.CENTER);
-		board.setParentPanel(boardPanel);
-		setSize(new Dimension(board.getXSize(), board.getYSize() + 100));
+		changeBoard("CallumLvl.txt", null);
+//		board = new Board("res/CallumLvl.txt");
+//		boardPanel = new BoardPanel(board);
+//		add(boardPanel, BorderLayout.CENTER);
+//		board.setParentPanel(boardPanel);
+//		setSize(new Dimension(board.getXSize(), board.getYSize() + 100));
 
 		// Add rule label
 		JPanel rulePanel = new JPanel();
@@ -116,8 +121,21 @@ public class MainFrame extends JFrame implements KeyListener {
 	 * @param board
 	 * @param rule
 	 */
-	public void changeBoard(Board board, RuleType rule) {
+	private void changeBoard(String level, RuleType rule) {
 
+//		this.board = new Board("res/" + level);
+//		boardPanel.setBoard(board);
+//		this.rule = rule;
+
+		this.board = new Board("res/" + level);
+		boardPanel = new BoardPanel(board);
+		add(boardPanel, BorderLayout.CENTER);
+		board.setParentPanel(boardPanel);
+		setSize(new Dimension(board.getXSize(), board.getYSize() + 100));
+
+		this.rule = rule;
+
+		repaint();
 	}
 
 	private JMenuBar createMenu() {
@@ -176,6 +194,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		endGame.setLocationRelativeTo(boardPanel);
 		endGame.setVisible(false);
 		endGame.addTryAgainListener(tryAgainListener);
+		endGame.addNextListener(nextListener);
 
 		timer = new Timer(1, new ActionListener() {
 
@@ -241,4 +260,27 @@ public class MainFrame extends JFrame implements KeyListener {
 		}
 
 	};
+
+	private ActionListener nextListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			endGame.dispose();
+			int levelNumber = randomNumber(0, levels.length);
+			int ruleNumber = randomNumber(0, RuleType.values().length);
+
+			changeBoard(levels[levelNumber], RuleType.values()[ruleNumber]);
+		}
+
+	};
+
+	/**
+	 * Gets a random number between a max and a min
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public static int randomNumber(int min, int max) {
+		return new Random().nextInt((max - min) + 1) + min;
+	}
 }
