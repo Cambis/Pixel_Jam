@@ -45,7 +45,7 @@ public class Bullet {
 		return (int)y;
 	}
 
-	public int GetNumHits() {
+	public int getNumHits() {
 
 		return numHits;
 	}
@@ -99,6 +99,11 @@ public class Bullet {
 		return Math.sqrt(vx*vx + vy*vy); //magnitude of velocity vector
 	}
 
+	public double getInitialSpeed() {
+
+		return initialSpeed; //magnitude of velocity vector
+	}
+
 	public void setVelocity(double vx, double vy) {
 
 		this.vx = vx;
@@ -137,5 +142,30 @@ public class Bullet {
 		g.setColor(GameColors.BULLET);
 		g.fillOval(getX() - RADIUS, getY() - RADIUS, RADIUS * 2, RADIUS * 2);
 		g.setColor(firstColor);
+	}
+
+	/**
+	 * Checks if the game is over
+	 * @param rule
+	 * @return
+	 */
+	public boolean checkValidWin(RuleType rule) {
+
+		switch (rule) {
+		case NO_RULE:
+			return true;
+		case BOUNCES:
+			return numHits >= rule.getValue();
+		case DISTANCE:
+			break;
+		case TIME_ALIVE:
+			break;
+		case TROPHY:
+			return player.getNumTrophies() >= rule.getValue();
+		default:
+			break;
+
+		}
+		return false;
 	}
 }

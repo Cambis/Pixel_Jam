@@ -3,6 +3,7 @@ package game.view;
 import game.control.Player;
 import game.model.Board;
 import game.model.Bullet;
+import game.model.RuleType;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -37,6 +38,8 @@ public class BoardPanel extends JPanel implements ActionListener {
 	private Timer timer;
 
 	private boolean gameOver = false;
+
+	private RuleType rule;
 
 	public BoardPanel(Board board) {
 		this.board = board;
@@ -81,9 +84,12 @@ public class BoardPanel extends JPanel implements ActionListener {
 	}
 
 
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
 	public void endGame() {
 		gameOver = true;
 		timer.stop();
-
 	}
 }
