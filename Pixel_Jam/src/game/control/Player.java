@@ -78,12 +78,12 @@ public class Player implements KeyListener{
 	}
 
 	public void updateFireSpeed() {
-		if(speed>=MAX_BULLET_HOLD_TIME||speed<=0){
+		if((speed+updateRate>=MAX_BULLET_HOLD_TIME)||(speed+updateRate<=0)){
 			updateRate*=-1;
 		}
 		speed += updateRate;
 
-		speed = (speed < 0) ? 0 : speed;
+		//speed = (speed < 0) ? 0 : speed;
 
 //		System.out.println(speed);
 	}
