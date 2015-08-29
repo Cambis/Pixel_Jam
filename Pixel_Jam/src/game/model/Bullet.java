@@ -59,7 +59,10 @@ public class Bullet {
 			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
 
 				bounceHorizontal(); //flip horizontal speed
-				x = board.getTileEdge(x, y, hitDirection);
+				if(hitDirection==HitDetection.EAST)
+					x = board.getTileEdge(x, y, hitDirection)-RADIUS;
+				else
+					x = board.getTileEdge(x, y, hitDirection)+RADIUS;
 			}
 //			if (hitDirection == HitDetection.NORTH) {
 //
