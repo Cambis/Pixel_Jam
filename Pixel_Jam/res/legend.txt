@@ -1,0 +1,10 @@
+LEGEND
+
+0 - Blank Space
+1 - Wall
+T - Target
+P - Player
+S - Slow Pad
+B - Boost Pad
+A - Teleporter Sender (not done)
+B - Teleporter Receiver (not done)
