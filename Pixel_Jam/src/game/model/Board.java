@@ -110,6 +110,12 @@ public class Board {
 			return HitDetection.TARGET;
 		}
 
+		//if hit a black hole
+		if(tiles[xTile][yTile] instanceof BlackHole) {
+
+			return HitDetection.BLACKHOLE;
+		}
+
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left
