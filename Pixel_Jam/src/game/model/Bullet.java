@@ -48,36 +48,41 @@ public class Bullet {
 			numHits++;
 
 			// if bullet hit top or bottom
-//			if (hitDirection == HitDetection.NORTH || hitDirection == HitDetection.SOUTH) {
+			if (hitDirection == HitDetection.NORTH || hitDirection == HitDetection.SOUTH) {
+				bounceVertical(); //flip vertical speed
+				if(hitDirection==HitDetection.NORTH)
+					y = board.getTileEdge(x, y, hitDirection)+RADIUS;
+				else
+					y = board.getTileEdge(x, y, hitDirection)-RADIUS;
+
+			}
+			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
+
+				bounceHorizontal(); //flip horizontal speed
+				x = board.getTileEdge(x, y, hitDirection);
+			}
+//			if (hitDirection == HitDetection.NORTH) {
 //
-//				bounceVertical(); //flip vertical speed
+//				bounceVertical();
+//				y = Math.floor(y/Board.tileSize)*board.tileSize-5;
 //			}
-//			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
+//			else if (hitDirection == HitDetection.SOUTH) {
 //
-//				bounceHorizontal(); //flip horizontal speed
+//				bounceVertical();
+//				y = Math.ceil(y/Board.tileSize)*board.tileSize;
 //			}
-			if (hitDirection == HitDetection.NORTH) {
+//			else if (hitDirection == HitDetection.WEST) {
+//
+//				bounceHorizontal();
+//				x = Math.floor(x/Board.tileSize)*board.tileSize-5;
+//			}
+//			else if (hitDirection == HitDetection.EAST) {
+//
+//				bounceHorizontal();
+//				x = Math.ceil(x/Board.tileSize)*board.tileSize;
+//			}
 
-				bounceVertical();
-				y = Math.floor(y/Board.tileSize)*board.tileSize-5;
-			}
-			else if (hitDirection == HitDetection.SOUTH) {
-
-				bounceVertical();
-				y = Math.ceil(y/Board.tileSize)*board.tileSize;
-			}
-			else if (hitDirection == HitDetection.WEST) {
-
-				bounceHorizontal();
-				x = Math.floor(x/Board.tileSize)*board.tileSize-5;
-			}
-			else if (hitDirection == HitDetection.EAST) {
-
-				bounceHorizontal();
-				x = Math.ceil(x/Board.tileSize)*board.tileSize;
-			}
-
-			System.out.println(hitDirection);
+			//System.out.println(hitDirection);
 		}
 	}
 
