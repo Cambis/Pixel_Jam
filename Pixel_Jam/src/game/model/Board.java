@@ -132,20 +132,6 @@ public class Board {
 			return HitDetection.TARGET;
 		}
 
-		//if hit a black hole
-		if(tiles[xTile][yTile] instanceof BlackHole) {
-
-			return HitDetection.BLACKHOLE;
-		}
-		if(tiles[xTile][yTile] instanceof BoostPad) {
-
-			return HitDetection.BOOSTPAD;
-		}
-		if(tiles[xTile][yTile] instanceof SlowPad) {
-
-			return HitDetection.SLOWPAD;
-		}
-
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left
@@ -219,6 +205,12 @@ public class Board {
 		int distX = Math.abs(x1-x2);
 		int distY = Math.abs(y1-y2);
 		return Math.sqrt(distX*distX+distY*distY);
+	}
+
+	public Tile getTile(double x, double y){
+		int xTile = (int)x / tileSize;
+		int yTile = (int)y / tileSize;
+		return tiles[xTile][yTile];
 	}
 
 	public int getTileEdge(double x, double y, HitDetection dir){

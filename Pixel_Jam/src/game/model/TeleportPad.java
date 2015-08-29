@@ -40,4 +40,10 @@ public class TeleportPad implements Tile {
 		return reciever;
 	}
 
+	@Override
+	public void effect(Bullet b) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

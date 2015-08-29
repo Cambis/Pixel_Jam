@@ -14,4 +14,11 @@ public class SlowPad implements Tile {
 		return g;
 	}
 
+	@Override
+	public void effect(Bullet b) {
+		b.setSpeed(0.1);
+	}
+
+
+
 }

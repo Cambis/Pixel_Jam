@@ -14,6 +14,11 @@ public class BlackHole implements Tile {
 		return g;
 	}
 
+	@Override
+	public void effect(Bullet b) {
+		b.setSpeed(0);
+	}
+
 
 
 }

@@ -15,6 +15,8 @@ public class Wall implements Tile {
 		return g;
 	}
 
+
+
 	public HitDetection hitSegment(int x, int y){
 		if(x>=y){
 			if(y>=Board.tileSize-x){
@@ -33,6 +35,14 @@ public class Wall implements Tile {
 				return HitDetection.WEST;
 			}
 		}
+	}
+
+
+
+	@Override
+	public void effect(Bullet b) {
+		// TODO Auto-generated method stub
+
 	}
 }
 
