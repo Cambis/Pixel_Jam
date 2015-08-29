@@ -41,7 +41,7 @@ public class Bullet {
 		x += vx;
 		y += vy;
 
-		System.out.println("speed: "+getSpeed());
+		//System.out.println("speed: "+getSpeed());
 
 		HitDetection hitDirection = board.checkCollisions(this);
 

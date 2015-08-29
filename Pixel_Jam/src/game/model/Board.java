@@ -88,43 +88,61 @@ public class Board {
 		int left = b.getX()-b.RADIUS;
 		int bot = b.getY()+b.RADIUS;
 		int top = b.getY()-b.RADIUS;
-		if(top<(yTile-1)*tileSize){
+		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left
-			if(left<(xTile-1)*tileSize){
+			if(left<(xTile)*tileSize
+					&& (tiles[xTile-1][yTile-1] instanceof Wall)){
 				if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
+					System.out.println("NW");
 					return HitDetection.NORTH_WEST;
 				}
 			}
-			else if(right>(xTile+1)*tileSize){
+			else if(right>(xTile+1)*tileSize
+					&& (tiles[xTile+1][yTile-1] instanceof Wall)){
 				//Colliding with tile right
 				if(dist(right, top, (xTile+1)*tileSize, yTile*tileSize)<=b.RADIUS){
+					System.out.println("NE");
 					return HitDetection.NORTH_EAST;
 				}
 			}
-			return HitDetection.NORTH;
+			if(tiles[xTile][yTile-1] instanceof Wall){
+				System.out.println("N");
+				return HitDetection.NORTH;
+			}
 		}
 		else if(bot>(yTile+1)*tileSize){
 			//Colliding with tile below
-			if(left<(xTile-1)*tileSize){
+			if(left<(xTile)*tileSize
+					&& (tiles[xTile-1][yTile+1] instanceof Wall)){
 				if(dist(left, bot, xTile*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
+					System.out.println("SW");
 					return HitDetection.SOUTH_WEST;
 				}
 			}
-			else if(right>(xTile+1)*tileSize){
+			else if(right>(xTile+1)*tileSize
+					&& (tiles[xTile+1][yTile+1] instanceof Wall)){
 				//Colliding with tile right
 				if(dist(right, bot, (xTile+1)*tileSize, (yTile+1)*tileSize)<=b.RADIUS){
+					System.out.println("SE");
 					return HitDetection.SOUTH_EAST;
 				}
 			}
-			return HitDetection.SOUTH;
+			if(tiles[xTile][yTile+1] instanceof Wall){
+				System.out.println("S");
+				return HitDetection.SOUTH;
+			}
 		}
-		else if(left<(xTile-1)*tileSize){
+		if(left<(xTile)*tileSize
+				&& (tiles[xTile-1][yTile] instanceof Wall)){
 			//Colliding with tile left
+			System.out.println("W");
 			return HitDetection.WEST;
 		}
-		else if(right>(xTile+1)*tileSize){
+		else if(right>(xTile+1)*tileSize
+				&& (tiles[xTile+1][yTile] instanceof Wall)){
 			//Colliding with tile right
+			System.out.println("E");
 			return HitDetection.EAST;
 		}
 		return null;
