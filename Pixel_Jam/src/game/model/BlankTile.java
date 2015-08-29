@@ -10,4 +10,10 @@ public class BlankTile implements Tile {
 		return g;
 	}
 
+	@Override
+	public void effect(Bullet b) {
+		// Do nothing
+
+	}
+
 }

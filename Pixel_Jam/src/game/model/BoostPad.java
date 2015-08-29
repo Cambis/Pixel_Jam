@@ -13,4 +13,9 @@ public class BoostPad implements Tile {
 		g.drawOval((int)((x+0.25) * size), (int)((y+0.25) * size), size/2, size/2);
 		return g;
 	}
+
+	@Override
+	public void effect(Bullet b) {
+		b.setSpeed(1.5);
+	}
 }

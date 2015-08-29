@@ -49,6 +49,8 @@ public class Player implements KeyListener{
 
 	private double updateRate = 0.1;
 
+	private Color currentColor = GameColors.PLAYER;
+
 	public Player(Point startPos, char left, char right, char fire) {
 		position = startPos;
 		this.left = left;
@@ -80,6 +82,10 @@ public class Player implements KeyListener{
 			updateRate*=-1;
 		}
 		speed += updateRate;
+
+
+		int c = (int)(255*speed/MAX_BULLET_HOLD_TIME);
+		currentColor = new Color(c, c, 0);
 
 		//speed = (speed < 0) ? 0 : speed;
 
@@ -176,12 +182,8 @@ public class Player implements KeyListener{
 		int w = Board.tileSize;
 		int h = Board.tileSize;
 
-		 if (!firing)
-			 g.setColor(GameColors.PLAYER);
-		 else {
-			 int c = (int)(255*speed/MAX_BULLET_HOLD_TIME);
-			 g.setColor(new Color(c, c, 0));
-		 }
+		g.setColor(currentColor);
+
 		g.fillOval(x, y, w, h);
 
 		int x2 = (int)(w/2 * Math.cos(rotation / 180 * Math.PI));
@@ -234,6 +236,7 @@ public class Player implements KeyListener{
 
 		if (key == fire) {
 			fired = true;
+			currentColor = GameColors.PLAYER;
 		}
 	}
 }

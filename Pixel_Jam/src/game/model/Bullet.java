@@ -41,27 +41,13 @@ public class Bullet {
 		x += vx;
 		y += vy;
 
+		board.getTile(x, y).effect(this);
+
 		HitDetection hitDirection = board.checkCollisions(this);
 
 		if (hitDirection != null) { //if bullet made a collision
 
 			numHits++;
-
-			if (hitDirection == HitDetection.BLACKHOLE) {
-
-				System.out.println("blackhole");
-				this.setSpeed(0);
-			}
-			else if (hitDirection == HitDetection.BOOSTPAD) {
-
-				System.out.println("boost");
-				this.setSpeed(1.5);
-			}
-			else if (hitDirection == HitDetection.SLOWPAD) {
-
-				System.out.println("slow");
-				this.setSpeed(0.1);
-			}
 
 			// if bullet hit top or bottom
 			switch(hitDirection){

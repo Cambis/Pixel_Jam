@@ -16,4 +16,12 @@ public class Target implements Tile {
 		return g;
 	}
 
+	@Override
+	public void effect(Bullet b) {
+
+
+	}
+
+
+
 }

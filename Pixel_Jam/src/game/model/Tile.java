@@ -6,4 +6,6 @@ public interface Tile {
 
 	public Graphics2D draw(int x, int y, int size, Graphics2D g);
 
+	public void effect(Bullet b);
+
 }
