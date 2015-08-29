@@ -1,5 +1,7 @@
 package game.model;
 
+import game.control.Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -13,14 +15,25 @@ public class Bullet {
 	private double vx;
 	private double vy;
 
+	private double initialSpeed;
+	private double alpha = 0.002;
+
+	private Player player;
+
 	int numHits;
 
-	public Bullet(int xi, int yi, double direction, double speed) {
+	public Bullet(int xi, int yi, double direction, double speed, Player player) {
 
 		x = xi;
 		y = yi;
 
-		setSpeed(direction, speed);
+		initialSpeed = speed;
+
+		setSpeed(direction, initialSpeed);
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 	public int getX() {
@@ -40,6 +53,10 @@ public class Bullet {
 
 		x += vx;
 		y += vy;
+
+		double newSpeed = alpha * initialSpeed + (1-alpha) * getSpeed();
+
+		setSpeed(newSpeed);
 
 		board.getTile(x, y).effect(this);
 
