@@ -2,7 +2,7 @@ package game.view;
 
 import game.control.Player;
 import game.model.Board;
-import game.model.Rules;
+import game.model.RuleType;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,6 +36,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static final int TARGET_SCORE = 100;
 	public static final int TROPHY_SCORE = 20;
 
+	// Top menu bar
 	private JMenuBar menuBar;
 	private JMenu menu;
 
@@ -43,12 +44,19 @@ public class MainFrame extends JFrame implements KeyListener {
 	private BoardPanel boardPanel;
 	private Board board;
 
+	// This pops up after a game is won
 	private EndGameBox endGame;
+
+	// Current rule
+	private RuleType rule;
 
 	// Displays the current rule
 	private JLabel ruleLabel;
+
+	// Displays player scores
 	private JLabel player1Score, player2Score;
 
+	// Used to check for game over and update player scores
 	private Timer timer;
 
 	public MainFrame() {
@@ -108,7 +116,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	 * @param board
 	 * @param rule
 	 */
-	public void changeBoard(Board board, Rules rule) {
+	public void changeBoard(Board board, RuleType rule) {
 
 	}
 
