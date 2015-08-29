@@ -3,6 +3,7 @@ package game.control;
 import game.model.Board;
 import game.model.Bullet;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -38,8 +39,8 @@ public class Player {
 	private long start, end;
 
 	private Bullet bullet;
-	private double bulletHoldTime = 0;
-	private static final int MAX_BULLET_HOLD_TIME = 5;
+	private double speed = 0;
+	private static final int MAX_BULLET_HOLD_TIME = 2;
 
 	private static final boolean DEBUG = true;
 
@@ -58,14 +59,19 @@ public class Player {
 		rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
 	}
 
-	public void fire(int speed) {
+	public void fire() {
 
 		speed = (speed < MAX_BULLET_HOLD_TIME) ? speed : MAX_BULLET_HOLD_TIME;
 
 		// Create new bullet
-		bullet = new Bullet(position.x, position.y, rotation,
-				speed);
+		bullet = new Bullet(position.x + Board.tileSize / 2, position.y
+				+ Board.tileSize / 2, rotation, speed);
 
+		speed = 0;
+	}
+
+	public void increaseFireSpeed() {
+		speed += 0.1;
 	}
 
 	public final double getLookAngle() {
@@ -85,15 +91,15 @@ public class Player {
 			e.printStackTrace();
 		}
 
-
-		double rotationRequired = Math.toRadians (rotation + 90);
+		double rotationRequired = Math.toRadians(rotation + 90);
 		double locationX = image.getWidth() / 2;
 		double locationY = image.getHeight() / 2;
-		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		AffineTransform tx = AffineTransform.getRotateInstance(
+				rotationRequired, locationX, locationY);
+		AffineTransformOp op = new AffineTransformOp(tx,
+				AffineTransformOp.TYPE_BILINEAR);
 
 		image = op.filter(image, null);
-
 
 		return image;
 	}
@@ -133,8 +139,27 @@ public class Player {
 
 		if (bullet != null) {
 
-//			System.out.println("Drawing Bullet");
+			// System.out.println("Drawing Bullet");
 			bullet.draw(g);
 		}
+	}
+
+	public void draw(Graphics g) {
+
+		int x = position.x;
+		int y = position.y;
+
+		int w = Board.tileSize;
+		int h = Board.tileSize;
+
+		g.setColor(Color.GRAY);
+		g.fillOval(x, y, w, h);
+
+		int x2 = (int)(w/2 * Math.cos(rotation / 180 * Math.PI));
+		int y2 = (int)(h/2 * Math.sin(rotation / 180 * Math.PI));
+
+		g.setColor(Color.RED);
+		g.drawLine(x + w / 2, y + h / 2, x + w / 2 + x2, y + h / 2 + y2);
+
 	}
 }

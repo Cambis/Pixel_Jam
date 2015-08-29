@@ -43,15 +43,14 @@ public class MainFrame extends JFrame implements KeyListener{
 		setSize(600, 600);
 		setJMenuBar(createMenu());
 
-		board = new Board("res/test1.txt");
+		board = new Board("res/test3.txt");
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 
 		// Make sure we can sees it!
 		setVisible(true);
 
-		// Probably will change this
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addKeyListener(this);
 		repaint();
@@ -107,7 +106,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		char key = e.getKeyChar();
-		System.out.println("In here");
+		//System.out.println("In here");
 
 		for (Player p : board.getPlayers()) {
 			if (key == p.getLeft())
@@ -115,7 +114,7 @@ public class MainFrame extends JFrame implements KeyListener{
 			else if (key == p.getRight())
 				p.turnRight();
 			else if (key == p.getFire()) {
-				fireSpeed++;
+				p.increaseFireSpeed();
 			}
 
 		}
@@ -127,8 +126,7 @@ public class MainFrame extends JFrame implements KeyListener{
 
 		for (Player p : board.getPlayers())
 			if (key == p.getFire()) {
-				p.fire(fireSpeed);
-				fireSpeed = 0;
+				p.fire();
 			}
 	}
 }

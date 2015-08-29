@@ -7,8 +7,8 @@ public class Bullet {
 
 	public final int RADIUS = 5;
 
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 
 	private double vx;
 	private double vy;
@@ -24,11 +24,11 @@ public class Bullet {
 	}
 
 	public int getX() {
-		return x;
+		return (int)x;
 	}
 
 	public int getY() {
-		return y;
+		return (int)y;
 	}
 
 	public int GetNumHits() {
@@ -41,7 +41,7 @@ public class Bullet {
 		x += vx;
 		y += vy;
 
-		System.out.println("pos:[" + x + "," + y + "]");
+		System.out.println("speed: "+getSpeed());
 
 		HitDetection hitDirection = board.checkCollisions(this);
 
@@ -102,7 +102,7 @@ public class Bullet {
 
 		Color firstColor = g.getColor();
 		g.setColor(Color.ORANGE);
-		g.fillOval(x - RADIUS, y - RADIUS, RADIUS * 2, RADIUS * 2);
+		g.fillOval(getX() - RADIUS, getY() - RADIUS, RADIUS * 2, RADIUS * 2);
 		g.setColor(firstColor);
 	}
 }
