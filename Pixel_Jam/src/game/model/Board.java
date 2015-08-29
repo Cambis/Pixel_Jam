@@ -161,7 +161,7 @@ public class Board {
 //				}
 //			}
 			if(tiles[xTile][yTile-1] instanceof Wall){
-				System.out.println("N");
+//				System.out.println("N");
 				return HitDetection.NORTH;
 			}
 		}
