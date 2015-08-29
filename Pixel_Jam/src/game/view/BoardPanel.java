@@ -65,7 +65,6 @@ public class BoardPanel extends JPanel implements ActionListener {
 		timer = new Timer(1, this); // tick every 1 milliseconds
 		timer.start();
 	}
-
 	// on timer tick
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -74,4 +73,9 @@ public class BoardPanel extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
+
+	public void endGame() {
+
+		timer.stop();
+	}
 }

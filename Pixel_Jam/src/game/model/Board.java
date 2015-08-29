@@ -26,9 +26,7 @@ public class Board {
 
 	private BoardPanel parentPanel;
 
-	public Board(String filename, BoardPanel panel) {
-
-		parentPanel = panel;
+	public Board(String filename) {
 
 		try {
 			Scanner s = new Scanner(new File(filename));
@@ -82,6 +80,11 @@ public class Board {
 		}
 	}
 
+	public void setParentPanel(BoardPanel panel) {
+
+		parentPanel = panel;
+	}
+
 	public HitDetection checkCollisions(Bullet b) {
 		if(b.getX()<0 || b.getY()<0 || b.getX()>xSize*2*tileSize || b.getY()>ySize*tileSize){
 			System.out.println("Out of screen");
@@ -93,6 +96,13 @@ public class Board {
 		int left = b.getX()-b.RADIUS;
 		int bot = b.getY()+b.RADIUS;
 		int top = b.getY()-b.RADIUS;
+
+		if(tiles[xTile][yTile] instanceof Target) {
+
+			parentPanel.endGame();
+			return HitDetection.TARGET;
+		}
+
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left
