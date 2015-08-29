@@ -47,6 +47,8 @@ public class Player implements KeyListener{
 
 	private boolean turnLeft, turnRight, firing, fired;
 
+	private int score;
+
 	public Player(Point startPos, char left, char right, char fire) {
 		position = startPos;
 		this.left = left;
@@ -127,6 +129,14 @@ public class Player implements KeyListener{
 		return fire;
 	}
 
+	public final int getScore() {
+		return score;
+	}
+
+	public void updateScore(int score) {
+		this.score += score;
+	}
+
 	public static void main(String args[]) {
 		Player player = new Player(new Point(0, 0), 'a', 'd', 'w');
 		System.out.println(player.getImage().toString());
@@ -145,6 +155,10 @@ public class Player implements KeyListener{
 			// System.out.println("Drawing Bullet");
 			bullet.draw(g);
 		}
+	}
+
+	public final Bullet getBullet() {
+		return this.bullet;
 	}
 
 	public void draw(Graphics g) {
