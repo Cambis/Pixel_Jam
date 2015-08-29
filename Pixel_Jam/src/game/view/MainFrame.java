@@ -164,7 +164,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			} else if (key == p.getRight()) {
 				p.turnRight();
 			} else if (key == p.getFire()) {
-				p.increaseFireSpeed();
+				p.updateFireSpeed();
 			}
 
 		}

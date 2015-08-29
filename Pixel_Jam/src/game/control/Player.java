@@ -49,6 +49,8 @@ public class Player implements KeyListener{
 
 	private int score;
 
+	private double updateRate = 0.1;
+
 	public Player(Point startPos, char left, char right, char fire) {
 		position = startPos;
 		this.left = left;
@@ -75,8 +77,11 @@ public class Player implements KeyListener{
 		speed = 0;
 	}
 
-	public void increaseFireSpeed() {
-		speed += 0.1;
+	public void updateFireSpeed() {
+		if(speed>=MAX_BULLET_HOLD_TIME||speed<=0){
+			updateRate*=-1;
+		}
+		speed += updateRate;
 	}
 
 	public final double getLookAngle() {
@@ -186,7 +191,7 @@ public class Player implements KeyListener{
 		else if (turnRight)
 			turnRight();
 		else if (firing) {
-			increaseFireSpeed();
+			updateFireSpeed();
 			firing = false;
 		}
 		else if (fired) {
