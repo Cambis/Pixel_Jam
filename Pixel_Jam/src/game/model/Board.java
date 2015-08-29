@@ -1,6 +1,7 @@
 package game.model;
 
 import game.control.Player;
+import game.view.BoardPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,7 +24,11 @@ public class Board {
 	private int ySize;
 	public static final int tileSize = 16;
 
-	public Board(String filename) {
+	private BoardPanel parentPanel;
+
+	public Board(String filename, BoardPanel panel) {
+
+		parentPanel = panel;
 
 		try {
 			Scanner s = new Scanner(new File(filename));
