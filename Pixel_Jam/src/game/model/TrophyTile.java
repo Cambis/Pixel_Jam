@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 
 public class TrophyTile implements Tile {
 
+	private boolean enabled = true;
+
 	@Override
 	public Graphics2D draw(int x, int y, int size, Graphics2D g) {
 		// TODO Auto-generated method stub
@@ -13,7 +15,7 @@ public class TrophyTile implements Tile {
 	@Override
 	public void effect(Bullet b) {
 		// TODO Auto-generated method stub
-
+		enabled = false;
 	}
 
 }
