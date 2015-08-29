@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
  * @author bryerscame
  *
  */
-public class Player {
+public class Player implements KeyListener{
 
 	// Player's position
 	private Point position;
@@ -44,6 +44,8 @@ public class Player {
 
 	private static final boolean DEBUG = true;
 
+	private boolean turnLeft, turnRight, firing, fired;
+
 	public Player(Point startPos, char left, char right, char fire) {
 		position = startPos;
 		this.left = left;
@@ -52,11 +54,11 @@ public class Player {
 	}
 
 	public void turnLeft() {
-		rotation = (rotation > ROTATION_MIN) ? rotation - 5 : ROTATION_MIN;
+		rotation = (rotation > ROTATION_MIN) ? rotation - 1 : ROTATION_MIN;
 	}
 
 	public void turnRight() {
-		rotation = (rotation < ROTATION_MAX) ? rotation + 5 : ROTATION_MAX;
+		rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
 	}
 
 	public void fire() {
@@ -161,5 +163,50 @@ public class Player {
 		g.setColor(Color.RED);
 		g.drawLine(x + w / 2, y + h / 2, x + w / 2 + x2, y + h / 2 + y2);
 
+	}
+
+	public void playerTick() {
+		if (turnLeft)
+			turnLeft();
+		else if (turnRight)
+			turnRight();
+		else if (firing) {
+			increaseFireSpeed();
+			firing = false;
+		}
+		else if (fired) {
+			fire();
+			fired = false;
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+		char key = e.getKeyChar();
+
+		if (key == left)
+			turnLeft = true;
+		else if (key == right)
+			turnRight = true;
+		else if (key == fire)
+			firing = true;
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		char key = e.getKeyChar();
+
+		turnLeft = turnRight = false;
+
+		if (key == fire) {
+			fired = true;
+		}
 	}
 }

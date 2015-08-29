@@ -222,7 +222,7 @@ public class Board {
 	public void gameTick() {
 
 		for (Player player : players) {
-
+			player.playerTick();
 			player.moveBullet(this);
 		}
 	}

@@ -20,10 +20,11 @@ import javax.swing.JMenuItem;
 
 /**
  * Holds all of the GUI elements
+ *
  * @author bryerscame
  *
  */
-public class MainFrame extends JFrame implements KeyListener{
+public class MainFrame extends JFrame implements KeyListener {
 
 	public static int BOARD_HEIGHT, BOARD_WIDTH;
 
@@ -37,8 +38,6 @@ public class MainFrame extends JFrame implements KeyListener{
 	// Displays the current rule
 	private JLabel rule;
 
-	private int fireSpeed = 0;
-
 	public MainFrame() {
 
 		setLayout(new GridLayout(1, 1));
@@ -48,7 +47,6 @@ public class MainFrame extends JFrame implements KeyListener{
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 
-
 		setSize(new Dimension(board.getXSize(), board.getYSize() + 50));
 
 		// Make sure we can sees it!
@@ -56,7 +54,8 @@ public class MainFrame extends JFrame implements KeyListener{
 
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addKeyListener(this);
+		addKeyListener(board.getPlayers().get(0));
+		addKeyListener(board.getPlayers().get(1));
 		repaint();
 	}
 
@@ -66,7 +65,8 @@ public class MainFrame extends JFrame implements KeyListener{
 
 		menu = new JMenu("File"); // creates first menu item
 		menu.setMnemonic(KeyEvent.VK_A);
-		menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+		menu.getAccessibleContext().setAccessibleDescription(
+				"The only menu in this program that has menu items");
 
 		menuBar.add(menu); // adds to menu bar
 
@@ -98,7 +98,6 @@ public class MainFrame extends JFrame implements KeyListener{
 		return menuBar;
 	}
 
-
 	public static void main(String args[]) {
 		new MainFrame();
 	}
@@ -111,14 +110,14 @@ public class MainFrame extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		char key = e.getKeyChar();
-		//System.out.println("In here");
+		// System.out.println("In here");
 
 		for (Player p : board.getPlayers()) {
-			if (key == p.getLeft())
+			if (key == p.getLeft()) {
 				p.turnLeft();
-			else if (key == p.getRight())
+			} else if (key == p.getRight()) {
 				p.turnRight();
-			else if (key == p.getFire()) {
+			} else if (key == p.getFire()) {
 				p.increaseFireSpeed();
 			}
 
