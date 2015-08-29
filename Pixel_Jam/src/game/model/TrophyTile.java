@@ -16,20 +16,21 @@ public class TrophyTile implements Tile {
 
 		if(enabled) {
 			time += 0.01;
-	
-			double widthScale = .3 + .5 * Math.sin(time);
-	
+
+			double widthScale = .5 + .5 * Math.sin(time);
+
 			double rx = 50 + 200 * Math.pow(Math.sin(time/2), 2);
 			double gx = rx;
-			double bx = 255 * Math.max(0, -Math.cos(time-1));
-	
+			double bx = 255 * Math.max(0, -Math.cos(time));
+
 			g.setColor(new Color((int)rx, (int)gx, (int)(bx)));
 			g.fillOval((int) (x*size + size/2 - widthScale*size/2), y*size + size/2, (int) (size * widthScale), size);
-	
-	//		g.setColor(new Color((int)rx/2, (int)gx/2, (int)bx/2));
-	//		g.drawOval((int) (x*size + size/2 - widthScale*size/4), y*size + size/2, (int) (size/2 * widthScale), size/2);
+
+			g.setColor(Color.YELLOW.darker());
+			g.drawOval((int) (x*size + size/2 - widthScale*size/2), y*size + size/2, (int) (size * widthScale), size);
+			g.drawOval((int) (x*size + size/2 - widthScale*size/4), y*size + size/4*3, (int) (size/2 * widthScale), size/2);
 		}
-			
+
 		return g;
 	}
 

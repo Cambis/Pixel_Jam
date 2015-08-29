@@ -16,6 +16,8 @@ public class BoostPad implements Tile {
 
 	@Override
 	public void effect(Bullet b) {
-		b.setSpeed(1.5);
+		//b.setSpeed(1.5);
+
+		b.setSpeed(b.getInitialSpeed()*3);
 	}
 }

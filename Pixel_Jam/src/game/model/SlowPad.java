@@ -16,7 +16,9 @@ public class SlowPad implements Tile {
 
 	@Override
 	public void effect(Bullet b) {
-		b.setSpeed(0.1);
+		//b.setSpeed(0.1);
+
+		b.setSpeed(b.getInitialSpeed()/3);
 	}
 
 

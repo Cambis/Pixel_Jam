@@ -99,6 +99,11 @@ public class Bullet {
 		return Math.sqrt(vx*vx + vy*vy); //magnitude of velocity vector
 	}
 
+	public double getInitialSpeed() {
+
+		return initialSpeed; //magnitude of velocity vector
+	}
+
 	public void setVelocity(double vx, double vy) {
 
 		this.vx = vx;
