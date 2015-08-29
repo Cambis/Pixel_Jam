@@ -38,7 +38,8 @@ public class TrophyTile implements Tile {
 	public void effect(Bullet b) {
 		if(enabled){
 			b.getPlayer().addTrophy();
-			System.out.println("YOU GOT A MOTHER FUCKING TROPHY!!");
+			//System.out.println("YOU GOT A MOTHER FUCKING TROPHY!!");
+			System.out.println("YOU GOT A TROPHY!!");
 		}
 		enabled = false;
 	}

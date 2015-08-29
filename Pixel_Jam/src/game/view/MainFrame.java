@@ -185,6 +185,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
+			dispose();
 			new MainFrame();
 		}
 
