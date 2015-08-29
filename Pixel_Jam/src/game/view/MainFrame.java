@@ -50,8 +50,7 @@ public class MainFrame extends JFrame implements KeyListener{
 		// Make sure we can sees it!
 		setVisible(true);
 
-		// Probably will change this
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addKeyListener(this);
 		repaint();
