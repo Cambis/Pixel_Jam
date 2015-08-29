@@ -98,9 +98,6 @@ public class Board {
 			System.out.println("IN WALL!!!");
 			return ((Wall)tiles[xTile][yTile]).hitSegment(xPos, yPos);
 		}
-		if(tiles[xTile][yTile] instanceof Target){
-			return HitDetection.TARGET;
-		}
 
 		int right = b.getX()+b.RADIUS;
 		int left = b.getX()-b.RADIUS;
