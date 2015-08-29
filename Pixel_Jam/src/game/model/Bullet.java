@@ -49,17 +49,18 @@ public class Bullet {
 
 			if (hitDirection == HitDetection.BLACKHOLE) {
 
+				System.out.println("blackhole");
 				this.setSpeed(0);
 			}
-
 			else if (hitDirection == HitDetection.BOOSTPAD) {
 
-				this.setSpeed(getSpeed() * 4);
+				System.out.println("boost");
+				this.setSpeed(1.5);
 			}
-
 			else if (hitDirection == HitDetection.SLOWPAD) {
 
-				this.setSpeed(getSpeed() / 4);
+				System.out.println("slow");
+				this.setSpeed(0.1);
 			}
 
 			// if bullet hit top or bottom

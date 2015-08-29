@@ -133,6 +133,14 @@ public class Board {
 
 			return HitDetection.BLACKHOLE;
 		}
+		if(tiles[xTile][yTile] instanceof BoostPad) {
+
+			return HitDetection.BOOSTPAD;
+		}
+		if(tiles[xTile][yTile] instanceof SlowPad) {
+
+			return HitDetection.SLOWPAD;
+		}
 
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
