@@ -9,7 +9,7 @@ public class TrophyTile implements Tile {
 	@Override
 	public Graphics2D draw(int x, int y, int size, Graphics2D g) {
 		// TODO Auto-generated method stub
-		return null;
+		return g;
 	}
 
 	@Override
