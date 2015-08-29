@@ -26,7 +26,7 @@ public class Bullet {
 
 		x = xi;
 		y = yi;
-
+		this.player = player;
 		initialSpeed = speed;
 
 		setSpeed(direction, initialSpeed);

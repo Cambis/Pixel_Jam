@@ -30,8 +30,10 @@ public class TrophyTile implements Tile {
 
 	@Override
 	public void effect(Bullet b) {
-		System.out.println(b);
-		b.getPlayer().addTrophy();
+		if(enabled){
+			b.getPlayer().addTrophy();
+			System.out.println("YOU GOT A MOTHER FUCKING TROPHY!!");
+		}
 		enabled = false;
 	}
 
