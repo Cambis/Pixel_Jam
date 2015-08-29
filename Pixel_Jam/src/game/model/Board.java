@@ -61,8 +61,8 @@ public class Board {
 						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
 					} else if (c == 'P') {
 						// Create player at this point
-						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'a', 'd', 'w'));
-						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'j', 'l', 'i'));
+						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'd', 'a', 'w'));
+						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'l', 'j', 'i'));
 						tiles[xPos][yPos] = new BlankTile();
 					}
 				}
