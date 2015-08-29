@@ -4,6 +4,7 @@ import game.control.Player;
 import game.model.Board;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -51,6 +52,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		board = new Board("res/test3.txt");
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
+
 
 		board.setParentPanel(boardPanel);
 
