@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -83,5 +84,6 @@ public class BoardPanel extends JPanel implements ActionListener {
 	public void endGame() {
 		gameOver = true;
 		timer.stop();
+
 	}
 }

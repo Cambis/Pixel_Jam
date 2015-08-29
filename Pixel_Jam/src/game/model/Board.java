@@ -59,14 +59,32 @@ public class Board {
 					}
 					// gets char
 					char c = tok.charAt(0);
-					if (c == 'T') {
+					switch(c){
+					case 'T':
 						tiles[xPos][yPos] = new Target();
 						tiles[xSize+(xSize-xPos)-1][yPos] = new Target();
-					} else if (c == 'P') {
+						break;
+					case 'P':
 						// Create player at this point
 						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'd', 'a', 'w'));
 						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'l', 'j', 'i'));
 						tiles[xPos][yPos] = new BlankTile();
+						break;
+					case 'S':
+						//create slow
+						tiles[xPos][yPos] = new SlowPad();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new SlowPad();
+						break;
+					case 'B':
+						//Create boost
+						tiles[xPos][yPos] = new BoostPad();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new BoostPad();
+						break;
+					case 'H':
+						//Create hole
+						tiles[xPos][yPos] = new BlackHole();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new BlackHole();
+						break;
 					}
 				}
 				//Updates x and y
@@ -110,6 +128,12 @@ public class Board {
 			return HitDetection.TARGET;
 		}
 
+		//if hit a black hole
+		if(tiles[xTile][yTile] instanceof BlackHole) {
+
+			return HitDetection.BLACKHOLE;
+		}
+
 		if(top<(yTile)*tileSize){
 			//Colliding with tile above
 			//Check Top-Left
@@ -129,7 +153,7 @@ public class Board {
 //				}
 //			}
 			if(tiles[xTile][yTile-1] instanceof Wall){
-				System.out.println("N");
+//				System.out.println("N");
 				return HitDetection.NORTH;
 			}
 		}
@@ -151,20 +175,20 @@ public class Board {
 //				}
 //			}
 			if(tiles[xTile][yTile+1] instanceof Wall){
-				System.out.println("S");
+//				System.out.println("S");
 				return HitDetection.SOUTH;
 			}
 		}
 		if(left<(xTile)*tileSize
 				&& (tiles[xTile-1][yTile] instanceof Wall)){
 			//Colliding with tile left
-			System.out.println("W");
+//			System.out.println("W");
 			return HitDetection.WEST;
 		}
 		else if(right>(xTile+1)*tileSize
 				&& (tiles[xTile+1][yTile] instanceof Wall)){
 			//Colliding with tile right
-			System.out.println("E");
+//			System.out.println("E");
 			return HitDetection.EAST;
 		}
 		return null;
@@ -225,16 +249,8 @@ public class Board {
 		g.fillRect(0,0,tileSize * (xSize*2), tileSize * ySize);
 		for (int x = 0; x < xSize*2; x++) {
 			for (int y = 0; y < ySize; y++) {
-				if (tiles[x][y] instanceof Wall) {
-					g.setColor(Color.black);
-					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-					g.setColor(Color.WHITE);
-					g.drawRect(x * tileSize, y * tileSize, tileSize, tileSize);
-				}else if (tiles[x][y] instanceof Target) {
-					g.setColor(Color.red);
-					g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-					g.setColor(Color.WHITE);
-					g.drawRect(x * tileSize, y * tileSize, tileSize, tileSize);
+				if(tiles[x][y]!=null){
+				g = tiles[x][y].draw(x, y, tileSize, g);
 				}
 				for(Player p: players){
 					if(p.getX()/tileSize==x && p.getY()/tileSize==y){
