@@ -137,4 +137,12 @@ public class Board {
 			player.moveBullet(this);
 		}
 	}
+
+	public final int getXSize() {
+		return tileSize * (xSize * 2);
+	}
+
+	public final int getYSize() {
+		return tileSize * ySize;
+	}
 }
