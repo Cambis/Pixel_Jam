@@ -54,12 +54,12 @@ public class Bullet {
 
 			else if (hitDirection == HitDetection.BOOSTPAD) {
 
-				this.setSpeed(getSpeed() * 2);
+				this.setSpeed(getSpeed() * 4);
 			}
 
 			else if (hitDirection == HitDetection.SLOWPAD) {
 
-				this.setSpeed(getSpeed() / 2);
+				this.setSpeed(getSpeed() / 4);
 			}
 
 			// if bullet hit top or bottom
