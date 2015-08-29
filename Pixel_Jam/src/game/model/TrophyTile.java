@@ -14,23 +14,31 @@ public class TrophyTile implements Tile {
 	@Override
 	public Graphics2D draw(int x, int y, int size, Graphics2D g) {
 
-		time += 0.005;
-
-		double widthScale = Math.sin(time);
-
-		double rx = 128 + 127 * Math.sin(time);
-		double gx = rx;
-		double bx = 50 + 50 * Math.cos(time);
-
-		g.setColor(new Color((int)rx, (int)gx, (int)bx));
-		g.fillOval(x*size + Board.tileSize/2, y*size + size/2, (int) (size/2 * widthScale), size);
-
+		if(enabled) {
+			time += 0.01;
+	
+			double widthScale = .3 + .5 * Math.sin(time);
+	
+			double rx = 50 + 200 * Math.pow(Math.sin(time/2), 2);
+			double gx = rx;
+			double bx = 255 * Math.max(0, -Math.cos(time-1));
+	
+			g.setColor(new Color((int)rx, (int)gx, (int)(bx)));
+			g.fillOval((int) (x*size + size/2 - widthScale*size/2), y*size + size/2, (int) (size * widthScale), size);
+	
+	//		g.setColor(new Color((int)rx/2, (int)gx/2, (int)bx/2));
+	//		g.drawOval((int) (x*size + size/2 - widthScale*size/4), y*size + size/2, (int) (size/2 * widthScale), size/2);
+		}
+			
 		return g;
 	}
 
 	@Override
 	public void effect(Bullet b) {
-		b.getPlayer().addTrophy();
+		if(enabled){
+			b.getPlayer().addTrophy();
+			System.out.println("YOU GOT A MOTHER FUCKING TROPHY!!");
+		}
 		enabled = false;
 	}
 
