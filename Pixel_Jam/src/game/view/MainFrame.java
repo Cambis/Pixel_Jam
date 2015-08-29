@@ -76,7 +76,8 @@ public class MainFrame extends JFrame implements KeyListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MainFrame();
+				MainFrame main = new MainFrame();
+
 			}
 
 		});

@@ -86,7 +86,6 @@ public class Bullet {
 //			}
 
 			//System.out.println(hitDirection);
-
 		}
 	}
 
