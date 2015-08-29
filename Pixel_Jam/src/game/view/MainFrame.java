@@ -4,6 +4,8 @@ import game.control.Player;
 import game.model.Board;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -39,13 +41,15 @@ public class MainFrame extends JFrame implements KeyListener{
 
 	public MainFrame() {
 
-		setLayout(new BorderLayout());
-		setSize(600, 600);
+		setLayout(new GridLayout(1, 1));
 		setJMenuBar(createMenu());
 
 		board = new Board("res/test3.txt");
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
+
+
+		setSize(new Dimension(board.getXSize(), board.getYSize() + 50));
 
 		// Make sure we can sees it!
 		setVisible(true);
