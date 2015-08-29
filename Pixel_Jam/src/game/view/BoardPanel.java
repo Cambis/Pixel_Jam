@@ -36,6 +36,8 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 	private Timer timer;
 
+	private boolean gameOver = false;
+
 	public BoardPanel(Board board) {
 		this.board = board;
 		state = BoardState.PLAY;
@@ -61,6 +63,10 @@ public class BoardPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	public boolean gameOver() {
+		return gameOver;
+	}
+
 	private void setUpTimer() {
 
 		timer = new Timer(1, this); // tick every 1 milliseconds
@@ -76,7 +82,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 
 	public void endGame() {
-
+		gameOver = true;
 		timer.stop();
 
 	}

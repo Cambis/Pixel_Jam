@@ -183,20 +183,20 @@ public class Board {
 //				}
 //			}
 			if(tiles[xTile][yTile+1] instanceof Wall){
-				System.out.println("S");
+//				System.out.println("S");
 				return HitDetection.SOUTH;
 			}
 		}
 		if(left<(xTile)*tileSize
 				&& (tiles[xTile-1][yTile] instanceof Wall)){
 			//Colliding with tile left
-			System.out.println("W");
+//			System.out.println("W");
 			return HitDetection.WEST;
 		}
 		else if(right>(xTile+1)*tileSize
 				&& (tiles[xTile+1][yTile] instanceof Wall)){
 			//Colliding with tile right
-			System.out.println("E");
+//			System.out.println("E");
 			return HitDetection.EAST;
 		}
 		return null;
