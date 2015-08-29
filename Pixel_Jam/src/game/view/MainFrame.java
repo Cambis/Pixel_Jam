@@ -112,7 +112,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		endGame = new EndGameBox();
 		endGame.setLocationRelativeTo(boardPanel);
 		endGame.setVisible(false);
-		endGame.addNextListener(tryAgainListener);
+		endGame.addTryAgainListener(tryAgainListener);
 
 		timer = new Timer(1, new ActionListener() {
 
