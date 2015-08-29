@@ -81,6 +81,8 @@ public class MainFrame extends JFrame implements KeyListener {
 		// Make sure we can sees it!
 		setVisible(true);
 
+		this.setLocationRelativeTo(null);
+
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addKeyListener(board.getPlayers().get(0));
