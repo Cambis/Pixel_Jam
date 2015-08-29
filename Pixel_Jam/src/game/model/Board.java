@@ -321,6 +321,10 @@ public class Board {
 			parentPanel.endGame();
 	}
 
+	public RuleType getRule() {
+		return rule;
+	}
+
 	public final int getXSize() {
 		return tileSize * (xSize * 2);
 	}
