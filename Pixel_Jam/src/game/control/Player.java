@@ -52,7 +52,7 @@ public class Player implements KeyListener {
 	// Points for hitting the trophies
 	private int trophies = 0;
 
-	private double updateRate = 0.1;
+	private double updateRate = 0.005;
 
 	private Color currentColor = GameColors.PLAYER;
 
@@ -212,7 +212,7 @@ public class Player implements KeyListener {
 			turnRight();
 		else if (firing) {
 			updateFireSpeed();
-			firing = false;
+//			firing = false;
 		} else if (fired) {
 			fire();
 			fired = false;
@@ -242,9 +242,16 @@ public class Player implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		char key = e.getKeyChar();
 
-		turnLeft = turnRight = false;
+//		turnLeft = turnRight = false;
 
-		if (key == fire) {
+		if (key == left)
+			turnLeft = false;
+
+		else if (key == right)
+			turnRight = false;
+
+		else if (key == fire) {
+			firing = false;
 			fired = true;
 			currentColor = GameColors.PLAYER;
 		}
