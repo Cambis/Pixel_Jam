@@ -41,8 +41,6 @@ public class Bullet {
 		x += vx;
 		y += vy;
 
-		System.out.println("speed: "+getSpeed());
-
 		HitDetection hitDirection = board.checkCollisions(this);
 
 		if (hitDirection != null) { //if bullet made a collision
@@ -50,14 +48,36 @@ public class Bullet {
 			numHits++;
 
 			// if bullet hit top or bottom
-			if (hitDirection == HitDetection.NORTH || hitDirection == HitDetection.SOUTH) {
+//			if (hitDirection == HitDetection.NORTH || hitDirection == HitDetection.SOUTH) {
+//
+//				bounceVertical(); //flip vertical speed
+//			}
+//			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
+//
+//				bounceHorizontal(); //flip horizontal speed
+//			}
+			if (hitDirection == HitDetection.NORTH) {
 
-				bounceVertical(); //flip vertical speed
+				bounceVertical();
+				y = Math.floor(y/Board.tileSize)*board.tileSize-5;
 			}
-			else if (hitDirection == HitDetection.EAST || hitDirection == HitDetection.WEST) {
+			else if (hitDirection == HitDetection.SOUTH) {
 
-				bounceHorizontal(); //flip horizontal speed
+				bounceVertical();
+				y = Math.ceil(y/Board.tileSize)*board.tileSize;
 			}
+			else if (hitDirection == HitDetection.WEST) {
+
+				bounceHorizontal();
+				x = Math.floor(x/Board.tileSize)*board.tileSize-5;
+			}
+			else if (hitDirection == HitDetection.EAST) {
+
+				bounceHorizontal();
+				x = Math.ceil(x/Board.tileSize)*board.tileSize;
+			}
+
+			System.out.println(hitDirection);
 		}
 	}
 
@@ -74,12 +94,12 @@ public class Bullet {
 
 	public void bounceVertical() {
 
-		vx = -vx;
+		vy = -vy;
 	}
 
 	public void bounceHorizontal() {
 
-		vy = -vy;
+		vx = -vx;
 	}
 
 	public void setSpeed(double direction, double speed) {
