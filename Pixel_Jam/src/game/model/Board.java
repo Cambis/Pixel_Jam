@@ -118,7 +118,9 @@ public class Board {
 				}
 				for(Player p: players){
 					if(p.getX()/tileSize==x && p.getY()/tileSize==y){
-						g.drawImage(p.getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
+						//g.drawImage(p.getImage(), x*tileSize, y*tileSize, tileSize, tileSize, null);
+
+						p.draw(g);
 					}
 
 					p.drawBullet(g);

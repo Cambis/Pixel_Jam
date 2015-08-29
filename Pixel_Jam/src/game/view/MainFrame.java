@@ -107,7 +107,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		char key = e.getKeyChar();
-		System.out.println("In here");
+		//System.out.println("In here");
 
 		for (Player p : board.getPlayers()) {
 			if (key == p.getLeft())

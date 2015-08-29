@@ -52,7 +52,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 	private void setUpTimer() {
 
-		timer = new Timer(20, this); //tick every 20 milliseconds
+		timer = new Timer(1, this); //tick every 20 milliseconds
 		timer.start();
 	}
 

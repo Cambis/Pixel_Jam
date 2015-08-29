@@ -3,6 +3,7 @@ package game.control;
 import game.model.Board;
 import game.model.Bullet;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -136,5 +137,24 @@ public class Player {
 //			System.out.println("Drawing Bullet");
 			bullet.draw(g);
 		}
+	}
+
+	public void draw(Graphics g) {
+
+		int x = position.x;
+		int y = position.y;
+
+		int w = Board.tileSize;
+		int h = Board.tileSize;
+
+		g.setColor(Color.GRAY);
+		g.fillRect(x, y, w, h);
+
+		int x2 = (int)(w * Math.cos(rotation / 180 * Math.PI));
+		int y2 = (int)(h * Math.sin(rotation / 180 * Math.PI));
+
+		g.setColor(Color.RED);
+		g.drawLine(x + w/2, y + h/2, x + w/2 + x2, y + h/2 + y2);
+
 	}
 }
