@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.Timer;
 
 /**
  * Holds all of the GUI elements
@@ -35,8 +36,12 @@ public class MainFrame extends JFrame implements KeyListener {
 	private BoardPanel boardPanel;
 	private Board board;
 
+	private EndGameBox endGame;
+
 	// Displays the current rule
 	private JLabel rule;
+
+	private Timer timer;
 
 	public MainFrame() {
 
@@ -50,6 +55,8 @@ public class MainFrame extends JFrame implements KeyListener {
 		board.setParentPanel(boardPanel);
 
 		setSize(new Dimension(board.getXSize(), board.getYSize() + 50));
+
+		setUpTimer();
 
 		// Make sure we can sees it!
 		setVisible(true);
@@ -100,6 +107,27 @@ public class MainFrame extends JFrame implements KeyListener {
 		return menuBar;
 	}
 
+	private void setUpTimer() {
+
+		endGame = new EndGameBox();
+		endGame.setLocationRelativeTo(boardPanel);
+		endGame.setVisible(false);
+		endGame.addNextListener(tryAgainListener);
+
+		timer = new Timer(1, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (boardPanel.gameOver()) {
+					endGame.setVisible(true);
+					timer.stop();
+				}
+			}
+
+		});
+
+		timer.start();
+	}
 	public static void main(String args[]) {
 		new MainFrame();
 	}
@@ -135,4 +163,15 @@ public class MainFrame extends JFrame implements KeyListener {
 				p.fire();
 			}
 	}
+
+	private ActionListener tryAgainListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			dispose();
+			endGame.dispose();
+			new MainFrame();
+		}
+
+	};
 }
