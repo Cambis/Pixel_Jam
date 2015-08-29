@@ -47,6 +47,8 @@ public class Player implements KeyListener{
 
 	private boolean turnLeft, turnRight, firing, fired;
 
+	private int score;
+
 	private double updateRate = 0.1;
 
 	public Player(Point startPos, char left, char right, char fire) {
@@ -80,6 +82,10 @@ public class Player implements KeyListener{
 			updateRate*=-1;
 		}
 		speed += updateRate;
+
+		speed = (speed < 0) ? 0 : speed;
+
+//		System.out.println(speed);
 	}
 
 	public final double getLookAngle() {
@@ -132,6 +138,14 @@ public class Player implements KeyListener{
 		return fire;
 	}
 
+	public final int getScore() {
+		return score;
+	}
+
+	public void updateScore(int score) {
+		this.score += score;
+	}
+
 	public static void main(String args[]) {
 		Player player = new Player(new Point(0, 0), 'a', 'd', 'w');
 		System.out.println(player.getImage().toString());
@@ -152,6 +166,10 @@ public class Player implements KeyListener{
 		}
 	}
 
+	public final Bullet getBullet() {
+		return this.bullet;
+	}
+
 	public void draw(Graphics g) {
 
 		int x = position.x;
@@ -160,7 +178,12 @@ public class Player implements KeyListener{
 		int w = Board.tileSize;
 		int h = Board.tileSize;
 
-		g.setColor(GameColors.PLAYER);
+		 if (!firing)
+			 g.setColor(GameColors.PLAYER);
+		 else {
+			 int c = (int)(255*speed/MAX_BULLET_HOLD_TIME);
+			 g.setColor(new Color(c, c, 0));
+		 }
 		g.fillOval(x, y, w, h);
 
 		int x2 = (int)(w/2 * Math.cos(rotation / 180 * Math.PI));
