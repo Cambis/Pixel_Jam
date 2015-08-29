@@ -120,7 +120,7 @@ public class Board {
 		if(tiles[xTile][yTile] instanceof Wall){
 			int xPos = b.getX() - xTile;
 			int yPos = b.getY() - yTile;
-			System.out.println("IN WALL!!!");
+//			System.out.println("IN WALL!!!");
 			return ((Wall)tiles[xTile][yTile]).hitSegment(xPos, yPos);
 		}
 
