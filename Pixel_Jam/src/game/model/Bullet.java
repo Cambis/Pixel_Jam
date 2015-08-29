@@ -16,7 +16,7 @@ public class Bullet {
 	private double vy;
 
 	private double initialSpeed;
-	private double alpha = 0.002;
+	private double alpha = 0.0007;
 
 	private Player player;
 
