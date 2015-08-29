@@ -64,7 +64,7 @@ public class Player {
 		speed = (speed < MAX_BULLET_HOLD_TIME) ? speed : MAX_BULLET_HOLD_TIME;
 
 		// Create new bullet
-		bullet = new Bullet(position.x, position.y, rotation,
+		bullet = new Bullet(position.x + Board.tileSize/2, position.y + Board.tileSize/2, rotation,
 				speed);
 
 	}
