@@ -14,16 +14,16 @@ public class TrophyTile implements Tile {
 	@Override
 	public Graphics2D draw(int x, int y, int size, Graphics2D g) {
 
-		time += 0.1;
+		time += 0.005;
 
 		double widthScale = Math.sin(time);
 
-		double rx = 255 * Math.sin(time);
+		double rx = 128 + 127 * Math.sin(time);
 		double gx = rx;
-		double bx = 100 * Math.cos(time);
+		double bx = 50 + 50 * Math.cos(time);
 
 		g.setColor(new Color((int)rx, (int)gx, (int)bx));
-		g.fillOval(x + Board.tileSize/2, y + Board.tileSize/2, (int) (Board.tileSize/2 * widthScale), Board.tileSize);
+		g.fillOval(x*size + Board.tileSize/2, y*size + size/2, (int) (size/2 * widthScale), size);
 
 		return g;
 	}
