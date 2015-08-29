@@ -39,7 +39,7 @@ public class Player {
 	private long start, end;
 
 	private Bullet bullet;
-	private double bulletHoldTime = 0;
+	private double speed = 0;
 	private static final int MAX_BULLET_HOLD_TIME = 5;
 
 	private static final boolean DEBUG = true;
@@ -59,7 +59,7 @@ public class Player {
 		rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
 	}
 
-	public void fire(int speed) {
+	public void fire() {
 
 		speed = (speed < MAX_BULLET_HOLD_TIME) ? speed : MAX_BULLET_HOLD_TIME;
 
@@ -67,6 +67,11 @@ public class Player {
 		bullet = new Bullet(position.x + Board.tileSize/2, position.y + Board.tileSize/2, rotation,
 				speed);
 
+		speed = 0;
+	}
+
+	public void increaseFireSpeed() {
+		speed++;
 	}
 
 	public final double getLookAngle() {

@@ -115,7 +115,7 @@ public class MainFrame extends JFrame implements KeyListener{
 			else if (key == p.getRight())
 				p.turnRight();
 			else if (key == p.getFire()) {
-				fireSpeed++;
+				p.increaseFireSpeed();
 			}
 
 		}
@@ -127,8 +127,7 @@ public class MainFrame extends JFrame implements KeyListener{
 
 		for (Player p : board.getPlayers())
 			if (key == p.getFire()) {
-				p.fire(fireSpeed);
-				fireSpeed = 0;
+				p.fire();
 			}
 	}
 }
