@@ -2,6 +2,7 @@ package game.model;
 
 public class Wall implements Tile {
 
+
 	public HitDetection hitSegment(int x, int y){
 		if(x>=y){
 			if(y>=Board.tileSize-x){
