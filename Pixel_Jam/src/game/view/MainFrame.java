@@ -43,7 +43,7 @@ public class MainFrame extends JFrame implements KeyListener{
 		setSize(600, 600);
 		setJMenuBar(createMenu());
 
-		board = new Board("res/test2.txt");
+		board = new Board("res/test3.txt");
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 
