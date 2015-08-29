@@ -69,6 +69,7 @@ public class Board {
 						players.add(new Player(new Point(xPos*tileSize, yPos*tileSize), 'd', 'a', 'w'));
 						players.add(new Player(new Point((xSize+(xSize-xPos)-1)*tileSize, yPos*tileSize), 'l', 'j', 'i'));
 						tiles[xPos][yPos] = new BlankTile();
+						tiles[xSize+(xSize-xPos)-1][yPos] = new BlankTile();
 						break;
 					case 'S':
 						//create slow
@@ -210,6 +211,9 @@ public class Board {
 	public Tile getTile(double x, double y){
 		int xTile = (int)x / tileSize;
 		int yTile = (int)y / tileSize;
+		if(tiles[xTile][yTile]==null){
+			System.out.println("RETURNING A NULL TILE!!! OHHH NOOOES!!");
+		}
 		return tiles[xTile][yTile];
 	}
 
