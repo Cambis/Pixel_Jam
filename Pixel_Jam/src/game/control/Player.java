@@ -52,7 +52,7 @@ public class Player implements KeyListener {
 	// Points for hitting the trophies
 	private int trophies = 0;
 
-	private double updateRate = 0.005;
+	private double updateRate = 0.01;
 
 	private Color currentColor = GameColors.PLAYER;
 
