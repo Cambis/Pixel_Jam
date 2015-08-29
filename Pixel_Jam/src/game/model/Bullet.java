@@ -152,6 +152,8 @@ public class Bullet {
 	public boolean checkValidWin(RuleType rule) {
 
 		switch (rule) {
+		case NO_RULE:
+			return true;
 		case BOUNCES:
 			return numHits >= rule.getValue();
 		case DISTANCE:

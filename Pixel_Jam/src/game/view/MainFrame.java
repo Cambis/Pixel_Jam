@@ -73,7 +73,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		setJMenuBar(createMenu());
 
 		// Add board
-		changeBoard("CallumLvl.txt", null);
+		changeBoard("CallumLvl.txt", RuleType.NO_RULE);
 //		board = new Board("res/CallumLvl.txt");
 //		boardPanel = new BoardPanel(board);
 //		add(boardPanel, BorderLayout.CENTER);
@@ -127,7 +127,7 @@ public class MainFrame extends JFrame implements KeyListener {
 //		boardPanel.setBoard(board);
 //		this.rule = rule;
 
-		this.board = new Board("res/" + level);
+		this.board = new Board("res/" + level, rule);
 		boardPanel = new BoardPanel(board);
 		add(boardPanel, BorderLayout.CENTER);
 		board.setParentPanel(boardPanel);

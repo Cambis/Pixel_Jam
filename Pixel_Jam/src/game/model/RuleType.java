@@ -6,6 +6,7 @@ package game.model;
  *
  * @author bryerscame
  *
+ *		   NO_RULE:		'Nuff said
  *         TIME_ALIVE: 	Bullet is alive for x amount of time
  *         BOUNCES:		Bullet must hit n amount of walls
  *         DISTANCE:	Bullet must travel >= x distance
@@ -13,7 +14,7 @@ package game.model;
  */
 public enum RuleType {
 
-	TIME_ALIVE, BOUNCES, DISTANCE, TROPHY;
+	NO_RULE, TIME_ALIVE, BOUNCES, DISTANCE, TROPHY;
 
 	// Value that bullet has to satisfy
 	private int value;
