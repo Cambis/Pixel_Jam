@@ -80,9 +80,10 @@ public class MainFrame extends JFrame implements KeyListener {
 		add(rulePanel, BorderLayout.NORTH);
 
 		// Add board
-		// changeBoard("tut4.txt", RuleType.NO_RULE);
+		 
 		RuleType rule = RuleType.TIME_TO_FINISH;
 		rule.randomiseValue();
+		//changeBoard("tut4.txt", RuleType.NO_RULE);
 		changeBoard("test_TP.txt", rule);
 		// board = new Board("res/CallumLvl.txt");
 		// boardPanel = new BoardPanel(board);
