@@ -38,7 +38,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static final int TROPHY_SCORE = 20;
 
 	// Levels
-	private final String[] levels = new String[] { "test_TP.txt", "CallumLvl.txt",
+	private final String[] levels = new String[] { "tut1.txt", "test_TP.txt", "CallumLvl.txt",
 			"camerons_level.txt", "Lohit_test.txt" };
 
 	// Top menu bar
@@ -80,7 +80,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		add(rulePanel, BorderLayout.NORTH);
 
 		// Add board
-		changeBoard("test_TP.txt", RuleType.NO_RULE);
+		changeBoard("tut1.txt", RuleType.NO_RULE);
 		// board = new Board("res/CallumLvl.txt");
 		// boardPanel = new BoardPanel(board);
 		// add(boardPanel, BorderLayout.CENTER);
