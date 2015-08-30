@@ -98,7 +98,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		 
 		RuleType rule = RuleType.TIME_TO_FINISH;
 		rule.randomiseValue();
-		//changeBoard("tut4.txt", RuleType.NO_RULE);
+		//changeBoard("main2.txt", RuleType.NO_RULE);
 		changeBoard("test_TP.txt", rule);
 		// board = new Board("res/CallumLvl.txt");
 		// boardPanel = new BoardPanel(board);
