@@ -353,7 +353,7 @@ public class Board {
 
 			System.out.println("Win Win");
 			b.getPlayer().hitTarget();
-			parentPanel.endGame();
+			parentPanel.endGame(b.getPlayer());
 
 		} else {
 

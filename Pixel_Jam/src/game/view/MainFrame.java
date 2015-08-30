@@ -221,8 +221,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 				updateScore();
 
-				if (boardPanel.gameOver()) {
+				if (boardPanel.getWinner()!=null) {
 					endGame.setVisible(true);
+					endGame.setTitle("Winner!");
 					timer.stop();
 				}
 			}

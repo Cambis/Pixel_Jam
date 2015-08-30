@@ -13,7 +13,7 @@ public class EndGameBox extends JDialog {
 
 	public EndGameBox() {
 
-		setTitle("Game Over");
+		setTitle("END GAME BOX");
 
 		setLayout(new FlowLayout());
 
