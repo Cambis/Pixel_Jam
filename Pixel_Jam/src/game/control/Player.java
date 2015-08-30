@@ -270,4 +270,9 @@ public class Player implements KeyListener {
 			currentColor = GameColors.PLAYER;
 		}
 	}
+
+	public void removeBullet() {
+
+		bullet = null;
+	}
 }
