@@ -66,14 +66,18 @@ public class Bullet {
 
 	public void moveFrame(Board board) {
 
-		if (board.getRule() == RuleType.TIME_TO_FINISH) {
-			int value = getValue(RuleType.TIME_TO_FINISH);
+		currentRule = board.getRule();
 
-			long currentTime = System.currentTimeMillis();
-			double time = (currentTime - initialTime) / 1000;
+		if (currentRule == RuleType.TIME_TO_FINISH) {
+			int time = getRuleValue(currentRule);
+			int value = currentRule.getValue();
+//			long currentTime = System.currentTimeMillis();
+//			double time = (currentTime - initialTime) / 1000;
+			System.out.println("TIME: " + time);
+			System.out.println("VAL: " + value);
 
-//			if (time >= value)
-//				this.setSpeed(0);
+			if (time >= value)
+				player.removeBullet();
 		}
 
 		x += vx;
@@ -119,7 +123,6 @@ public class Bullet {
 
 		}
 
-		currentRule = board.getRule();
 	}
 
 	public double getSpeed() {
@@ -175,7 +178,7 @@ public class Bullet {
 		g.setFont(font);
 
 		if (currentRule != RuleType.NO_RULE) {
-			String s = String.valueOf(getValue(currentRule));
+			String s = String.valueOf(getRuleValue(currentRule));
 //			FontMetrics fm = g.getFontMetrics();
 //			Rectangle2D rect = fm.getStringBounds(s, g);
 //			g.setColor(GameColors.BACKGROUND);
@@ -219,7 +222,7 @@ public class Bullet {
 		return false;
 	}
 
-	private int getValue(RuleType rule) {
+	private int getRuleValue(RuleType rule) {
 
 		switch (rule) {
 		case NO_RULE:
@@ -230,9 +233,12 @@ public class Bullet {
 			return (int) (distance/Board.tileSize);
 		case TIME_ALIVE:
 			return (int) ((System.currentTimeMillis()-initialTime)/1000);
+		case TIME_TO_FINISH:
+			return (int) ((System.currentTimeMillis()-initialTime)/1000);
 		case TROPHY:
 			return player.getNumTrophies();
 		default:
+			System.out.println("Unknown rule " + rule);
 			break;
 
 		}
