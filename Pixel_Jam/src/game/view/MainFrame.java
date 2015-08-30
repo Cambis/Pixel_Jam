@@ -38,9 +38,8 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	public static double maxSpeed = 2;
 
-	// Levels
-	private final String[] levels = new String[] { "test_TP.txt",
-			"CallumLvl.txt", "camerons_level.txt", "Lohit_test.txt" };
+	private final String[] levels = new String[] { "tut1.txt", "test_TP.txt", "CallumLvl.txt",
+			"camerons_level.txt", "Lohit_test.txt" };
 
 	// Top menu bar
 	private JMenuBar menuBar;
@@ -96,6 +95,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		add(rulePanel, BorderLayout.NORTH);
 
 		// Add board
+		// changeBoard("tut4.txt", RuleType.NO_RULE);
 		RuleType rule = RuleType.TIME_TO_FINISH;
 		rule.randomiseValue();
 		changeBoard("test_TP.txt", rule);
