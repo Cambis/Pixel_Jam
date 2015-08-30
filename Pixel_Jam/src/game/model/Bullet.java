@@ -72,8 +72,8 @@ public class Bullet {
 			long currentTime = System.currentTimeMillis();
 			double time = (currentTime - initialTime) / 1000;
 
-			if (time >= value)
-				this.setSpeed(0);
+//			if (time >= value)
+//				this.setSpeed(0);
 		}
 
 		x += vx;
