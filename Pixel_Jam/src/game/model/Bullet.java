@@ -3,7 +3,10 @@ package game.model;
 import game.control.Player;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 
 public class Bullet {
 
@@ -153,13 +156,32 @@ public class Bullet {
 
 	public void draw(Graphics g) {
 
-		Color firstColor = g.getColor();
+		Font font = new Font("Dialog", Font.ITALIC, Board.tileSize*4/5);
+
 		g.setColor(GameColors.BULLET);
 		g.fillOval(getX() - RADIUS, getY() - RADIUS, RADIUS * 2, RADIUS * 2);
 
 		g.setColor(Color.BLACK);
-		g.drawString(String.valueOf(getValue(currentRule)), getX() - RADIUS, getY() + RADIUS);
+		g.setFont(font);
 
+		if (currentRule != RuleType.NO_RULE) {
+			String s = String.valueOf(getValue(currentRule));
+//			FontMetrics fm = g.getFontMetrics();
+//			Rectangle2D rect = fm.getStringBounds(s, g);
+//			g.setColor(GameColors.BACKGROUND);
+//			g.fillRect(getX(), getY() - fm.getAscent(), (int) rect.getWidth(),
+//					(int) rect.getHeight());
+			g.setColor(Color.WHITE);
+			g.drawString(s, player.getX(), player.getY());
+		}
+
+	}
+
+	public void drawCenteredString(String s, int w, int h, Graphics g) {
+	    FontMetrics fm = g.getFontMetrics();
+	    int x = (w - fm.stringWidth(s)) / 2;
+	    int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2);
+	    g.drawString(s, x, y);
 	}
 
 	/**
