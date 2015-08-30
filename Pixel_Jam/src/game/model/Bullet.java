@@ -54,6 +54,11 @@ public class Bullet {
 		return (int)y;
 	}
 
+	public void setPos(int x, int y){
+		this.x=x;
+		this.y=y;
+	}
+
 	public int getNumHits() {
 
 		return numHits;

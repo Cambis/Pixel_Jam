@@ -138,6 +138,10 @@ public class Board {
 		for(int i=0; i<senders.size(); i++){
 			senders.get(i).setReciver(recievers.get(i));
 		}
+		//setup tp pads
+		for(int i=0; i<senders.size(); i++){
+			senders.get(i).setReciver(recievers.get(i));
+		}
 	}
 
 	public void setParentPanel(BoardPanel panel) {
