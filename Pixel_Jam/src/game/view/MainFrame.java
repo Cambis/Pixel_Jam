@@ -98,7 +98,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		add(rulePanel, BorderLayout.NORTH);
 
 		// Add board
-		 
+
 		RuleType rule = RuleType.TIME_TO_FINISH;
 		rule.randomiseValue();
 		//changeBoard("main2.txt", RuleType.NO_RULE);
@@ -328,7 +328,12 @@ public class MainFrame extends JFrame implements KeyListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
-			changeBoard(levels[pos], createRule());
+
+			RuleType newRule = createRule();
+			if (levels[pos - 1].contains("tut"))
+				newRule = RuleType.NO_RULE;
+
+			changeBoard(levels[pos - 1], newRule);
 		}
 
 	};
