@@ -76,6 +76,7 @@ public class Player implements KeyListener {
 		speed = (speed < MAX_BULLET_HOLD_TIME) ? speed : MAX_BULLET_HOLD_TIME;
 
 		System.out.println(MainFrame.maxSpeed);
+		System.out.println("Speed: " + speed);
 		speed *= MainFrame.maxSpeed;
 
 		// Create new bullet
