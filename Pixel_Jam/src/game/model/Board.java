@@ -147,7 +147,6 @@ public class Board {
 			// player.hitTarget();
 			// }
 
-			b.getPlayer().hitTarget();
 			checkGameOver(b);
 			// parentPanel.endGame();
 			return HitDetection.TARGET;
@@ -319,6 +318,7 @@ public class Board {
 	public void checkGameOver(Bullet b) {
 		if (b.checkValidWin(rule)) {
 			System.out.println("Win Win");
+			b.getPlayer().hitTarget();
 			parentPanel.endGame();
 	}
 	}
