@@ -23,14 +23,14 @@ public enum RuleType {
 	public final static int NO_RULE_MIN = 0;
 	public final static int NO_RULE_MAX = 0;
 
-	public final static int TIME_ALIVE_MIN = 5;
-	public final static int TIME_ALIVE_MAX = 15;
+	public final static int TIME_ALIVE_MIN = 3;
+	public final static int TIME_ALIVE_MAX = 10;
 
 	public final static int BOUNCES_MIN = 3;
 	public final static int BOUNCES_MAX = 10;
 
 	public final static int DISTANCE_MIN = 50;
-	public final static int DISTANCE_MAX = 200;
+	public final static int DISTANCE_MAX = 150;
 
 	public final static int TROPHY_MIN = 1;
 	public final static int TROPHY_MAX = 5;
