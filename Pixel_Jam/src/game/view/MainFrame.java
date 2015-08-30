@@ -330,10 +330,10 @@ public class MainFrame extends JFrame implements KeyListener {
 			endGame.dispose();
 
 			RuleType newRule = createRule();
-			if (levels[pos - 1].contains("tut"))
+			if (levels[pos].contains("tut"))
 				newRule = RuleType.NO_RULE;
 
-			changeBoard(levels[pos - 1], newRule);
+			changeBoard(levels[pos], newRule);
 		}
 
 	};
@@ -343,7 +343,9 @@ public class MainFrame extends JFrame implements KeyListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
-			pos = (pos < levels.length) ? pos + 1 : 0;
+			// pos = (pos < levels.length) ? pos + 1 : 0;
+
+			pos = (pos + 1) % levels.length;
 
 			RuleType newRule = createRule();
 
