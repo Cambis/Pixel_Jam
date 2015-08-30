@@ -29,8 +29,8 @@ public enum RuleType {
 	public final static int BOUNCES_MIN = 3;
 	public final static int BOUNCES_MAX = 10;
 
-	public final static int DISTANCE_MIN = 100;
-	public final static int DISTANCE_MAX = 400;
+	public final static int DISTANCE_MIN = 50;
+	public final static int DISTANCE_MAX = 200;
 
 	public final static int TROPHY_MIN = 1;
 	public final static int TROPHY_MAX = 5;
