@@ -142,7 +142,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		this.rule = rule;
 
-		maxSpeed = board.getXSize() / 400;
+		 maxSpeed = board.getXSize() / 400;
+//		maxSpeed = (board.getXSize() > board.getYSize()) ? board.getXSize() / 400 : board.getYSize() / 400;
+
 
 		addKeyListener(board.getPlayers().get(0));
 		addKeyListener(board.getPlayers().get(1));
