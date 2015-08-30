@@ -66,4 +66,22 @@ public enum RuleType {
 	public final int getValue() {
 		return this.value;
 	}
+
+	@Override
+	public String toString() {
+		switch(ordinal()) {
+		case 0:
+			return "NO RULE";
+		case 1:
+			return "Bullet alive time: " + value;
+		case 2:
+			return "Bounces before target: " + value;
+		case 3:
+			return "Distance to travel before target: "  + value;
+		case 4:
+			return "Trophies to get before target: " + value;
+		default:
+			return "ERROR";
+		}
+	}
 }

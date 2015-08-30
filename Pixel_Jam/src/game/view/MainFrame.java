@@ -132,7 +132,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		}
 
 		// Change rule label
-		ruleLabel.setText(rule.toString() + " " + rule.getValue());
+		ruleLabel.setText(rule.toString());
 
 		this.board = new Board("res/" + level, rule);
 		boardPanel = new BoardPanel(board);
@@ -151,6 +151,8 @@ public class MainFrame extends JFrame implements KeyListener {
 		endGame = new EndGameBox();
 		endGame.setLocationRelativeTo(boardPanel);
 		endGame.setVisible(false);
+		endGame.addTryAgainListener(tryAgainListener);
+		endGame.addNextListener(nextListener);
 
 		if (timer != null)
 			timer.start();
@@ -207,9 +209,6 @@ public class MainFrame extends JFrame implements KeyListener {
 	}
 
 	private void setUpTimer() {
-
-		endGame.addTryAgainListener(tryAgainListener);
-		endGame.addNextListener(nextListener);
 
 		timer = new Timer(1, new ActionListener() {
 
