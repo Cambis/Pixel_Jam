@@ -24,6 +24,8 @@ public class Board {
 	private int xSize;
 	private int ySize;
 	public static final int tileSize = 16;
+	private List<TeleportPad> senders = new ArrayList<TeleportPad>();
+	private List<TeleportPad> recievers = new ArrayList<TeleportPad>();
 
 	private BoardPanel parentPanel;
 
@@ -102,6 +104,25 @@ public class Board {
 						tiles[xPos][yPos] = new TrophyTile();
 						tiles[xSize + (xSize - xPos) - 1][yPos] = new TrophyTile();
 						break;
+					case 'I':
+						// Create hole
+						TeleportPad s1 = new TeleportPad(true, tileSize*xPos, tileSize*yPos, tileSize);
+						tiles[xPos][yPos] = s1;
+						senders.add(s1);
+						TeleportPad s2 = new TeleportPad(true, tileSize*(xSize + (xSize - xPos) - 1), tileSize*yPos, tileSize);
+						senders.add(s2);
+						tiles[xSize + (xSize - xPos) - 1][yPos] = s2;
+						break;
+					case 'O':
+						// Create hole
+						TeleportPad r1 = new TeleportPad(false, tileSize*xPos, tileSize*yPos, tileSize);
+						tiles[xPos][yPos] = r1;
+						recievers.add(r1);
+						TeleportPad r2 = new TeleportPad(false, tileSize*(xSize + (xSize - xPos) - 1), tileSize*yPos, tileSize);
+						recievers.add(r2);
+						tiles[xSize + (xSize - xPos) - 1][yPos] = r2;
+						break;
+
 					}
 				}
 				// Updates x and y
@@ -112,6 +133,10 @@ public class Board {
 				}
 			}
 		} catch (IOException e) {
+		}
+		//setup tp pads
+		for(int i=0; i<senders.size(); i++){
+			senders.get(i).setReciver(recievers.get(i));
 		}
 	}
 
@@ -321,10 +346,15 @@ public class Board {
 	 */
 	public void checkGameOver(Bullet b) {
 		if (b.checkValidWin(rule)) {
+
 			System.out.println("Win Win");
 			b.getPlayer().hitTarget();
 			parentPanel.endGame();
-	}
+
+		} else {
+
+			b.getPlayer().removeBullet();
+		}
 	}
 
 	public RuleType getRule() {
