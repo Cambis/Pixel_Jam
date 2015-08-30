@@ -84,11 +84,11 @@ public enum RuleType {
 			return "NO RULE";
 		case TIME_ALIVE:
 			return "Bullet has to be alive for: " + value
-					+ " before hitting target";
+					+ " seconds before hitting target";
 		case BOUNCES:
 			return "Bounces before target: " + value;
 		case DISTANCE:
-			return "Distance to travel before target: " + value;
+			return "Distance to travel before target: " + value + "m";
 		case TROPHY:
 			return "Collect "+value+" coins before hitting target";
 		case TIME_TO_FINISH:
