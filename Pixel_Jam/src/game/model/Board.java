@@ -279,9 +279,9 @@ public class Board {
 				tileSize * ySize, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) boardReturn.getGraphics();
 
-		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setRenderingHints(rh);
+//		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+//				RenderingHints.VALUE_ANTIALIAS_ON);
+//		g.setRenderingHints(rh);
 
 		g.setColor(GameColors.BACKGROUND);
 		g.fillRect(0, 0, tileSize * (xSize * 2), tileSize * ySize);
