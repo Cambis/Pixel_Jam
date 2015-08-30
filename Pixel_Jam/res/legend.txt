@@ -6,6 +6,7 @@ T - Target
 P - Player
 S - Slow Pad
 B - Boost Pad
-I - Teleporter Sender (not done)
-O - Teleporter Receiver (not done)
+I - Teleporter Sender
+O - Teleporter Receiver
 $ - Trophy
+H - Blackhole (deletes bullet)
