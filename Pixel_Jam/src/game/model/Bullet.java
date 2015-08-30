@@ -58,6 +58,16 @@ public class Bullet {
 
 	public void moveFrame(Board board) {
 
+		if (board.getRule() == RuleType.TIME_TO_FINISH) {
+			int value = getValue(RuleType.TIME_TO_FINISH);
+
+			long currentTime = System.currentTimeMillis();
+			double time = (currentTime - initialTime) / 1000;
+
+			if (time >= value)
+				this.setSpeed(0);
+		}
+
 		x += vx;
 		y += vy;
 
