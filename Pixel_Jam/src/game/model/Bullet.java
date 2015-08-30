@@ -71,10 +71,8 @@ public class Bullet {
 		if (currentRule == RuleType.TIME_TO_FINISH) {
 			int time = getRuleValue(currentRule);
 			int value = currentRule.getValue();
-//			long currentTime = System.currentTimeMillis();
-//			double time = (currentTime - initialTime) / 1000;
-			System.out.println("TIME: " + time);
-			System.out.println("VAL: " + value);
+//			System.out.println("TIME: " + time);
+//			System.out.println("VAL: " + value);
 
 			if (time >= value)
 				player.removeBullet();
@@ -120,7 +118,7 @@ public class Bullet {
 //				break;
 			}
 
-			GameSounds.playSound("short_chirp.wav");
+//			GameSounds.playSound("short_chirp.wav");
 		}
 
 	}
@@ -215,6 +213,8 @@ public class Bullet {
 			return (System.currentTimeMillis()-initialTime)/1000 >= rule.getValue();
 		case TROPHY:
 			return player.getNumTrophies() >= rule.getValue();
+		case TIME_TO_FINISH:
+			return true;
 		default:
 			break;
 
