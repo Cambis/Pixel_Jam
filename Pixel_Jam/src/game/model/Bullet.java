@@ -120,7 +120,7 @@ public class Bullet {
 //				break;
 			}
 
-
+			GameSounds.playSound("short_chirp.wav");
 		}
 
 	}
