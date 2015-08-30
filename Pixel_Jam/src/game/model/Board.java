@@ -183,46 +183,12 @@ public class Board {
 
 		if (top < (yTile) * tileSize) {
 			// Colliding with tile above
-			// Check Top-Left
-			// if(left<(xTile)*tileSize
-			// && (tiles[xTile-1][yTile-1] instanceof Wall)){
-			// if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
-			// System.out.println("NW");
-			// return HitDetection.NORTH_WEST;
-			// }
-			// }
-			// else if(right>(xTile+1)*tileSize
-			// && (tiles[xTile+1][yTile-1] instanceof Wall)){
-			// //Colliding with tile right
-			// if(dist(right, top, (xTile+1)*tileSize,
-			// yTile*tileSize)<=b.RADIUS){
-			// System.out.println("NE");
-			// return HitDetection.NORTH_EAST;
-			// }
-			// }
 			if (tiles[xTile][yTile - 1] instanceof Wall) {
 				// System.out.println("N");
 				return HitDetection.NORTH;
 			}
 		} else if (bot > (yTile + 1) * tileSize) {
 			// Colliding with tile below
-			// if(left<(xTile)*tileSize
-			// && (tiles[xTile-1][yTile+1] instanceof Wall)){
-			// if(dist(left, bot, xTile*tileSize,
-			// (yTile+1)*tileSize)<=b.RADIUS){
-			// System.out.println("Sw");
-			// return HitDetection.SOUTH_WEST;
-			// }
-			// }
-			// else if(right>(xTile+1)*tileSize
-			// && (tiles[xTile+1][yTile+1] instanceof Wall)){
-			// //Colliding with tile right
-			// if(dist(right, bot, (xTile+1)*tileSize,
-			// (yTile+1)*tileSize)<=b.RADIUS){
-			// System.out.println("SE");
-			// return HitDetection.SOUTH_EAST;
-			// }
-			// }
 			if (tiles[xTile][yTile + 1] instanceof Wall) {
 				// System.out.println("S");
 				return HitDetection.SOUTH;
@@ -239,6 +205,36 @@ public class Board {
 			// System.out.println("E");
 			return HitDetection.EAST;
 		}
+
+//		if(tiles[xTile-1][yTile-1] instanceof Wall){
+//			if(dist(left, top, xTile*tileSize, yTile*tileSize)<=b.RADIUS){
+//				//System.out.println("NW");
+//				return HitDetection.WEST;
+//			}
+//		}
+//		if(tiles[xTile+1][yTile-1] instanceof Wall){
+//			//Colliding with tile right
+//			if(dist(right, top, (xTile+1)*tileSize,
+//					yTile*tileSize)<=b.RADIUS){
+//				System.out.println("E");
+//				return HitDetection.EAST;
+//			}
+//		}
+//		if(tiles[xTile-1][yTile+1] instanceof Wall){
+//			if(dist(left, bot, xTile*tileSize,
+//					(yTile+1)*tileSize)<=b.RADIUS){
+//				System.out.println("Sw");
+//				return HitDetection.WEST;
+//			}
+//		}
+//		if(tiles[xTile+1][yTile+1] instanceof Wall){
+//			//Colliding with tile right
+//			if(dist(right, bot, (xTile+1)*tileSize,
+//					(yTile+1)*tileSize)<=b.RADIUS){
+//				System.out.println("S");
+//				return HitDetection.SOUTH;
+//			}
+//		}
 		return null;
 	}
 
