@@ -64,11 +64,11 @@ public class Player implements KeyListener {
 	}
 
 	public void turnLeft() {
-		rotation = (rotation > ROTATION_MIN) ? rotation - 1 : ROTATION_MIN;
+		rotation = (rotation > ROTATION_MIN) ? rotation - 0.5 : ROTATION_MIN;
 	}
 
 	public void turnRight() {
-		rotation = (rotation < ROTATION_MAX) ? rotation + 1 : ROTATION_MAX;
+		rotation = (rotation < ROTATION_MAX) ? rotation + 0.5 : ROTATION_MAX;
 	}
 
 	public void fire() {
