@@ -38,8 +38,8 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	public static double maxSpeed = 2;
 
-	private final String[] levels = new String[] { "tut1.txt", "test_TP.txt", "CallumLvl.txt",
-			"camerons_level.txt", "Lohit_test.txt" };
+	private final String[] levels = new String[] { "test_TP.txt",
+			"CallumLvl.txt", "camerons_level.txt", "Lohit_test.txt" };
 
 	// Top menu bar
 	private JMenuBar menuBar;
@@ -362,7 +362,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 	private static MainFrame tutorial() {
 
-		// Put string array of tutorial
+		final String[] tutorials = new String[] { "tut1.txt", "tut2.txt",
+				"tut3.txt", "tut4.txt" };
+
 		MainFrame main = new MainFrame();
 		// main.init();
 		main.changeBoard("test1.txt", null);
@@ -373,11 +375,14 @@ public class MainFrame extends JFrame implements KeyListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// main.changeBoard(level, rule);
+				main.changeBoard(tutorials[i], RuleType.NO_RULE);
+				main.endGame.addNextListener(this);
 				i++;
 			}
 
 		};
+
+		main.endGame.addNextListener(next);
 		return main;
 	}
 }
