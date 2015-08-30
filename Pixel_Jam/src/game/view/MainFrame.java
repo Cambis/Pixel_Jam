@@ -16,6 +16,7 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 
 import javax.swing.AbstractButton;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -38,8 +39,8 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static double maxSpeed = 2;
 
 	// Levels
-	private final String[] levels = new String[] { "test_TP.txt", "CallumLvl.txt",
-			"camerons_level.txt", "Lohit_test.txt" };
+	private final String[] levels = new String[] { "test_TP.txt",
+			"CallumLvl.txt", "camerons_level.txt", "Lohit_test.txt" };
 
 	// Top menu bar
 	private JMenuBar menuBar;
@@ -64,7 +65,22 @@ public class MainFrame extends JFrame implements KeyListener {
 	// Used to check for game over and update player scores
 	private Timer timer;
 
+	private JPanel startPanel;
+
 	public MainFrame() {
+		// setLayout(new BorderLayout());
+		// setJMenuBar(createMenu());
+
+		// setSize(300, 300);
+		// // Make sure we can sees it!
+		// setLocationRelativeTo(null);
+		// setVisible(true);
+		// setResizable(true);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// startScreen();
+		// add(startPanel, BorderLayout.CENTER);
+		// repaint();
 		init();
 	}
 
@@ -101,13 +117,11 @@ public class MainFrame extends JFrame implements KeyListener {
 		playerPanel.add(player2Score);
 		add(playerPanel, BorderLayout.SOUTH);
 
-		// Make sure we can sees it!
-		setVisible(true);
-
 		setUpTimer();
 
-		this.setLocationRelativeTo(null);
-
+		// Make sure we can sees it!
+		setLocationRelativeTo(null);
+		setVisible(true);
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		repaint();
@@ -142,9 +156,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		this.rule = rule;
 
-		 maxSpeed = board.getXSize() / 400;
-//		maxSpeed = (board.getXSize() > board.getYSize()) ? board.getXSize() / 400 : board.getYSize() / 400;
-
+		maxSpeed = board.getXSize() / 400;
+		// maxSpeed = (board.getXSize() > board.getYSize()) ? board.getXSize() /
+		// 400 : board.getYSize() / 400;
 
 		addKeyListener(board.getPlayers().get(0));
 		addKeyListener(board.getPlayers().get(1));
@@ -221,7 +235,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 				updateScore();
 
-				if (boardPanel.getWinner()!=null) {
+				if (boardPanel.getWinner() != null) {
 					endGame.setVisible(true);
 					endGame.setTitle("Winner!");
 					timer.stop();
@@ -233,8 +247,38 @@ public class MainFrame extends JFrame implements KeyListener {
 		timer.start();
 	}
 
+	private void startScreen() {
+
+		startPanel = new JPanel(new GridLayout(2, 1));
+		JButton tut = new JButton("Tutorial");
+		JButton game = new JButton("Start");
+
+		startPanel.add(tut);
+		startPanel.add(game);
+
+		tut.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MainFrame main = MainFrame.tutorial();
+			}
+
+		});
+
+		game.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				remove(startPanel);
+				init();
+			}
+
+		});
+	}
+
 	public static void main(String args[]) {
-		new MainFrame();
+		MainFrame frame = new MainFrame();
 	}
 
 	@Override
@@ -287,15 +331,13 @@ public class MainFrame extends JFrame implements KeyListener {
 			endGame.dispose();
 			int levelNumber = randomNumber(0, levels.length - 1);
 
-
-
 			RuleType newRule = createRule();
 			changeBoard(levels[levelNumber], newRule);
 		}
 
 	};
 
-	private RuleType createRule(){
+	private RuleType createRule() {
 		int ruleNumber = randomNumber(1, RuleType.values().length - 1);
 		RuleType newRule = RuleType.values()[ruleNumber];
 		int value = 0;
@@ -314,5 +356,26 @@ public class MainFrame extends JFrame implements KeyListener {
 	 */
 	public static int randomNumber(int min, int max) {
 		return new Random().nextInt((max - min) + 1) + min;
+	}
+
+	private static MainFrame tutorial() {
+
+		// Put string array of tutorial
+		MainFrame main = new MainFrame();
+		// main.init();
+		main.changeBoard("test1.txt", null);
+
+		ActionListener next = new ActionListener() {
+
+			int i = 0;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// main.changeBoard(level, rule);
+				i++;
+			}
+
+		};
+		return main;
 	}
 }
