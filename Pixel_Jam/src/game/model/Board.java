@@ -348,7 +348,7 @@ public class Board {
 		if (b.checkValidWin(rule)) {
 			System.out.println("Win Win");
 			b.getPlayer().hitTarget();
-			parentPanel.endGame();
+			parentPanel.endGame(b.getPlayer());
 	}
 	}
 
