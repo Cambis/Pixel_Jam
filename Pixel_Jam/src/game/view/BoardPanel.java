@@ -37,7 +37,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 	private Timer timer;
 
-	private boolean gameOver = false;
+	private Player winner = null;
 
 	private RuleType rule;
 
@@ -66,8 +66,8 @@ public class BoardPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public boolean gameOver() {
-		return gameOver;
+	public Player getWinner() {
+		return winner;
 	}
 
 	private void setUpTimer() {
@@ -88,8 +88,8 @@ public class BoardPanel extends JPanel implements ActionListener {
 		this.board = board;
 	}
 
-	public void endGame() {
-		gameOver = true;
+	public void endGame(Player p) {
+		winner = p;
 		timer.stop();
 	}
 }

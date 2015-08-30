@@ -138,6 +138,10 @@ public class Board {
 		for(int i=0; i<senders.size(); i++){
 			senders.get(i).setReciver(recievers.get(i));
 		}
+		//setup tp pads
+		for(int i=0; i<senders.size(); i++){
+			senders.get(i).setReciver(recievers.get(i));
+		}
 	}
 
 	public void setParentPanel(BoardPanel panel) {
@@ -346,10 +350,15 @@ public class Board {
 	 */
 	public void checkGameOver(Bullet b) {
 		if (b.checkValidWin(rule)) {
+
 			System.out.println("Win Win");
 			b.getPlayer().hitTarget();
-			parentPanel.endGame();
-	}
+			parentPanel.endGame(b.getPlayer());
+
+		} else {
+
+			b.getPlayer().removeBullet();
+		}
 	}
 
 	public RuleType getRule() {

@@ -16,7 +16,8 @@ public class BlackHole implements Tile {
 
 	@Override
 	public void effect(Bullet b) {
-		b.setSpeed(0);
+
+		b.getPlayer().removeBullet();
 	}
 
 

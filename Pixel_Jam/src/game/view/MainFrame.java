@@ -32,10 +32,10 @@ import javax.swing.Timer;
  */
 public class MainFrame extends JFrame implements KeyListener {
 
-	public static int BOARD_HEIGHT, BOARD_WIDTH;
-
 	public static final int TARGET_SCORE = 100;
 	public static final int TROPHY_SCORE = 20;
+
+	public static double maxSpeed = 2;
 
 	// Levels
 	private final String[] levels = new String[] { "tut1.txt", "test_TP.txt", "CallumLvl.txt",
@@ -142,6 +142,8 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		this.rule = rule;
 
+		maxSpeed = board.getXSize() / 400;
+
 		addKeyListener(board.getPlayers().get(0));
 		addKeyListener(board.getPlayers().get(1));
 		repaint();
@@ -217,8 +219,9 @@ public class MainFrame extends JFrame implements KeyListener {
 
 				updateScore();
 
-				if (boardPanel.gameOver()) {
+				if (boardPanel.getWinner()!=null) {
 					endGame.setVisible(true);
+					endGame.setTitle("Winner!");
 					timer.stop();
 				}
 			}

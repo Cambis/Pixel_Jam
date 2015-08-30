@@ -17,6 +17,8 @@ public class TeleportPad implements Tile {
 	private boolean isSender = false;
 	private int x,y;
 
+	private double time;
+
 	public TeleportPad(boolean isSender, int x, int y, int tileSize) {
 		this.isSender = isSender;
 		this.x = x + tileSize/2;
@@ -32,8 +34,10 @@ public class TeleportPad implements Tile {
 			g.setColor(Color.RED);
 		}
 		g.fillOval(x * size, y * size, size, size);
-		g.setColor(Color.BLACK);
-		g.drawOval((int) ((x + 0.25) * size), (int) ((y + 0.25) * size),
+		time += 0.01;
+		int c = (int) (255 * Math.pow(Math.sin(time), 2));
+		g.setColor(new Color(255-c,c,c));
+		g.fillOval((int) ((x + 0.25) * size), (int) ((y + 0.25) * size),
 				size / 2, size / 2);
 		return g;
 	}

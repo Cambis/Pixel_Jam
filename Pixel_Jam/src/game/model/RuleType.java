@@ -6,15 +6,16 @@ package game.model;
  *
  * @author bryerscame
  *
- *		   NO_RULE:		'Nuff said
- *         TIME_ALIVE: 	Bullet is alive for x amount of time
- *         BOUNCES:		Bullet must hit n amount of walls
- *         DISTANCE:	Bullet must travel >= x distance
- *         TROPHY:	 	Bullet must gain n trophies
+ *         NO_RULE: 'Nuff said
+ *         TIME_ALIVE: Bullet has to stay alive x amount of time
+ *         BOUNCES: Bullet must hit n amount of walls
+ *         DISTANCE: Bullet must travel >= x distance
+ *         TROPHY: Bullet must gain n trophies
+ *         TIME_TO_FINISH: Bullet lasts x time TIMER: Player has x time to win
  */
 public enum RuleType {
 
-	NO_RULE, TIME_ALIVE, BOUNCES, DISTANCE, TROPHY;
+	NO_RULE, TIME_ALIVE, BOUNCES, DISTANCE, TROPHY, TIME_TO_FINISH;
 
 	// Value that bullet has to satisfy
 	private int value = 0;
@@ -34,31 +35,40 @@ public enum RuleType {
 	public final static int TROPHY_MIN = 1;
 	public final static int TROPHY_MAX = 5;
 
+	public final static int FINISH_TIME_MIN = 5;
+	public final static int FINISH_TIME_MAX = 10;
+
 	public void setValue(int value) {
 		this.value = value;
 	}
 
-	public void randomiseValue(){
+	public void randomiseValue() {
 		int dif = 0;
-		switch(this){
+		switch (this) {
 		case NO_RULE:
 			value = NO_RULE_MIN;
 			break;
 		case TIME_ALIVE:
-			dif = TIME_ALIVE_MAX-TIME_ALIVE_MIN;
-			value = (int)(Math.random()*dif)+TIME_ALIVE_MIN;
+			dif = TIME_ALIVE_MAX - TIME_ALIVE_MIN;
+			value = (int) (Math.random() * dif) + TIME_ALIVE_MIN;
 			break;
 		case BOUNCES:
-			dif = BOUNCES_MAX-BOUNCES_MIN;
-			value = (int)(Math.random()*dif)+BOUNCES_MIN;
+			dif = BOUNCES_MAX - BOUNCES_MIN;
+			value = (int) (Math.random() * dif) + BOUNCES_MIN;
 			break;
 		case DISTANCE:
-			dif = DISTANCE_MAX-DISTANCE_MIN;
-			value = (int)(Math.random()*dif)+DISTANCE_MIN;
+			dif = DISTANCE_MAX - DISTANCE_MIN;
+			value = (int) (Math.random() * dif) + DISTANCE_MIN;
 			break;
 		case TROPHY:
-			dif = TROPHY_MAX-TROPHY_MIN;
-			value = (int)(Math.random()*dif)+TROPHY_MIN;
+			dif = TROPHY_MAX - TROPHY_MIN;
+			value = (int) (Math.random() * dif) + TROPHY_MIN;
+			break;
+		case TIME_TO_FINISH:
+			dif = TROPHY_MAX - TROPHY_MIN;
+			value = (int) (Math.random() * dif) + FINISH_TIME_MIN;
+			break;
+		default:
 			break;
 		}
 	}
@@ -69,17 +79,20 @@ public enum RuleType {
 
 	@Override
 	public String toString() {
-		switch(ordinal()) {
-		case 0:
+		switch (this) {
+		case NO_RULE:
 			return "NO RULE";
-		case 1:
-			return "Bullet alive time: " + value;
-		case 2:
+		case TIME_ALIVE:
+			return "Bullet has to be alive for: " + value
+					+ " before hitting target";
+		case BOUNCES:
 			return "Bounces before target: " + value;
-		case 3:
-			return "Distance to travel before target: "  + value;
-		case 4:
+		case DISTANCE:
+			return "Distance to travel before target: " + value;
+		case TROPHY:
 			return "Trophies to get before target: " + value;
+		case TIME_TO_FINISH:
+			return "Bullets last for: " + value + " seconds";
 		default:
 			return "ERROR";
 		}
