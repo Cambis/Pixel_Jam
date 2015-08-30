@@ -3,6 +3,7 @@ package game.model;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 
 /**
  * Teleports the bullet to another pad, each pad has a pointer to the other
@@ -13,18 +14,23 @@ import java.awt.Graphics2D;
 public class TeleportPad implements Tile {
 
 	private TeleportPad reciever;
+	private boolean isSender = false;
+	private int x,y;
 
-	public TeleportPad() {
-
+	public TeleportPad(boolean isSender, int x, int y, int tileSize) {
+		this.isSender = isSender;
+		this.x = x + tileSize/2;
+		this.y = y + tileSize/2;
 	}
 
-	public TeleportPad(TeleportPad reciever) {
-		this.reciever = reciever;
-	}
 
 	@Override
 	public Graphics2D draw(int x, int y, int size, Graphics2D g) {
-		g.setColor(Color.RED);
+		if(isSender){
+		g.setColor(Color.white);
+		}else{
+			g.setColor(Color.RED);
+		}
 		g.fillOval(x * size, y * size, size, size);
 		g.setColor(Color.BLACK);
 		g.drawOval((int) ((x + 0.25) * size), (int) ((y + 0.25) * size),
@@ -36,14 +42,24 @@ public class TeleportPad implements Tile {
 		this.reciever = reciever;
 	}
 
+	public Point getPos() {
+		return new Point(x,y);
+	}
+
 	public TeleportPad getReceiver() {
 		return reciever;
+	}
+
+	public boolean isSender() {
+		return isSender;
 	}
 
 	@Override
 	public void effect(Bullet b) {
 		// TODO Auto-generated method stub
-
+		if(isSender&&reciever!=null){
+			b.setPos(reciever.getPos().x, reciever.getPos().y);
+		}
 	}
 
 }
