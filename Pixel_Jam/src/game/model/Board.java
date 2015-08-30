@@ -232,8 +232,12 @@ public class Board {
 	public Tile getTile(double x, double y) {
 		int xTile = (int) x / tileSize;
 		int yTile = (int) y / tileSize;
-		if (tiles[xTile][yTile] == null) {
-			System.out.println("RETURNING A NULL TILE!!! OHHH NOOOES!!");
+		if (xTile<0 || yTile<0) {
+			yTile = (int) y / tileSize;
+			if (tiles[xTile][yTile] == null) {
+				System.out.println("RETURNING A NULL TILE!!! OHHH NOOOES!!");
+			}
+			return tiles[0][0];
 		}
 		return tiles[xTile][yTile];
 	}
