@@ -42,7 +42,7 @@ public class MainFrame extends JFrame implements KeyListener {
 			"tut3.txt", "tut4.txt", "test_TP.txt", "CallumLvl.txt", "camerons_level.txt",
 			"Lohit_test.txt" };
 
-	private int pos = 1;
+	private int pos = 0;
 
 	// Top menu bar
 	private JMenuBar menuBar;
