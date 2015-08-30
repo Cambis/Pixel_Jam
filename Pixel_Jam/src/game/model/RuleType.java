@@ -65,7 +65,7 @@ public enum RuleType {
 			value = (int) (Math.random() * dif) + TROPHY_MIN;
 			break;
 		case TIME_TO_FINISH:
-			dif = TROPHY_MAX - TROPHY_MIN;
+			dif = FINISH_TIME_MAX - FINISH_TIME_MIN;
 			value = (int) (Math.random() * dif) + FINISH_TIME_MIN;
 			break;
 		default:
@@ -90,9 +90,9 @@ public enum RuleType {
 		case DISTANCE:
 			return "Distance to travel before target: " + value;
 		case TROPHY:
-			return "Trophies to get before target: " + value;
+			return "Collect "+value+" coins before hitting target";
 		case TIME_TO_FINISH:
-			return "Bullets last for: " + value + " seconds";
+			return "Bullet has: " + value + " seconds to finish";
 		default:
 			return "ERROR";
 		}
