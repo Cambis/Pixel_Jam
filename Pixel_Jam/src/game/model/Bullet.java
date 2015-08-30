@@ -183,6 +183,8 @@ public class Bullet {
 //			g.fillRect(getX(), getY() - fm.getAscent(), (int) rect.getWidth(),
 //					(int) rect.getHeight());
 			g.setColor(Color.WHITE);
+			if (checkValidWin(currentRule))
+				g.setColor(Color.GREEN);
 			g.drawString(s, player.getX(), player.getY());
 		}
 
