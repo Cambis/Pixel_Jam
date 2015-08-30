@@ -282,18 +282,24 @@ public class MainFrame extends JFrame implements KeyListener {
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
 			int levelNumber = randomNumber(0, levels.length - 1);
-			int ruleNumber = randomNumber(1, RuleType.values().length - 1);
 
-			// System.out.println("level: " + levels[levelNumber] + "rule: "
-			// + RuleType.values()[ruleNumber]);
 
-			RuleType newRule = RuleType.values()[ruleNumber];
-			int value = randomNumber(1, 10);
-			newRule.setValue(value);
+
+			RuleType newRule = createRule();
 			changeBoard(levels[levelNumber], newRule);
 		}
 
 	};
+
+	private RuleType createRule(){
+		int ruleNumber = randomNumber(1, RuleType.values().length - 1);
+		RuleType newRule = RuleType.values()[ruleNumber];
+		int value = 0;
+		newRule.randomiseValue();
+		// System.out.println("level: " + levels[levelNumber] + "rule: "
+		// + RuleType.values()[ruleNumber]);
+		return newRule;
+	}
 
 	/**
 	 * Gets a random number between a max and a min

@@ -20,7 +20,11 @@ public class Bullet {
 
 	private Player player;
 
+	private RuleType currentRule;
+
 	int numHits;
+	private double distance;
+	private long initialTime;
 
 	public Bullet(int xi, int yi, double direction, double speed, Player player) {
 
@@ -28,6 +32,8 @@ public class Bullet {
 		y = yi;
 		this.player = player;
 		initialSpeed = speed;
+
+		initialTime = System.currentTimeMillis();
 
 		setSpeed(direction, initialSpeed);
 	}
@@ -54,6 +60,8 @@ public class Bullet {
 
 		x += vx;
 		y += vy;
+
+		distance += getSpeed();
 
 		double newSpeed = alpha * initialSpeed + (1-alpha) * getSpeed();
 
@@ -92,6 +100,8 @@ public class Bullet {
 
 
 		}
+
+		currentRule = board.getRule();
 	}
 
 	public double getSpeed() {
@@ -141,7 +151,10 @@ public class Bullet {
 		Color firstColor = g.getColor();
 		g.setColor(GameColors.BULLET);
 		g.fillOval(getX() - RADIUS, getY() - RADIUS, RADIUS * 2, RADIUS * 2);
-		g.setColor(firstColor);
+
+		g.setColor(Color.BLACK);
+		g.drawString(String.valueOf(getValue(currentRule)), getX() - RADIUS, getY() + RADIUS);
+
 	}
 
 	/**
@@ -157,9 +170,9 @@ public class Bullet {
 		case BOUNCES:
 			return numHits >= rule.getValue();
 		case DISTANCE:
-			break;
+			return distance/Board.tileSize >= rule.getValue();
 		case TIME_ALIVE:
-			break;
+			return (System.currentTimeMillis()-initialTime)/1000 >= rule.getValue();
 		case TROPHY:
 			return player.getNumTrophies() >= rule.getValue();
 		default:
@@ -167,5 +180,25 @@ public class Bullet {
 
 		}
 		return false;
+	}
+
+	private int getValue(RuleType rule) {
+
+		switch (rule) {
+		case NO_RULE:
+			return 0;
+		case BOUNCES:
+			return numHits;
+		case DISTANCE:
+			return (int) (distance/Board.tileSize);
+		case TIME_ALIVE:
+			return (int) ((System.currentTimeMillis()-initialTime)/1000);
+		case TROPHY:
+			return player.getNumTrophies();
+		default:
+			break;
+
+		}
+		return 0;
 	}
 }
