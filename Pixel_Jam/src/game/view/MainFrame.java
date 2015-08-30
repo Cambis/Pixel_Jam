@@ -39,7 +39,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static double maxSpeed = 2;
 
 	private final String[] levels = new String[] { "tut1.txt", "tut2.txt",
-			"tut3.txt", "tut4.txt", "test_TP.txt", "CallumLvl.txt", "main1.txt", "main2.txt", "camerons_level.txt",
+			"tut3.txt", "tut4.txt", "test_TP.txt", "CallumLvl.txt", "main1.txt", "main2.txt", "main3.txt", "camerons_level.txt",
 			"Lohit_test.txt" };
 
 	private int pos = 0;
@@ -101,7 +101,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
 		RuleType rule = RuleType.TIME_TO_FINISH;
 		rule.randomiseValue();
-		//changeBoard("main2.txt", RuleType.NO_RULE);
+		//changeBoard("main3.txt", RuleType.NO_RULE);
 		// RuleType rule = RuleType.TIME_TO_FINISH;
 		// rule.randomiseValue();
 		changeBoard("tut1.txt", RuleType.NO_RULE);
