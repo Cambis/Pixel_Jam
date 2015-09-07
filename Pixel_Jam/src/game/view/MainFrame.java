@@ -39,10 +39,10 @@ public class MainFrame extends JFrame implements KeyListener {
 	public static double maxSpeed = 2;
 
 	private final String[] levels = new String[] { "tut1.txt", "tut2.txt",
-			"tut3.txt", "tut4.txt", "test_TP.txt", "CallumLvl.txt", "camerons_level.txt",
+			"tut3.txt", "tut4.txt", "test_TP.txt", "CallumLvl.txt", "main1.txt", "main2.txt", "main3.txt", "camerons_level.txt",
 			"Lohit_test.txt" };
 
-	private int pos = 1;
+	private int pos = 0;
 
 	// Top menu bar
 	private JMenuBar menuBar;
@@ -98,7 +98,10 @@ public class MainFrame extends JFrame implements KeyListener {
 		add(rulePanel, BorderLayout.NORTH);
 
 		// Add board
-		// changeBoard("tut4.txt", RuleType.NO_RULE);
+
+		RuleType rule = RuleType.TIME_TO_FINISH;
+		rule.randomiseValue();
+		//changeBoard("main3.txt", RuleType.NO_RULE);
 		// RuleType rule = RuleType.TIME_TO_FINISH;
 		// rule.randomiseValue();
 		changeBoard("tut1.txt", RuleType.NO_RULE);
@@ -283,6 +286,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	}
 
 	public static void main(String args[]) {
+
 		MainFrame frame = new MainFrame();
 	}
 
@@ -323,7 +327,12 @@ public class MainFrame extends JFrame implements KeyListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
-			changeBoard(levels[pos], createRule());
+
+			RuleType newRule = createRule();
+			if (levels[pos].contains("tut"))
+				newRule = RuleType.NO_RULE;
+
+			changeBoard(levels[pos], newRule);
 		}
 
 	};
@@ -333,7 +342,9 @@ public class MainFrame extends JFrame implements KeyListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			endGame.dispose();
-			pos = (pos < levels.length) ? pos + 1 : 0;
+			// pos = (pos < levels.length) ? pos + 1 : 0;
+
+			pos = (pos + 1) % levels.length;
 
 			RuleType newRule = createRule();
 

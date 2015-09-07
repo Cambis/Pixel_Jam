@@ -1,12 +1,17 @@
 package game.model;
 
 import game.control.Player;
+import game.view.MainFrame;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Bullet {
 
@@ -25,6 +30,8 @@ public class Bullet {
 
 	private RuleType currentRule;
 
+	private Clip soundClip;
+
 	int numHits;
 	private double distance;
 	private long initialTime;
@@ -39,6 +46,17 @@ public class Bullet {
 		initialTime = System.currentTimeMillis();
 
 		setSpeed(direction, initialSpeed);
+
+		try {
+		        Clip clip = AudioSystem.getClip();
+		        File audioFile = new File("Sounds/short_chirp.wav");
+		        clip.open(AudioSystem.getAudioInputStream(audioFile));
+
+		        clip.start();
+
+		  } catch (Exception e) {
+		    System.err.println("sound error:" + e.getMessage());
+		  }
 	}
 
 	public Player getPlayer() {
@@ -117,8 +135,8 @@ public class Bullet {
 //
 //				break;
 			}
+			//GameSounds.playSound("short_chirp.wav");
 
-			GameSounds.playSound("short_chirp.wav");
 		}
 
 	}
@@ -183,6 +201,8 @@ public class Bullet {
 //			g.fillRect(getX(), getY() - fm.getAscent(), (int) rect.getWidth(),
 //					(int) rect.getHeight());
 			g.setColor(Color.WHITE);
+			if (checkValidWin(currentRule))
+				g.setColor(Color.GREEN);
 			g.drawString(s, player.getX(), player.getY());
 		}
 
