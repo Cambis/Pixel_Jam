@@ -23,14 +23,14 @@ public enum RuleType {
 	public final static int NO_RULE_MIN = 0;
 	public final static int NO_RULE_MAX = 0;
 
-	public final static int TIME_ALIVE_MIN = 5;
-	public final static int TIME_ALIVE_MAX = 15;
+	public final static int TIME_ALIVE_MIN = 3;
+	public final static int TIME_ALIVE_MAX = 10;
 
 	public final static int BOUNCES_MIN = 3;
 	public final static int BOUNCES_MAX = 10;
 
 	public final static int DISTANCE_MIN = 50;
-	public final static int DISTANCE_MAX = 200;
+	public final static int DISTANCE_MAX = 150;
 
 	public final static int TROPHY_MIN = 1;
 	public final static int TROPHY_MAX = 5;
@@ -84,11 +84,11 @@ public enum RuleType {
 			return "NO RULE";
 		case TIME_ALIVE:
 			return "Bullet has to be alive for: " + value
-					+ " before hitting target";
+					+ " seconds before hitting target";
 		case BOUNCES:
 			return "Bounces before target: " + value;
 		case DISTANCE:
-			return "Distance to travel before target: " + value;
+			return "Distance to travel before target: " + value + "m";
 		case TROPHY:
 			return "Collect "+value+" coins before hitting target";
 		case TIME_TO_FINISH:
